@@ -1,11 +1,71 @@
 {
   "version": 1,
   "skills": {
+    "brainstorming": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/brainstorming/SKILL.md",
+      "computedHash": "759eaa3b4b3d06d9e1c98c24bcd58eeb4d2faf724b3239f81e8559aa41e28fdd"
+    },
+    "caveman": {
+      "source": "JuliusBrussee/caveman",
+      "sourceType": "github",
+      "skillPath": "skills/caveman/SKILL.md",
+      "computedHash": "71b600c88c8d1d36f18c4875db23b53c5d6cb9ba3195e19451d6b1bb67db07c4"
+    },
+    "copywriting-frameworks": {
+      "source": "thatrebeccarae/claude-marketing",
+      "sourceType": "github",
+      "skillPath": "skills/copywriting-frameworks/SKILL.md",
+      "computedHash": "780aa5cacc1ce4e0276adabf8445f071137406b321a35d17faad3cca1706d728"
+    },
+    "cro-auditor": {
+      "source": "thatrebeccarae/claude-marketing",
+      "sourceType": "github",
+      "skillPath": "skills/cro-auditor/SKILL.md",
+      "computedHash": "03bc16d0b2a8e3337f4cad73aefba0b873a5487a444994edc42406ad1c1c4e8a"
+    },
+    "facebook-ads": {
+      "source": "thatrebeccarae/claude-marketing",
+      "sourceType": "github",
+      "skillPath": "skills/facebook-ads/SKILL.md",
+      "computedHash": "89cb152a01cb5b1fb46163918c306ed420f6b82dc1c33bbf00890e95e47ecfd8"
+    },
     "find-skills": {
       "source": "vercel-labs/skills",
       "sourceType": "github",
       "skillPath": "skills/find-skills/SKILL.md",
       "computedHash": "913b9d37d0d54047dd65222bb8c67b2bf04e3cb87dcad1729068d7a8b2c8c396"
+    },
+    "market-research": {
+      "source": "thatrebeccarae/claude-marketing",
+      "sourceType": "github",
+      "skillPath": "skills/market-research/SKILL.md",
+      "computedHash": "0f0dfc3b15383a9db334db71a5bd0f95ec020023e88c4b245f47fd95ce534c04"
+    },
+    "pricing-strategy": {
+      "source": "thatrebeccarae/claude-marketing",
+      "sourceType": "github",
+      "skillPath": "skills/pricing-strategy/SKILL.md",
+      "computedHash": "883ab20455885d741fbdd0b027991bd73bb192f81169f575f2bef120d2c529d5"
+    },
+    "shopify": {
+      "source": "thatrebeccarae/claude-marketing",
+      "sourceType": "github",
+      "skillPath": "skills/shopify/SKILL.md",
+      "computedHash": "83e3b50123807813e388b207e915510467de91388d36cf15df2d06b69530056c"
+    },
+    "tiktok-ads": {
+      "source": "thatrebeccarae/claude-marketing",
+      "sourceType": "github",
+      "skillPath": "skills/tiktok-ads/SKILL.md",
+      "computedHash": "4363e2420260e4302cfa9c0d49dd07e7672f21a407340fc85849bf05831b7476"
+    },
+    "writing-plans": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/writing-plans/SKILL.md",
+      "computedHash": "c2647b5bf067be353a893e5a39a632cbbeb7ad81e61fa5ae227ece5490029073"
     }
   }
 }
