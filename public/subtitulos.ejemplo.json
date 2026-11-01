@@ -1,0 +1,11 @@
+[
+  { "text": "Dieciocho", "start": 0.4, "end": 1.0 },
+  { "text": "días.", "start": 1.0, "end": 1.6 },
+  { "text": "Eso", "start": 2.0, "end": 2.3 },
+  { "text": "trabajas", "start": 2.3, "end": 2.8 },
+  { "text": "solo", "start": 2.8, "end": 3.1 },
+  { "text": "para", "start": 3.1, "end": 3.3 },
+  { "text": "pagar", "start": 3.3, "end": 3.7 },
+  { "text": "el", "start": 3.7, "end": 3.8 },
+  { "text": "arriendo.", "start": 3.8, "end": 4.6 }
+]
