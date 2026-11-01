@@ -27,6 +27,23 @@ Ver `public/subtitulos.ejemplo.json`. Formatos aceptados:
 - con `start`/`end` en segundos, o con `startMs`/`endMs` en milisegundos (formato `@remotion/captions`)
 - salida de WhisperX: `{ "segments": [{ "words": [{ "word": "...", "start": 0.4, "end": 1.0 }] }] }`
 
+## Audio incluido (generado, reemplazable)
+
+- `voz.mp3`: voz en off generada con Kokoro-82M (voz `em_alex`, español), a partir de `guion/guion.json`.
+  Cada frase tiene su segundo de entrada para calzar con la escena.
+- `subtitulos.json`: tiempos por palabra calculados al generar la voz (frase por frase); las cifras se muestran como en pantalla.
+- `tic.mp3`, `golpe.mp3`, `subida.mp3`, `musica.mp3`: sintetizados con ffmpeg.
+
+Para regenerar la voz y los subtítulos (requiere `pip install kokoro-onnx soundfile` y los archivos del modelo
+`kokoro-v1.0.onnx` y `voices-v1.0.bin` de github.com/thewh1teagle/kokoro-onnx/releases):
+
+```bash
+python scripts/make_voice.py guion/guion.json voz.wav public/subtitulos.json
+ffmpeg -i voz.wav -af "highpass=f=70,acompressor=threshold=-20dB:ratio=3,loudnorm=I=-16:TP=-1.5" -ar 44100 -ac 2 public/voz.mp3
+```
+
+Si grabas tu propia voz, reemplaza `voz.mp3` y genera `subtitulos.json` con WhisperX.
+
 ## Estructura
 
 - `src/data.ts`: todos los números y fuentes

@@ -1,0 +1,234 @@
+[
+  {
+    "escena": 1,
+    "fin": 8,
+    "frases": [
+      {
+        "t": 0.4,
+        "texto": "Dieciocho días."
+      },
+      {
+        "t": 3.6,
+        "texto": "Eso es lo que trabajas cada mes, solo para pagar el arriendo."
+      }
+    ]
+  },
+  {
+    "escena": 2,
+    "fin": 25,
+    "frases": [
+      {
+        "t": 8.6,
+        "texto": "Partamos por lo básico. El sueldo mínimo en Chile es de quinientos cincuenta y tres mil quinientos cincuenta y tres pesos."
+      },
+      {
+        "gap": 1.0,
+        "texto": "Ahora, divide ese sueldo en dos: lo que se va en arriendo, y lo que te queda para todo lo demás."
+      }
+    ]
+  },
+  {
+    "escena": 3,
+    "fin": 65,
+    "frases": [
+      {
+        "t": 25.6,
+        "texto": "Este es el sueldo mínimo: quinientos cincuenta y tres mil quinientos cincuenta y tres pesos."
+      },
+      {
+        "gap": 2.0,
+        "texto": "Ahora, ponle un arriendo al lado."
+      },
+      {
+        "t": 37.3,
+        "texto": "Según datos de Assetplan, publicados por The Clinic: trescientos cuarenta mil pesos."
+      },
+      {
+        "t": 49.2,
+        "texto": "Hagamos la división. Trescientos cuarenta mil, dividido por quinientos cincuenta y tres mil quinientos cincuenta y tres."
+      },
+      {
+        "gap": 0.6,
+        "texto": "El resultado: sesenta y uno por ciento."
+      },
+      {
+        "gap": 0.8,
+        "texto": "Más de la mitad del sueldo, directo al arriendo."
+      }
+    ]
+  },
+  {
+    "escena": 4,
+    "fin": 100,
+    "frases": [
+      {
+        "t": 65.8,
+        "texto": "Pero hay un detalle que casi nadie dice."
+      },
+      {
+        "gap": 1.0,
+        "texto": "Ese sueldo mínimo es bruto. Lo que de verdad llega a tu cuenta es el líquido, después de los descuentos."
+      },
+      {
+        "gap": 1.2,
+        "texto": "O sea, el bloque blanco, lo que te queda, es todavía más chico."
+      },
+      {
+        "gap": 1.5,
+        "texto": "Bruto no es lo mismo que líquido."
+      },
+      {
+        "gap": 1.2,
+        "texto": "Y el arriendo no te hace descuento."
+      }
+    ]
+  },
+  {
+    "escena": 5,
+    "fin": 150,
+    "frases": [
+      {
+        "t": 100.6,
+        "texto": "Hay una regla muy usada en finanzas personales: no gastar más del treinta por ciento de tus ingresos en vivienda."
+      },
+      {
+        "gap": 1.0,
+        "texto": "El treinta por ciento del sueldo mínimo son ciento sesenta y seis mil pesos."
+      },
+      {
+        "gap": 1.2,
+        "texto": "Esa es la línea punteada."
+      },
+      {
+        "gap": 1.5,
+        "texto": "Ahora mira dónde termina la barra roja. Está muy por encima."
+      },
+      {
+        "gap": 1.5,
+        "texto": "El arriendo no se pasa de la regla por un poco. La duplica."
+      },
+      {
+        "gap": 2.0,
+        "texto": "Para cumplir la regla, ese arriendo tendría que costar menos de la mitad."
+      }
+    ]
+  },
+  {
+    "escena": 6,
+    "fin": 200,
+    "frases": [
+      {
+        "t": 150.6,
+        "texto": "Y todo cambia según dónde vivas. Esta es la barra del sueldo mínimo."
+      },
+      {
+        "t": 158.0,
+        "texto": "En Estación Central, un arriendo de doscientos treinta mil pesos ya se lleva el cuarenta y dos por ciento."
+      },
+      {
+        "t": 166.0,
+        "texto": "En Providencia, el arriendo llega a novecientos mil pesos. El ciento sesenta y tres por ciento del sueldo mínimo."
+      },
+      {
+        "gap": 1.5,
+        "texto": "La barra se sale de la pantalla."
+      },
+      {
+        "gap": 2.0,
+        "texto": "Con un sueldo mínimo, simplemente no alcanza. Ni siquiera para el arriendo."
+      }
+    ]
+  },
+  {
+    "escena": 7,
+    "fin": 220,
+    "frases": [
+      {
+        "t": 201.2,
+        "texto": "¿Y si cruzamos la frontera?"
+      },
+      {
+        "t": 204.2,
+        "texto": "Vamos a Lima."
+      }
+    ]
+  },
+  {
+    "escena": 8,
+    "fin": 280,
+    "frases": [
+      {
+        "t": 220.6,
+        "texto": "En Perú, según El Peruano, el sueldo mínimo es de mil doscientos treinta soles."
+      },
+      {
+        "t": 236.3,
+        "texto": "Y según Urbania, citado por Infobae, en Los Olivos Sur un arriendo cuesta mil quinientos ochenta y tres soles."
+      },
+      {
+        "gap": 0.8,
+        "texto": "Eso es el ciento veintinueve por ciento del sueldo mínimo."
+      },
+      {
+        "gap": 1.0,
+        "texto": "Ojo: son departamentos de alrededor de cien metros cuadrados."
+      },
+      {
+        "t": 254.5,
+        "texto": "Y si miramos el promedio de Lima, sube a tres mil trescientos cincuenta y seis soles."
+      },
+      {
+        "gap": 1.2,
+        "texto": "Más del doble del sueldo mínimo."
+      }
+    ]
+  },
+  {
+    "escena": 9,
+    "fin": 330,
+    "frases": [
+      {
+        "t": 280.6,
+        "texto": "Pongamos los dos países lado a lado. Cada barra es un sueldo mínimo, y la línea punteada marca el treinta por ciento."
+      },
+      {
+        "gap": 1.0,
+        "texto": "En Chile, el arriendo se come el sesenta y uno por ciento."
+      },
+      {
+        "gap": 1.0,
+        "texto": "En Perú, en Los Olivos Sur, el ciento veintinueve. Más que el sueldo completo."
+      },
+      {
+        "gap": 1.5,
+        "texto": "En los dos casos, la línea del treinta por ciento quedó muy atrás."
+      },
+      {
+        "gap": 2.5,
+        "texto": "Con un sueldo mínimo, en Santiago o en Lima, el arriendo se lleva la mayor parte del mes."
+      }
+    ]
+  },
+  {
+    "escena": 10,
+    "fin": 358,
+    "frases": [
+      {
+        "t": 331.0,
+        "texto": "Dieciocho días al mes, trabajando para el arriendo."
+      },
+      {
+        "gap": 0.8,
+        "texto": "Esto fue Datos que Duelen."
+      },
+      {
+        "t": 337.0,
+        "texto": "Y ahora te pregunto a ti: ¿cuánto pagas tú?"
+      },
+      {
+        "gap": 0.8,
+        "texto": "Déjalo en los comentarios."
+      }
+    ]
+  }
+]
