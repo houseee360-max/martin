@@ -86,7 +86,7 @@ Nada de "antes $59.990" si nunca se vendió a ese precio (Ley del Consumidor / S
 
 | Etapa | Oferta | Cuándo |
 |---|---|---|
-| **Atracción** | Precios en escalera: 1 kit / ×2 / ×3. El ×3 hace que el ×2 parezca la opción lógica. Marcar el ×2 como "Más elegido" y dejarlo preseleccionado | En la página del producto |
+| **Atracción** | Precios en escalera: 1 kit / ×2 / ×3. El ×3 hace que el ×2 parezca la opción lógica. Marcar el ×2 como "Recomendado" (no "más vendido" hasta tener datos propios) y dejarlo preseleccionado | En la página del producto |
 | **Venta extra al confirmar** | Por WhatsApp: "¿Te agrego un segundo kit para tus papás a $29.990? Va en el mismo envío." | Al confirmar el pedido |
 | **Opción más barata** | Si alguien pidió el pack y duda al confirmar: "¿Prefieres llevar solo 1 a $39.990?" (mejor eso que una devolución) | Al confirmar |
 | **Recompra** | Mensaje en marzo y abril: "Se viene el invierno y los temporales: ¿uno para tus papás?" a $34.990, solo para clientes | 3 a 5 meses después |
