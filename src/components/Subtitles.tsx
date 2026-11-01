@@ -57,14 +57,20 @@ const paginate = (words: Word[], maxWords = 6, maxGapMs = 700) => {
 };
 
 /** Subtítulos palabra por palabra en la mitad inferior */
-export const Subtitles: React.FC<{ words: Word[]; bottom?: number }> = ({
-  words,
-  bottom = 110,
-}) => {
+export const Subtitles: React.FC<{
+  words: Word[];
+  bottom?: number;
+  top?: number;
+  /** Tiempo a mostrar (ms). Por defecto, el del frame actual */
+  timeMs?: number;
+  fontSize?: number;
+  maxWords?: number;
+  maxWidth?: number;
+}> = ({ words, bottom = 110, top, timeMs, fontSize = 50, maxWords = 6, maxWidth = 1500 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const pages = useMemo(() => paginate(words), [words]);
-  const ms = (frame / fps) * 1000;
+  const pages = useMemo(() => paginate(words, maxWords), [words, maxWords]);
+  const ms = timeMs ?? (frame / fps) * 1000;
 
   const page = pages.find(
     (p) => ms >= p[0].startMs && ms <= p[p.length - 1].endMs + 250,
@@ -77,7 +83,7 @@ export const Subtitles: React.FC<{ words: Word[]; bottom?: number }> = ({
         position: "absolute",
         left: 0,
         right: 0,
-        bottom,
+        ...(top !== undefined ? { top } : { bottom }),
         display: "flex",
         justifyContent: "center",
         pointerEvents: "none",
@@ -85,7 +91,7 @@ export const Subtitles: React.FC<{ words: Word[]; bottom?: number }> = ({
     >
       <div
         style={{
-          maxWidth: 1500,
+          maxWidth,
           padding: "14px 28px",
           backgroundColor: "rgba(20,20,20,0.82)",
           display: "flex",
@@ -94,7 +100,7 @@ export const Subtitles: React.FC<{ words: Word[]; bottom?: number }> = ({
           gap: "0 18px",
           fontFamily: MONO,
           fontWeight: 700,
-          fontSize: 50,
+          fontSize,
           lineHeight: 1.25,
           color: C.fg,
         }}

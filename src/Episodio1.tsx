@@ -19,6 +19,7 @@ import { C, SCENES, TOTAL_FRAMES, sec } from "./theme";
 export type Episodio1Props = {
   assets: AssetFlags;
   subtitles: Word[];
+  hideSubtitles?: boolean;
 };
 
 const COMPONENTS = [Scene01, Scene02, Scene03, Scene04, Scene05, Scene06, Scene07, Scene08, Scene09, Scene10];
@@ -28,7 +29,7 @@ const WIPES = SCENES.slice(1)
   .map((s) => s.from)
   .filter((t) => t !== 200);
 
-export const Episodio1: React.FC<Episodio1Props> = ({ assets, subtitles }) => (
+export const Episodio1: React.FC<Episodio1Props> = ({ assets, subtitles, hideSubtitles }) => (
   <AssetsContext.Provider value={assets}>
     <AbsoluteFill style={{ backgroundColor: C.bg }}>
       {SCENES.map((s, i) => {
@@ -44,7 +45,7 @@ export const Episodio1: React.FC<Episodio1Props> = ({ assets, subtitles }) => (
         <Wipe key={t} at={sec(t)} />
       ))}
 
-      <Subtitles words={subtitles} />
+      {hideSubtitles ? null : <Subtitles words={subtitles} />}
 
       {assets.voz ? <Audio src={staticFile("voz.mp3")} volume={1} /> : null}
       {assets.musica ? (

@@ -6,7 +6,7 @@ import { C } from "../theme";
 export const Wipe: React.FC<{ at: number; half?: number }> = ({ at, half = 7 }) => {
   const frame = useCurrentFrame();
   if (frame < at - half || frame > at + half) return null;
-  const x = interpolate(frame, [at - half, at, at + half], [-115, 0, 115], {
+  const x = interpolate(frame, [at - half, at, at + half], [-130, 0, 130], {
     easing: Easing.inOut(Easing.quad),
   });
   return (
@@ -15,8 +15,8 @@ export const Wipe: React.FC<{ at: number; half?: number }> = ({ at, half = 7 }) 
         position: "absolute",
         top: 0,
         bottom: 0,
-        left: "-10%",
-        width: "120%",
+        left: "-30%",
+        width: "160%",
         backgroundColor: C.fg,
         transform: `translateX(${x}%) skewX(-12deg)`,
       }}

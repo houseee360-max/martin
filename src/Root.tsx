@@ -1,57 +1,47 @@
 import React from "react";
-import { CalculateMetadataFunction, Composition, staticFile } from "remotion";
-import { AssetFlags, NO_ASSETS } from "./components/assets";
-import { parseSubtitles } from "./components/Subtitles";
+import { CalculateMetadataFunction, Composition, Folder } from "remotion";
+import { NO_ASSETS } from "./components/assets";
 import { Episodio1, Episodio1Props } from "./Episodio1";
+import { loadMedia } from "./metadata";
+import { CLIPS } from "./shorts/clips";
+import { layoutSegments, Short, SHORT_H, SHORT_W, ShortProps } from "./shorts/Short";
 import { FPS, HEIGHT, TOTAL_FRAMES, WIDTH } from "./theme";
 
-/** Comprueba si un archivo existe en /public (sin romper el render si falta) */
-const exists = async (file: string) => {
-  try {
-    const res = await fetch(staticFile(file), { method: "HEAD" });
-    const type = res.headers.get("content-type") ?? "";
-    return res.ok && !type.includes("text/html");
-  } catch {
-    return false;
-  }
-};
+const episodioMetadata: CalculateMetadataFunction<Episodio1Props> = async ({ props }) => ({
+  props: { ...props, ...(await loadMedia(props.subtitles)) },
+});
 
-const calculateMetadata: CalculateMetadataFunction<Episodio1Props> = async ({ props }) => {
-  const names = Object.keys(NO_ASSETS) as (keyof AssetFlags)[];
-  const files: Record<keyof AssetFlags, string> = {
-    voz: "voz.mp3",
-    musica: "musica.mp3",
-    tic: "tic.mp3",
-    golpe: "golpe.mp3",
-    subida: "subida.mp3",
-    logo: "logo.png",
-  };
-  const flags = Object.fromEntries(
-    await Promise.all(names.map(async (n) => [n, await exists(files[n])] as const)),
-  ) as AssetFlags;
-
-  let subtitles = props.subtitles;
-  try {
-    const res = await fetch(staticFile("subtitulos.json"));
-    if (res.ok && !(res.headers.get("content-type") ?? "").includes("text/html")) {
-      subtitles = parseSubtitles(await res.json());
-    }
-  } catch {
-    // sin subtítulos
-  }
-
-  return { props: { ...props, assets: flags, subtitles } };
-};
+const shortMetadata: CalculateMetadataFunction<ShortProps> = async ({ props }) => ({
+  durationInFrames: layoutSegments(props.clipId, FPS).total,
+  props: { ...props, ...(await loadMedia(props.subtitles)) },
+});
 
 export const RemotionRoot: React.FC = () => (
-  <Composition
-    id="Episodio1"
-    component={Episodio1}
-    durationInFrames={TOTAL_FRAMES}
-    fps={FPS}
-    width={WIDTH}
-    height={HEIGHT}
-    defaultProps={{ assets: NO_ASSETS, subtitles: [] }}
-    calculateMetadata={calculateMetadata}
-  />
+  <>
+    <Composition
+      id="Episodio1"
+      component={Episodio1}
+      durationInFrames={TOTAL_FRAMES}
+      fps={FPS}
+      width={WIDTH}
+      height={HEIGHT}
+      defaultProps={{ assets: NO_ASSETS, subtitles: [] }}
+      calculateMetadata={episodioMetadata}
+    />
+    <Folder name="Shorts">
+      {CLIPS.map((c) => (
+        <Composition
+          key={c.id}
+          id={c.id}
+          component={Short}
+          durationInFrames={300}
+          fps={FPS}
+          width={SHORT_W}
+          height={SHORT_H}
+          defaultProps={{ clipId: c.id, assets: NO_ASSETS, subtitles: [] }}
+          calculateMetadata={shortMetadata}
+        />
+      ))}
+    </Folder>
+  </>
 );

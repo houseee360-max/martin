@@ -53,6 +53,17 @@ Si grabas tu propia voz, reemplaza `voz.mp3` y genera `subtitulos.json` con Whis
 
 Las fuentes (Archivo Black y JetBrains Mono) se descargaron de Google Fonts y están en `public/fonts`.
 
+## Shorts / TikTok / Reels (1080x1920)
+
+Los tramos de cada clip están en `src/shorts/clips.ts` (en segundos del episodio). Cada short muestra el episodio
+con su audio al centro, un gancho arriba, subtítulos grandes abajo y termina con "¿Cuánto pagas tú?".
+
+```bash
+for c in Short01-18Dias Short02-Providencia Short03-Regla30 Short04-BrutoLiquido Short05-Lima Short06-ChileVsPeru; do
+  npx remotion render $c out/shorts/$c.mp4
+done
+```
+
 ## Comandos
 
 ```bash
