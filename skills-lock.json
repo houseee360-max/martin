@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "ad-creative": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/ad-creative/SKILL.md",
+      "computedHash": "62469b7b8e594424cd313527c6b45e0749242a27955b1f80dcfc7f0c12d13d2d"
+    },
     "brainstorming": {
       "source": "obra/superpowers",
       "sourceType": "github",
@@ -25,6 +31,12 @@
       "skillPath": "skills/cro-auditor/SKILL.md",
       "computedHash": "03bc16d0b2a8e3337f4cad73aefba0b873a5487a444994edc42406ad1c1c4e8a"
     },
+    "customer-research": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/customer-research/SKILL.md",
+      "computedHash": "c1820bf42369971b9d5e43c5118bbf50402a7b6731b43cfa61d8fe56e0260da4"
+    },
     "facebook-ads": {
       "source": "thatrebeccarae/claude-marketing",
       "sourceType": "github",
@@ -37,11 +49,35 @@
       "skillPath": "skills/find-skills/SKILL.md",
       "computedHash": "913b9d37d0d54047dd65222bb8c67b2bf04e3cb87dcad1729068d7a8b2c8c396"
     },
+    "grand-slam-offer": {
+      "source": "zacker-tech/hormozi-skills",
+      "sourceType": "github",
+      "skillPath": "skills/grand-slam-offer/SKILL.md",
+      "computedHash": "33c6325b1af8f39daf78b26848abe11acccd3395bbe3c816f6498ab355bc6a83"
+    },
     "market-research": {
       "source": "thatrebeccarae/claude-marketing",
       "sourceType": "github",
       "skillPath": "skills/market-research/SKILL.md",
       "computedHash": "0f0dfc3b15383a9db334db71a5bd0f95ec020023e88c4b245f47fd95ce534c04"
+    },
+    "marketing-psychology": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/marketing-psychology/SKILL.md",
+      "computedHash": "50d735eb0f5c36f379ed2200f21aeacc9b9ad85667b5d33ec6111857352a1340"
+    },
+    "money-model": {
+      "source": "zacker-tech/hormozi-skills",
+      "sourceType": "github",
+      "skillPath": "skills/money-model/SKILL.md",
+      "computedHash": "774261bbbc1c277660d73b44d850598c38c5d16f159c2941a61260061d2539d1"
+    },
+    "offers": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/offers/SKILL.md",
+      "computedHash": "cf33eff3e0bc6a527d16f00919f8887be47e9f3dae78a0b382b8e6df8f8081cc"
     },
     "pricing-strategy": {
       "source": "thatrebeccarae/claude-marketing",
@@ -49,17 +85,35 @@
       "skillPath": "skills/pricing-strategy/SKILL.md",
       "computedHash": "883ab20455885d741fbdd0b027991bd73bb192f81169f575f2bef120d2c529d5"
     },
+    "product-marketing": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/product-marketing/SKILL.md",
+      "computedHash": "d051a45340cc15c633c008e5e8896dce61f5746830104f2624e7d20fdf5beb48"
+    },
     "shopify": {
       "source": "thatrebeccarae/claude-marketing",
       "sourceType": "github",
       "skillPath": "skills/shopify/SKILL.md",
       "computedHash": "83e3b50123807813e388b207e915510467de91388d36cf15df2d06b69530056c"
     },
+    "sms": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/sms/SKILL.md",
+      "computedHash": "1a49d8a2326f945a3a88fa09e7aeb9049a40a457f3c12629c0278bf4ffe6ce95"
+    },
     "tiktok-ads": {
       "source": "thatrebeccarae/claude-marketing",
       "sourceType": "github",
       "skillPath": "skills/tiktok-ads/SKILL.md",
       "computedHash": "4363e2420260e4302cfa9c0d49dd07e7672f21a407340fc85849bf05831b7476"
+    },
+    "value-equation": {
+      "source": "zacker-tech/hormozi-skills",
+      "sourceType": "github",
+      "skillPath": "skills/value-equation/SKILL.md",
+      "computedHash": "9c18d829f248ca1256ed7086a12e3908ae87d41e6893e1f5f580e9a986789556"
     },
     "writing-plans": {
       "source": "obra/superpowers",
