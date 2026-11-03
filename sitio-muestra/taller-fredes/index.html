@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taller mecánico en Ovalle | Taller Automotriz Fredes, Av. La Feria 86</title>
+<meta name="description" content="Taller mecánico en Ovalle: scanner, frenos, suspensión, embragues y aire acondicionado. 4,8 estrellas en Google. Av. La Feria 86. Agenda por WhatsApp.">
+<link rel="icon" href="img/logo.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "Taller Mecánico Automotriz Fredes",
+  "image": "img/hero.jpg",
+  "logo": "img/logo.png",
+  "telephone": "+56981927918",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Av. La Feria 86",
+    "addressLocality": "Ovalle",
+    "addressRegion": "Coquimbo",
+    "postalCode": "1840369",
+    "addressCountry": "CL"
+  },
+  "areaServed": "Ovalle",
+  "sameAs": [
+    "https://www.instagram.com/tallerautomotrizfredes.oficial/"
+  ]
+}
+</script>
+<style>
+@font-face{font-family:"Barlow Condensed";font-weight:600;font-display:swap;src:url(fonts/BarlowCondensed-600.woff2) format("woff2")}
+@font-face{font-family:"Barlow Condensed";font-weight:700;font-display:swap;src:url(fonts/BarlowCondensed-700.woff2) format("woff2")}
+@font-face{font-family:"Barlow Condensed";font-weight:800;font-display:swap;src:url(fonts/BarlowCondensed-800.woff2) format("woff2")}
+@font-face{font-family:"Barlow";font-weight:400;font-display:swap;src:url(fonts/Barlow-400.woff2) format("woff2")}
+@font-face{font-family:"Barlow";font-weight:500;font-display:swap;src:url(fonts/Barlow-500.woff2) format("woff2")}
+@font-face{font-family:"Barlow";font-weight:600;font-display:swap;src:url(fonts/Barlow-600.woff2) format("woff2")}
+
+:root{
+  --rojo:#D7262B;        /* rojo del logo y del letrero */
+  --rojo-oscuro:#A81C20;
+  --asfalto:#2A2C30;     /* piso y techo del taller */
+  --concreto:#E7E9EB;    /* muro de bloque */
+  --blanco:#FFFFFF;
+  --linea:#F2C230;       /* línea amarilla del piso del taller */
+  --texto:#24262A;
+  --texto-suave:#5B6068;
+  --wa:#1FA855;
+  --cond:"Barlow Condensed", "Arial Narrow", sans-serif;
+  --body:"Barlow", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;font-family:var(--body);font-size:17px;line-height:1.55;color:var(--texto);background:var(--blanco)}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--linea);outline-offset:3px}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--cond);line-height:1;margin:0;letter-spacing:-.005em}
+h2{font-size:clamp(34px,6vw,52px);font-weight:800}
+p{margin:0}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border-radius:6px;font-family:var(--cond);font-weight:700;font-size:21px;text-decoration:none;border:0;cursor:pointer}
+.btn svg{width:22px;height:22px;flex:none}
+.btn-wa{background:var(--wa);color:#fff}
+.btn-wa:hover{background:#178a45}
+.btn-borde{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.85)}
+.btn-borde:hover{background:rgba(255,255,255,.12)}
+.btn-oscuro{background:var(--asfalto);color:#fff}
+
+/* Encabezado */
+.top{position:sticky;top:0;z-index:20;background:var(--blanco);border-bottom:4px solid var(--rojo)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:12px}
+.marca{display:flex;align-items:center;gap:10px;text-decoration:none}
+.marca img{width:46px;height:46px}
+.marca span{font-family:var(--cond);font-weight:800;font-size:23px;line-height:.95}
+.marca small{display:block;font-family:var(--body);font-weight:500;font-size:13px;color:var(--texto-suave)}
+.top nav{display:none;gap:26px;font-weight:600}
+.top nav a{text-decoration:none}
+.top nav a:hover{color:var(--rojo)}
+.top .btn{min-height:44px;font-size:19px;padding:0 16px}
+
+/* Portada */
+.hero{position:relative;color:#fff;background:var(--asfalto)}
+.hero-foto{position:absolute;inset:0;overflow:hidden}
+.hero-foto img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.hero-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,29,32,.35) 0%,rgba(28,29,32,.55) 45%,rgba(28,29,32,.95) 100%)}
+.hero .wrap{position:relative;padding-top:150px;padding-bottom:36px}
+.hero h1{font-size:clamp(58px,15vw,118px);font-weight:800;line-height:.86;max-width:9ch}
+.hero .sub{margin-top:18px;font-size:19px;max-width:34ch;color:#F1F2F3}
+.nota{display:inline-flex;align-items:center;gap:10px;margin-top:22px;background:#fff;color:var(--texto);padding:8px 14px 8px 10px;border-radius:6px;text-decoration:none;font-weight:600}
+.nota b{font-family:var(--cond);font-size:26px;font-weight:800;line-height:1}
+.estrellas{color:#F5A400;letter-spacing:1px;font-size:17px}
+.acciones{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.piso{height:14px;background:repeating-linear-gradient(90deg,var(--linea) 0 46px,transparent 46px 70px),var(--asfalto)}
+
+/* Pizarra de precios: la lona roja del taller */
+.precios{padding:64px 0 70px;background:var(--concreto)}
+.precios .intro{max-width:46ch;margin-top:12px;color:var(--texto-suave)}
+.pizarra{margin-top:30px;background:var(--rojo);color:#fff;border-radius:4px;box-shadow:0 0 0 8px #fff,0 18px 40px rgba(0,0,0,.14);overflow:hidden}
+.fila{display:grid;grid-template-columns:1fr auto;gap:6px 18px;padding:24px 22px;border-bottom:2px dashed rgba(255,255,255,.35)}
+.fila:last-child{border-bottom:0}
+.fila h3{font-size:clamp(25px,5vw,34px);font-weight:700}
+.precio{font-family:var(--cond);font-weight:800;font-size:clamp(38px,8vw,58px);line-height:.9;text-align:right;white-space:nowrap}
+.precio small{display:block;font-size:15px;font-weight:600;font-family:var(--body);opacity:.9}
+.fila ul{grid-column:1/-1;margin:6px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px 8px}
+.fila li{background:rgba(0,0,0,.18);padding:3px 10px;border-radius:3px;font-size:15px;font-weight:500}
+.fila .det{grid-column:1/-1;font-size:16px;opacity:.92}
+.precios .aviso{margin-top:22px;font-size:15px;color:var(--texto-suave)}
+
+/* Patente */
+.revision{padding:70px 0;background:var(--asfalto);color:#fff}
+.revision .grid{display:grid;gap:36px}
+.revision p.lead{margin-top:14px;color:#D6D8DB;max-width:40ch}
+.patente{width:100%;max-width:440px;background:#fff;color:#111;border-radius:12px;border:4px solid #111;padding:14px 18px 12px;box-shadow:0 10px 0 #17181b}
+.patente-top{display:flex;justify-content:space-between;font-family:var(--cond);font-weight:700;font-size:15px;color:#333}
+.patente-num{display:flex;justify-content:center;align-items:center;gap:6px;font-family:var(--cond);font-weight:700;font-size:clamp(64px,16vw,96px);line-height:1;margin:4px 0 2px}
+.patente-num .fijo{color:#111}
+.patente-num .sep{width:10px;height:10px;border-radius:50%;background:#111;margin:0 2px}
+.patente-num .dig{display:inline-block;min-width:.55em;text-align:center;color:var(--rojo);border-bottom:5px solid var(--rojo)}
+.patente-pie{text-align:center;font-family:var(--cond);font-weight:700;letter-spacing:.3em;font-size:14px}
+.digitos{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:22px;max-width:440px}
+.digitos button{min-height:54px;border-radius:6px;border:2px solid #4A4D53;background:#34363B;color:#fff;font-family:var(--cond);font-weight:700;font-size:28px;cursor:pointer}
+.digitos button:hover{border-color:#fff}
+.digitos button[aria-pressed="true"]{background:var(--linea);border-color:var(--linea);color:#111}
+.resultado{margin-top:24px;background:#34363B;border-left:6px solid var(--linea);padding:20px 20px 22px;border-radius:4px;max-width:520px}
+.resultado .mes{font-family:var(--cond);font-weight:800;font-size:44px;line-height:1;color:var(--linea)}
+.resultado p{margin-top:8px;color:#E4E6E8}
+.resultado .btn{margin-top:16px}
+.fuente{margin-top:14px;font-size:14px;color:#9EA2A8}
+
+/* Servicios */
+.servicios{padding:70px 0}
+.serv-grid{display:grid;gap:34px;margin-top:30px}
+.lista{list-style:none;margin:0;padding:0}
+.lista li{display:grid;grid-template-columns:28px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid #DADDE0}
+.lista li:first-child{border-top:1px solid #DADDE0}
+.lista svg{width:28px;height:28px;color:var(--rojo);margin-top:2px}
+.lista b{font-family:var(--cond);font-size:26px;font-weight:700;line-height:1.05;display:block}
+.lista span{color:var(--texto-suave);font-size:16px}
+.mosaico{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mosaico figure{margin:0;position:relative;border-radius:4px;overflow:hidden;background:#ddd}
+.mosaico img{width:100%;height:100%;object-fit:cover}
+.mosaico .alto{grid-row:span 2}
+.mosaico figcaption{position:absolute;left:0;bottom:0;background:rgba(28,29,32,.82);color:#fff;font-size:14px;font-weight:600;padding:4px 10px;border-top-right-radius:4px}
+
+/* El taller */
+.taller{padding:0 0 70px}
+.tira{display:grid;grid-auto-flow:column;grid-auto-columns:78%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 20px 14px;margin:26px -20px 0}
+.tira figure{margin:0;scroll-snap-align:start}
+.tira img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px}
+.tira figcaption{margin-top:8px;font-weight:600}
+.tira figcaption span{display:block;font-weight:400;color:var(--texto-suave);font-size:15px}
+
+/* Opiniones */
+.opiniones{background:var(--rojo);color:#fff;padding:56px 0}
+.opiniones .wrap{display:grid;gap:22px;align-items:center}
+.gran-nota{font-family:var(--cond);font-weight:800;font-size:clamp(96px,26vw,170px);line-height:.8}
+.opiniones h2{font-size:clamp(30px,5.5vw,44px)}
+.opiniones p{margin-top:10px;max-width:44ch;color:#FFE9EA}
+.opiniones .btn{margin-top:18px;background:#fff;color:var(--rojo)}
+
+/* Ubicación */
+.ubicacion{padding:70px 0}
+.ubi-grid{display:grid;gap:26px;margin-top:26px}
+.ubi-grid img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:4px}
+.datos{display:grid;gap:18px}
+.dato b{display:block;font-family:var(--cond);font-size:24px;font-weight:700}
+.dato a{font-weight:600}
+.datos .acciones{margin-top:4px}
+.datos .btn-borde{color:var(--texto);box-shadow:inset 0 0 0 2px var(--texto)}
+
+footer{background:var(--asfalto);color:#C9CCD0;padding:34px 0 110px;font-size:15px}
+footer .wrap{display:grid;gap:10px}
+footer b{color:#fff;font-family:var(--cond);font-size:22px}
+footer a{color:#fff}
+
+/* Barra fija en el celular */
+.barra{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);border-top:1px solid #DADDE0}
+.barra .btn{min-height:50px;font-size:20px}
+.barra .btn-oscuro{background:var(--asfalto)}
+
+@media (min-width:760px){
+  .top nav{display:flex}
+  .hero .wrap{padding-top:210px;padding-bottom:64px}
+  .hero .sub{font-size:21px}
+  .fila{padding:26px 34px}
+  .revision .grid{grid-template-columns:1.05fr 1fr;align-items:center}
+  .serv-grid{grid-template-columns:1fr 1.1fr;align-items:start}
+  .tira{grid-auto-flow:row;grid-template-columns:repeat(4,1fr);grid-auto-columns:auto;overflow:visible;margin:26px 0 0;padding:0}
+  .opiniones .wrap{grid-template-columns:auto 1fr;gap:44px}
+  .ubi-grid{grid-template-columns:1.2fr 1fr;align-items:center}
+  .barra{display:none}
+  footer{padding-bottom:34px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="marca" href="#inicio">
+      <img src="img/logo.png" alt="Logo de Taller Automotriz Fredes">
+      <span>Taller Automotriz Fredes<small>Av. La Feria 86, Ovalle</small></span>
+    </a>
+    <nav aria-label="Secciones">
+      <a href="#precios">Precios</a>
+      <a href="#revision">Revisión técnica</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#ubicacion">Cómo llegar</a>
+    </nav>
+    <a class="btn btn-wa" href="https://wa.me/56981927918?text=Hola%2C%20quiero%20agendar%20una%20hora%20en%20el%20taller" aria-label="Escribir por WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3Z"/></svg>
+      Agendar
+    </a>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="hero-foto"><img src="img/hero.jpg" alt="Autos en los elevadores del Taller Automotriz Fredes"></div>
+    <div class="wrap">
+      <h1>Taller mecánico en Ovalle</h1>
+      <p class="sub">Scanner, frenos, suspensión, embragues y aire acondicionado. Tu auto en Av. La Feria 86.</p>
+      <a class="nota" href="https://www.google.com/maps/search/?api=1&query=Taller+Mec%C3%A1nico+Automotriz+FREDES+Av.+La+Feria+86+Ovalle">
+        <b>4,8</b><span class="estrellas" aria-hidden="true">★★★★★</span> 52 opiniones en Google
+      </a>
+      <div class="acciones">
+        <a class="btn btn-wa" href="https://wa.me/56981927918?text=Hola%2C%20quiero%20cotizar%20un%20trabajo%20para%20mi%20auto">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>
+          Cotizar por WhatsApp
+        </a>
+        <a class="btn btn-borde" href="tel:+56981927918">Llamar al 9 8192 7918</a>
+      </div>
+    </div>
+    <div class="piso" aria-hidden="true"></div>
+  </section>
+
+  <section class="precios" id="precios">
+    <div class="wrap">
+      <h2>Precios a la vista</h2>
+      <p class="intro">Lo que más nos piden, con precio publicado. Para otros trabajos, mándanos la marca y el modelo por WhatsApp.</p>
+      <div class="pizarra">
+        <div class="fila">
+          <h3>Revisión antes de la revisión técnica</h3>
+          <div class="precio">$30.000<small>IVA incluido</small></div>
+          <ul aria-label="Incluye">
+            <li>Frenos</li><li>Luces</li><li>Niveles</li><li>Suspensión</li><li>Tren delantero y trasero</li><li>Scanner</li>
+          </ul>
+        </div>
+        <div class="fila">
+          <h3>Kit de embrague para colectivo</h3>
+          <div class="precio">$80.000<small>IVA incluido</small></div>
+          <p class="det">Cambio completo del kit de embrague.</p>
+        </div>
+        <div class="fila">
+          <h3>Cinta espiral del airbag</h3>
+          <div class="precio"><small>desde</small>$25.000</div>
+          <p class="det">Cuando se enciende la luz del airbag o dejan de funcionar los botones del volante.</p>
+        </div>
+      </div>
+      <p class="aviso">Valores referenciales. Consulta el precio para tu modelo por WhatsApp.</p>
+    </div>
+  </section>
+
+  <section class="revision" id="revision">
+    <div class="wrap grid">
+      <div>
+        <h2>¿Cuándo te toca la revisión técnica?</h2>
+        <p class="lead">Toca el último número de tu patente. Te decimos el mes y te dejamos el auto listo antes de ir a la planta.</p>
+        <div class="digitos" role="group" aria-label="Último número de tu patente">
+          <button type="button" data-d="1">1</button><button type="button" data-d="2">2</button><button type="button" data-d="3">3</button><button type="button" data-d="4">4</button><button type="button" data-d="5">5</button>
+          <button type="button" data-d="6">6</button><button type="button" data-d="7">7</button><button type="button" data-d="8">8</button><button type="button" data-d="9">9</button><button type="button" data-d="0">0</button>
+        </div>
+      </div>
+      <div>
+        <div class="patente" aria-hidden="true">
+          <div class="patente-top"><span>CHILE</span><span>OVALLE</span></div>
+          <div class="patente-num"><span class="fijo">FR</span><span class="sep"></span><span class="fijo">ED</span><span class="sep"></span><span class="fijo">8<span class="dig" id="digito">?</span></span></div>
+          <div class="patente-pie">REVISIÓN TÉCNICA</div>
+        </div>
+        <div class="resultado" id="resultado" aria-live="polite">
+          <div class="mes" id="mes">Elige un número</div>
+          <p id="texto-mes">Y te mostramos en qué mes te toca.</p>
+          <a class="btn btn-wa" id="btn-revision" href="https://wa.me/56981927918?text=Hola%2C%20quiero%20agendar%20la%20revisi%C3%B3n%20antes%20de%20la%20t%C3%A9cnica">Agendar pre-revisión, $30.000</a>
+        </div>
+        <p class="fuente">Calendario del Ministerio de Transportes para vehículos particulares. Confírmalo en tu permiso de circulación.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="servicios" id="servicios">
+    <div class="wrap">
+      <h2>Qué hacemos</h2>
+      <div class="serv-grid">
+        <ul class="lista">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M8 20h8M12 16v4M7 11l3-3 2 2 4-4"/></svg><div><b>Diagnóstico con scanner</b><span>Leemos las fallas que registra el computador del auto.</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 4v3M12 17v3M4 12h3M17 12h3"/></svg><div><b>Frenos y rectificado de discos</b><span>Pastillas, discos y rectificado de discos.</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 3v4l-3 3 3 3-3 3 3 3v2M16 3v4l3 3-3 3 3 3-3 3v2"/></svg><div><b>Suspensión y tren delantero</b><span>Revisión y reparación de la suspensión delantera y trasera.</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v5M21 12h-5M12 21v-5M3 12h5"/></svg><div><b>Embragues</b><span>Cambio de kit de embrague, también para colectivos.</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2v20M4.9 6l14.2 12M19.1 6 4.9 18"/></svg><div><b>Carga de aire acondicionado</b><span>Para que llegue el verano con el aire funcionando.</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11Z"/></svg><div><b>Cambio de aceite y lavado de motor</b><span>Con lubricantes a la venta en el mismo taller.</span></div></li>
+        </ul>
+        <div class="mosaico">
+          <figure class="alto"><img src="img/frenos.jpg" alt="Mecánico revisando el disco de freno de una camioneta"><figcaption>Frenos</figcaption></figure>
+          <figure><img src="img/scanner.jpg" alt="Computador de diagnóstico del taller"><figcaption>Scanner</figcaption></figure>
+          <figure><img src="img/motor.jpg" alt="Auto con el capó abierto en reparación"><figcaption>Motor</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="taller">
+    <div class="wrap">
+      <h2>El taller</h2>
+      <div class="tira">
+        <figure><img src="img/taller-bahias.jpg" alt="Bahías de trabajo con elevadores"><figcaption>Elevadores<span>Varias bahías de trabajo bajo techo.</span></figcaption></figure>
+        <figure><img src="img/sala-espera.jpg" alt="Sala de espera con sillones"><figcaption>Sala de espera<span>Para que esperes cómodo mientras trabajamos.</span></figcaption></figure>
+        <figure><img src="img/lubricantes.jpg" alt="Mesón con lubricantes y repuestos"><figcaption>Lubricantes<span>Aceites y repuestos en el mismo lugar.</span></figcaption></figure>
+        <figure><img src="img/fachada.jpg" alt="Entrada del taller en Av. La Feria"><figcaption>La entrada<span>Av. La Feria 86, junto a la lona roja.</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="opiniones">
+    <div class="wrap">
+      <div class="gran-nota">4,8</div>
+      <div>
+        <h2>52 clientes nos dejaron su opinión en Google</h2>
+        <p>Léelas antes de traer tu auto. Si ya viniste, tu opinión ayuda a otros conductores de Ovalle.</p>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Taller+Mec%C3%A1nico+Automotriz+FREDES+Av.+La+Feria+86+Ovalle">Leer las opiniones</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ubicacion" id="ubicacion">
+    <div class="wrap">
+      <h2>Cómo llegar</h2>
+      <div class="ubi-grid">
+        <img src="img/fachada.jpg" alt="Fachada del Taller Automotriz Fredes">
+        <div class="datos">
+          <div class="dato"><b>Dirección</b>Av. La Feria 86, Ovalle, Región de Coquimbo</div>
+          <div class="dato"><b>Horario</b>Abrimos desde las 8:30. <span style="color:var(--texto-suave)">[Completar horario con el taller]</span></div>
+          <div class="dato"><b>Teléfono y WhatsApp</b><a href="tel:+56981927918">+56 9 8192 7918</a></div>
+          <div class="acciones">
+            <a class="btn btn-oscuro" href="https://www.google.com/maps/dir/?api=1&destination=Av.+La+Feria+86+Ovalle">Abrir en Google Maps</a>
+            <a class="btn btn-borde" href="https://www.instagram.com/tallerautomotrizfredes.oficial/">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>Taller Automotriz Fredes</b>
+    <span>Av. La Feria 86, Ovalle. Teléfono y WhatsApp <a href="tel:+56981927918">+56 9 8192 7918</a>.</span>
+    <span>Síguenos en <a href="https://www.instagram.com/tallerautomotrizfredes.oficial/">Instagram</a>.</span>
+  </div>
+</footer>
+
+<div class="barra">
+  <a class="btn btn-wa" href="https://wa.me/56981927918?text=Hola%2C%20quiero%20agendar%20una%20hora%20en%20el%20taller">WhatsApp</a>
+  <a class="btn btn-oscuro" href="tel:+56981927918">Llamar</a>
+</div>
+
+<script>
+// Calendario de revisión técnica, vehículos particulares (último dígito de la patente)
+const MESES = {9:"enero",0:"febrero",1:"abril",2:"mayo",3:"junio",4:"julio",5:"agosto",6:"septiembre",7:"octubre",8:"noviembre"};
+const botones = document.querySelectorAll(".digitos button");
+const dig = document.getElementById("digito");
+const mes = document.getElementById("mes");
+const texto = document.getElementById("texto-mes");
+const btn = document.getElementById("btn-revision");
+botones.forEach(b => b.addEventListener("click", () => {
+  const d = b.dataset.d;
+  botones.forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+  dig.textContent = d;
+  mes.textContent = "Te toca en " + MESES[d];
+  texto.textContent = "Agenda la revisión antes de la técnica: frenos, luces, niveles, suspensión y scanner, para ir a la planta sin sorpresas.";
+  const msg = "Hola, quiero agendar la revisión antes de la técnica ($30.000). Mi patente termina en " + d + " y me toca en " + MESES[d] + ".";
+  btn.href = "https://wa.me/56981927918?text=" + encodeURIComponent(msg);
+}));
+</script>
+</body>
+</html>

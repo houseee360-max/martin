@@ -103,6 +103,12 @@
       "skillPath": "skills/local-competitor-analysis/SKILL.md",
       "computedHash": "938335ff1a610e71664ba509b478d49c6b0e64ff81a85addffbc208d011ffbe7"
     },
+    "local-schema": {
+      "source": "garrettjsmith/localseoskills",
+      "sourceType": "github",
+      "skillPath": "skills/local-schema/SKILL.md",
+      "computedHash": "9c856508847c6b4d872eb82f331b9ef960d9dde25d88e2849e87601970d71a2c"
+    },
     "local-seo-audit": {
       "source": "garrettjsmith/localseoskills",
       "sourceType": "github",
