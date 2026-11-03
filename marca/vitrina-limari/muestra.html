@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:BC;font-weight:800;src:url(BarlowCondensed-800.woff2)}
+@font-face{font-family:BC;font-weight:900;src:url(BarlowCondensed-900.woff2)}
+@font-face{font-family:B;font-weight:500;src:url(Barlow-500.woff2)}
+@font-face{font-family:B;font-weight:600;src:url(Barlow-600.woff2)}
+body{margin:0;font-family:B;background:#E9ECEB}
+.wrap{display:flex;flex-wrap:wrap;gap:24px;padding:30px;width:1260px}
+.cell{background:#fff;border-radius:16px;padding:22px;display:flex;flex-direction:column;align-items:center;gap:14px;width:380px}
+.cell h4{margin:0;font:600 15px B;color:#555}
+/* Perfil circular */
+.perfil{width:220px;height:220px;border-radius:50%;display:grid;place-items:center;overflow:hidden}
+.perfil img{width:150px}
+.p1{background:#fff;box-shadow:0 0 0 1px #ddd}
+.p2{background:#0E5A4B}
+.p3{background:#F2B233}
+/* Horizontal */
+.h{display:flex;align-items:center;gap:12px}
+.h img{width:72px}
+.n{font-family:BC;font-weight:900;font-size:46px;line-height:.85;color:#0E5A4B;text-transform:uppercase;letter-spacing:.01em}
+.n span{display:block;color:#F2B233;font-size:46px}
+.n small{display:block;font:600 13px B;letter-spacing:.06em;color:#4A5552;text-transform:none;margin-top:6px}
+.oscuro{background:#0E5A4B;border-radius:12px;padding:18px 22px}
+.oscuro .n{color:#fff}
+/* Apilado */
+.ap{text-align:center}
+.ap img{width:120px}
+.ap .n{margin-top:8px;font-size:52px}
+.ap .n span{display:inline;font-size:52px}
+</style></head><body><div class="wrap">
+<div class="cell"><h4>A · Perfil fondo blanco</h4><div class="perfil p1"><img src="icono.svg"></div></div>
+<div class="cell"><h4>B · Perfil fondo verde</h4><div class="perfil p2"><img src="icono-claro.svg"></div></div>
+<div class="cell"><h4>C · Perfil fondo amarillo</h4><div class="perfil p3"><img src="icono.svg"></div></div>
+<div class="cell"><h4>Horizontal (web, documentos)</h4><div class="h"><img src="icono.svg"><div class="n">Vitrina<span>Limarí</span><small>Páginas web para negocios</small></div></div></div>
+<div class="cell"><h4>Horizontal sobre oscuro</h4><div class="h oscuro"><img src="icono-claro.svg"><div class="n">Vitrina<span>Limarí</span><small style="color:#CFE3DD">Páginas web para negocios</small></div></div></div>
+<div class="cell"><h4>Apilado (redes, tarjetas)</h4><div class="ap"><img src="icono.svg"><div class="n">Vitrina <span>Limarí</span></div></div></div>
+</div></body></html>
