@@ -1,5 +1,38 @@
 # Prospectos en Ovalle y el Limarí: análisis inicial
 
+## ⭐ Actualización 3-nov: nuevo mejor prospecto
+
+### 1. Limarí Experience (Turismo y Eventos Limarí SpA): RECOMENDADO
+- **Qué es:** operador de tours con **oficina en calle Lord Cochrane, Ovalle**. Vende en Civitatis tours a los humedales del río Limarí
+  (bicicleta, kayak y observación de aves) y al Valle del Encanto, con retiro en el hotel.
+- **Debilidad principal:** **no encontré web propia**. Todo pasa por Civitatis y otras plataformas, que cobran comisión por cada reserva.
+  Tampoco encontré redes verificadas (confirmar en el celular).
+- **Por qué es el mejor:**
+  - Ya vende por internet, así que entiende que lo necesita.
+  - Es una empresa (SpA), puede pagar con factura.
+  - Tiene varios tours, que dan para una web con catálogo y reservas directas por WhatsApp, en español e inglés.
+  - Su oficina queda en Ovalle, así que puedes ir en persona.
+- **Argumento:** "Cada turista que te encuentra por Civitatis te deja una comisión. Con tu propia web y Google Maps, parte de esas reservas llegan directo a tu WhatsApp."
+- Fuentes: https://www.civitatis.com/en/ovalle/limari-river-wetlands-bike-tour · https://www.civitatis.com/es/ovalle/tour-arqueologico-valle-encanto/
+
+### 2. Limarí Aventura (Fabián Miranda Parra)
+- **Qué es:** astroturismo cultural. Fabián es uno de los **3 guías del Limarí recién certificados** en astroturismo (nota de la Municipalidad de Ovalle).
+- **Debilidad:** no encontré web ni ficha en plataformas de reservas. Tiene una certificación que vende y casi nada de presencia online.
+- **Argumento:** "Tu certificación es tu mejor carta. Hoy un turista que busca astroturismo en Ovalle no te encuentra."
+- **Ojo:** probablemente es un emprendimiento chico, con menos presupuesto. Puede servir como primer caso a precio reducido.
+- Fuente: https://muniovalle.cl/sitio/?p=11228
+
+### Mensaje para Limarí Experience
+```
+Hola, soy [tu nombre], de Ovalle. Vi sus tours en Civitatis, el de los humedales y el del Valle del Encanto, y se ven muy buenos.
+Busqué una página propia para reservar directo y no la encontré, así que cada reserva les deja comisión en la plataforma.
+Les preparé un análisis gratis de cómo aparecen en internet y cómo recibir reservas directas. ¿Puedo pasar 10 minutos por la oficina?
+```
+
+---
+
+## Análisis anterior
+
 Fecha: 2026-11-03. Método: búsquedas web públicas (skills prospecting, local-seo-audit y seo-local).
 **Límite:** no pude ver Google Maps, Instagram ni Facebook por dentro. Lo que dice "no encontré" significa que no apareció
 en buscadores. Antes de contactarlos, verifícalo en tu celular.
