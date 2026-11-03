@@ -19,6 +19,12 @@
       "skillPath": "skills/caveman/SKILL.md",
       "computedHash": "71b600c88c8d1d36f18c4875db23b53c5d6cb9ba3195e19451d6b1bb67db07c4"
     },
+    "client-deliverables": {
+      "source": "garrettjsmith/localseoskills",
+      "sourceType": "github",
+      "skillPath": "skills/client-deliverables/SKILL.md",
+      "computedHash": "d3f11adc0efa73157ba7a56965eafdb45978952d0836a48e0c56bcdadcf97be9"
+    },
     "copy-editing": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
@@ -73,6 +79,12 @@
       "skillPath": "skills/frontend-design/SKILL.md",
       "computedHash": "89496d5dd00f4810205f351759594fc2742bf8eea85a2f2b2d1de59f4bd91576"
     },
+    "gbp-optimization": {
+      "source": "garrettjsmith/localseoskills",
+      "sourceType": "github",
+      "skillPath": "skills/gbp-optimization/SKILL.md",
+      "computedHash": "a66d0352cb672295d8c0b680643aadd5f1bcc2e70ed73bb92d3d5d2f02dd4fe6"
+    },
     "grand-slam-offer": {
       "source": "zacker-tech/hormozi-skills",
       "sourceType": "github",
@@ -84,6 +96,18 @@
       "sourceType": "github",
       "skillPath": "skills/landing-page-optimizer/SKILL.md",
       "computedHash": "ac3848358ea4ed6ceb8d8c593fe7b441fb97391fc207293fde67ee05b3ee0328"
+    },
+    "local-competitor-analysis": {
+      "source": "garrettjsmith/localseoskills",
+      "sourceType": "github",
+      "skillPath": "skills/local-competitor-analysis/SKILL.md",
+      "computedHash": "938335ff1a610e71664ba509b478d49c6b0e64ff81a85addffbc208d011ffbe7"
+    },
+    "local-seo-audit": {
+      "source": "garrettjsmith/localseoskills",
+      "sourceType": "github",
+      "skillPath": "skills/local-seo-audit/SKILL.md",
+      "computedHash": "076af704d3d230ac63bd776d1d12d0cda5028f70fbbf0f14735e88f7326e6004"
     },
     "market-research": {
       "source": "thatrebeccarae/claude-marketing",
@@ -120,6 +144,18 @@
       "sourceType": "github",
       "skillPath": "skills/product-marketing/SKILL.md",
       "computedHash": "d051a45340cc15c633c008e5e8896dce61f5746830104f2624e7d20fdf5beb48"
+    },
+    "prospecting": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/prospecting/SKILL.md",
+      "computedHash": "435118084e04534a9d393a69e19e8dd846271ebd1e13d3966b02e8c2e4a72780"
+    },
+    "seo-local": {
+      "source": "AgriciDaniel/claude-seo",
+      "sourceType": "github",
+      "skillPath": "skills/seo-local/SKILL.md",
+      "computedHash": "01fe25e2495267f9491b1a2cc4d4fe6573840b162b0540af2cba25d0463c1e85"
     },
     "shopify": {
       "source": "thatrebeccarae/claude-marketing",
