@@ -151,11 +151,23 @@
       "skillPath": "skills/prospecting/SKILL.md",
       "computedHash": "435118084e04534a9d393a69e19e8dd846271ebd1e13d3966b02e8c2e4a72780"
     },
+    "review-management": {
+      "source": "garrettjsmith/localseoskills",
+      "sourceType": "github",
+      "skillPath": "skills/review-management/SKILL.md",
+      "computedHash": "1851e01a712ac3876d6fb932ebe930a6735da199e17a50c2251fd2666f3cb1c7"
+    },
     "seo-local": {
       "source": "AgriciDaniel/claude-seo",
       "sourceType": "github",
       "skillPath": "skills/seo-local/SKILL.md",
       "computedHash": "01fe25e2495267f9491b1a2cc4d4fe6573840b162b0540af2cba25d0463c1e85"
+    },
+    "service-area-seo": {
+      "source": "garrettjsmith/localseoskills",
+      "sourceType": "github",
+      "skillPath": "skills/service-area-seo/SKILL.md",
+      "computedHash": "7418570eb6a6759e7c6b85a83ff9f08e06e2dfd9093c249bfd9f55cbd809dfb7"
     },
     "shopify": {
       "source": "thatrebeccarae/claude-marketing",
