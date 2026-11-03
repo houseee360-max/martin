@@ -6,6 +6,7 @@ import { loadMedia } from "./metadata";
 import { CLIPS } from "./shorts/clips";
 import { layoutSegments, Short, SHORT_H, SHORT_W, ShortProps } from "./shorts/Short";
 import { FPS, HEIGHT, TOTAL_FRAMES, WIDTH } from "./theme";
+import { Propuesta, PROP_FPS, PROP_H, PROP_TOTAL, PROP_W } from "./propuesta/Propuesta";
 
 const episodioMetadata: CalculateMetadataFunction<Episodio1Props> = async ({ props }) => ({
   props: { ...props, ...(await loadMedia(props.subtitles)) },
@@ -27,6 +28,14 @@ export const RemotionRoot: React.FC = () => (
       height={HEIGHT}
       defaultProps={{ assets: NO_ASSETS, subtitles: [] }}
       calculateMetadata={episodioMetadata}
+    />
+    <Composition
+      id="PropuestaFredes"
+      component={Propuesta}
+      durationInFrames={PROP_TOTAL}
+      fps={PROP_FPS}
+      width={PROP_W}
+      height={PROP_H}
     />
     <Folder name="Shorts">
       {CLIPS.map((c) => (

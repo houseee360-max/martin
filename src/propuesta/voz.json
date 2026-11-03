@@ -1,0 +1,42 @@
+[
+ {
+  "key": "intro",
+  "texto": "Les preparamos una propuesta de página web para el Taller Automotriz Fredes. Les mostramos cómo funciona.",
+  "dur": 6.21
+ },
+ {
+  "key": "portada",
+  "texto": "Lo primero que ve el cliente: sus cuatro coma ocho estrellas en Google, y un botón para agendar por WhatsApp.",
+  "dur": 6.12
+ },
+ {
+  "key": "precios",
+  "texto": "Sus precios, a la vista, como órdenes de trabajo. El cliente sabe cuánto cuesta antes de llamar.",
+  "dur": 5.57
+ },
+ {
+  "key": "tablero",
+  "texto": "El cliente toca la luz que se le encendió en el tablero. La página le explica qué revisar, y le escribe al taller con un toque.",
+  "dur": 7.02
+ },
+ {
+  "key": "revision",
+  "texto": "Con el último número de la patente, sabe en qué mes le toca la revisión técnica, y agenda la pre revisión de treinta mil pesos.",
+  "dur": 7.27
+ },
+ {
+  "key": "agenda",
+  "texto": "Para agendar, llena sus datos, y se abre WhatsApp con el mensaje listo. Al taller le llega todo ordenado: nombre, patente, auto y servicio.",
+  "dur": 8.13
+ },
+ {
+  "key": "ubicacion",
+  "texto": "Y al final, el mapa, el teléfono, y un botón para llegar con Google Maps.",
+  "dur": 4.2
+ },
+ {
+  "key": "outro",
+  "texto": "La página queda conectada a su ficha de Google, para que sea más fácil encontrarlos. ¿La dejamos lista para el taller?",
+  "dur": 6.59
+ }
+]
