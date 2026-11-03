@@ -20,8 +20,12 @@ Su dueño, Nelson Veas, aparece en una nota de MDZol (2023) como impulsor del tu
 - Producto premium y diferenciado: domos y observatorio, en pleno auge del astroturismo en la región.
 - Atrae turistas de Santiago y del extranjero, que buscan y reservan por internet.
 
+**Corrección (3-nov):** sí tiene web, **valledelsol.cl** (dato del usuario). No pude abrirla desde este entorno porque la red la bloquea,
+y en el buscador que uso no aparece ningún resultado de valledelsol.cl, ni siquiera buscando "valledelsol.cl Monte Patria".
+Eso apunta a un posible problema de indexación o SEO, pero hay que confirmarlo en Google desde un celular.
+
 **Debilidades encontradas**
-1. **No encontré una web oficial.**
+1. ~~No encontré una web oficial.~~ Tiene web, pero no aparece en los resultados de búsqueda que revisé.
 2. **No encontré Instagram ni Facebook verificados.**
 3. **Confusión de nombre:** existe un "Complejo Valle del Sol" en Calamuchita, Argentina, con web propia (complejovalledelsol.com).
    Quien busca "Valle del Sol" en Google puede caer en el argentino y perder la reserva.
