@@ -1,11 +1,16 @@
 # Prospectos en Ovalle y el Limarí: análisis inicial
 
+## ⚠️ Límite importante de este análisis
+Valle del Sol (valledelsol.cl) y Limarí Experience (limaritravel.cl) **sí tienen web** (dato del usuario). Mi buscador no las mostraba
+y la red de este entorno no deja abrirlas. Por eso **"no encontré web" no prueba que no exista**.
+Para auditar bien un negocio hay que poder abrir su web (habilitar el dominio en Network access) o revisarla desde el celular.
+
 ## ⭐ Actualización 3-nov: nuevo mejor prospecto
 
 ### 1. Limarí Experience (Turismo y Eventos Limarí SpA): RECOMENDADO
 - **Qué es:** operador de tours con **oficina en calle Lord Cochrane, Ovalle**. Vende en Civitatis tours a los humedales del río Limarí
   (bicicleta, kayak y observación de aves) y al Valle del Encanto, con retiro en el hotel.
-- **Debilidad principal:** **no encontré web propia**. Todo pasa por Civitatis y otras plataformas, que cobran comisión por cada reserva.
+- **Corrección:** tiene web, **limaritravel.cl**. No pude abrirla. ~~Debilidad principal: no encontré web propia.~~ Todo pasa por Civitatis y otras plataformas, que cobran comisión por cada reserva.
   Tampoco encontré redes verificadas (confirmar en el celular).
 - **Por qué es el mejor:**
   - Ya vende por internet, así que entiende que lo necesita.
