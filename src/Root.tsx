@@ -37,6 +37,15 @@ export const RemotionRoot: React.FC = () => (
       width={PROP_W}
       height={PROP_H}
     />
+    <Composition
+      id="PropuestaFredesSinVoz"
+      component={Propuesta}
+      durationInFrames={PROP_TOTAL}
+      fps={PROP_FPS}
+      width={PROP_W}
+      height={PROP_H}
+      defaultProps={{ conVoz: false }}
+    />
     <Folder name="Shorts">
       {CLIPS.map((c) => (
         <Composition

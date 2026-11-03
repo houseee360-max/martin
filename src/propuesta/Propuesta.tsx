@@ -79,7 +79,10 @@ export const plan = () => {
 export const PROP_TOTAL = plan().reduce((a, e) => a + e.frames, 0);
 
 /** Subtítulo: las palabras se iluminan a medida que la voz avanza */
+const ConVoz = React.createContext(true);
+
 const Subtitulo: React.FC<{ texto: string; voz: number }> = ({ texto, voz }) => {
+  const conVoz = React.useContext(ConVoz);
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
@@ -92,7 +95,7 @@ const Subtitulo: React.FC<{ texto: string; voz: number }> = ({ texto, voz }) => 
       {palabras.map((w, i) => {
         const inicio = (acc / total) * voz;
         acc += pesos[i];
-        const dicha = t >= inicio;
+        const dicha = !conVoz || t >= inicio;
         return (
           <span key={i} style={{ opacity: dicha ? 1 : 0.32, transition: "none" }}>
             {w}{" "}
@@ -227,20 +230,24 @@ const Outro: React.FC<{ e: ReturnType<typeof plan>[number] }> = ({ e }) => {
   );
 };
 
-export const Propuesta: React.FC = () => {
+export const Propuesta: React.FC<{ conVoz?: boolean }> = ({ conVoz = true }) => {
   const escenas = plan();
   return (
+    <ConVoz.Provider value={conVoz}>
     <AbsoluteFill>
       <Fondo />
       {escenas.map((e) => (
         <Sequence key={e.key} from={e.from} durationInFrames={e.frames} name={e.key}>
           {e.key === "intro" ? <Intro e={e} /> : e.key === "outro" ? <Outro e={e} /> : <EscenaClip e={e} />}
-          <Sequence from={6} layout="none">
-            <Audio src={staticFile(`propuesta/voz_${e.key}.mp3`)} />
-          </Sequence>
+          {conVoz ? (
+            <Sequence from={6} layout="none">
+              <Audio src={staticFile(`propuesta/voz_${e.key}.mp3`)} />
+            </Sequence>
+          ) : null}
         </Sequence>
       ))}
     </AbsoluteFill>
+    </ConVoz.Provider>
   );
 };
 
