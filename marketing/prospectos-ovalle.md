@@ -129,3 +129,18 @@ de cómo aparecen en internet y cómo recibir reservas directas por WhatsApp.
 - Lonely Planet, Hostal Chile Colonial: https://www-lonelyplanet-com-57e2.imagizer.com/chile/ovalle/hotels/hostal-chile-colonial/a/poi-sle/1588793/1340024
 - Sernatur, Destino Limarí: https://turismoregiondecoquimbo.cl/wp-content/uploads/2023/03/Destino-Provinca-Limari.pdf
 - Expedia, cabañas cerca de Ovalle: https://www.expedia.com/es/Ovalle-Cabanas.d6143185-aaCabanas.Guia-Viajes-Alojamiento
+
+---
+
+## Nuevos prospectos (búsqueda 3-nov, por verificar en Google Maps)
+
+| Prioridad | Negocio | Rubro | Dato encontrado | Por qué es buen prospecto |
+|---|---|---|---|---|
+| 1 | Escuela de Conductores Cordillera Ltda. | Escuela de conductores | Registrada en Ovalle (Mercantil). No se encontró web. | Cada alumno paga caro y busca "escuela de conductores Ovalle" en Google. Un alumno extra al mes paga la web. |
+| 2 | Veterinaria El Mirador | Veterinaria | Vicuña Mackenna 406 (directorio AgendaPro) | Urgencias = la gente busca en Google Maps en el momento. |
+| 3 | Veterinaria Roco / Patricio Roco | Veterinaria | Benavente 485 (registro de empresas) | Igual que la anterior. Verificar si tiene web o solo Facebook. |
+| 4 | Pastelería María Jesús / Pastelerías San Pablo | Pastelería | Aparecen en directorio de Ovalle | Venden por foto y por encargo: les sirve web con catálogo de tortas + videos. Presupuesto probablemente menor. |
+
+Descartado por ahora: cadena veterinaria con varias sedes (ya usa AgendaPro para reservas online, más digitalizada).
+
+Fuentes: mercantil.com (escuelas de conductores Coquimbo), agendapro.com (veterinarias Ovalle), genealog.cl (Veterinaria Roco), mercantil.com (pastelerías Ovalle).
