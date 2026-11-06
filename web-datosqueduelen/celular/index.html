@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿Cuántos años de tu vida vas a pasar en el celular? | Datos que Duelen</title>
+<meta name="description" content="Calcula cuántos años de tu vida vas a pasar mirando el celular. Pon tu edad y tus horas de pantalla, y comparte tu resultado.">
+<meta property="og:title" content="¿Cuántos años de tu vida vas a pasar en el celular?">
+<meta property="og:description" content="Calcula el tuyo en 10 segundos. Datos que Duelen.">
+<meta name="theme-color" content="#141414">
+<style>
+@font-face{font-family:"Archivo Black";src:url(../fonts/ArchivoBlack-Regular.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url(../fonts/JetBrainsMono-Variable.woff2) format("woff2");font-weight:100 800;font-display:swap}
+:root{--fondo:#141414;--fondo-2:#1E1E1E;--fondo-3:#2A2A2A;--texto:#F2EFE9;--suave:#A8A49C;--acento:#FF4D2E;--linea:#333}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fondo);color:var(--texto);font-family:"JetBrains Mono",ui-monospace,monospace;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--acento);outline-offset:3px;border-radius:6px}
+.mono-s{font-size:13px;color:var(--suave)}
+
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.marca{font-family:"Archivo Black";font-size:16px;letter-spacing:.02em}
+.marca span{color:var(--acento)}
+.idioma{display:flex;background:var(--fondo-2);border-radius:999px;padding:3px}
+.idioma button{border:0;background:none;padding:6px 12px;border-radius:999px;font-size:13px;cursor:pointer;color:var(--suave)}
+.idioma button[aria-pressed="true"]{background:var(--texto);color:var(--fondo)}
+
+.titulo{padding:24px 0 8px}
+h1{font-family:"Archivo Black";font-weight:400;font-size:clamp(38px,10vw,58px);line-height:.98;margin:0;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--acento)}
+.intro{margin-top:16px;color:var(--suave);max-width:46ch}
+
+.form{margin-top:30px;display:grid;gap:22px}
+.campo{background:var(--fondo-2);border-radius:20px;padding:18px 18px 16px}
+.campo-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.campo label{font-size:14px;color:var(--suave)}
+.valor{font-family:"Archivo Black";font-size:34px;line-height:1}
+.valor small{font-family:"JetBrains Mono";font-size:14px;color:var(--suave);margin-left:4px}
+input[type=range]{width:100%;margin:14px 0 4px;-webkit-appearance:none;appearance:none;height:8px;border-radius:8px;background:linear-gradient(90deg,var(--acento) var(--p,30%),var(--fondo-3) var(--p,30%));outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:var(--texto);border:5px solid var(--acento);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--texto);border:5px solid var(--acento);cursor:pointer}
+.ayuda{margin-top:8px;font-size:13px;color:var(--suave)}
+.ayuda summary{cursor:pointer;color:var(--texto);text-decoration:underline;text-underline-offset:3px}
+.ayuda p{margin:8px 0 0}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:58px;padding:0 28px;border:0;border-radius:999px;cursor:pointer;font-family:"Archivo Black";font-size:18px;text-decoration:none;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-acento{background:var(--acento);color:#fff}
+.btn-claro{background:var(--texto);color:var(--fondo)}
+.btn-borde{background:transparent;color:var(--texto);box-shadow:inset 0 0 0 2px var(--linea)}
+.btn.full{width:100%}
+
+/* Resultado */
+.resultado{margin-top:40px;padding:28px 0 10px;border-top:1px solid var(--linea);display:none}
+.resultado.ver{display:block}
+.res-label{font-size:14px;color:var(--suave)}
+.res-num{font-family:"Archivo Black";font-size:clamp(84px,26vw,150px);line-height:.9;color:var(--acento);margin-top:8px;font-variant-numeric:tabular-nums}
+.res-num small{font-size:.32em;color:var(--texto);margin-left:6px}
+.res-txt{margin-top:10px;font-family:"Archivo Black";font-size:clamp(22px,6vw,30px);line-height:1.1}
+.extra{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.extra div{background:var(--fondo-2);border-radius:16px;padding:14px}
+.extra b{display:block;font-family:"Archivo Black";font-weight:400;font-size:26px;line-height:1.1}
+.extra span{font-size:13px;color:var(--suave)}
+
+/* Tu vida en cuadritos */
+.vida{margin-top:30px}
+.vida h2{font-family:"Archivo Black";font-weight:400;font-size:22px;margin:0}
+.vida p{margin:6px 0 14px;font-size:13px;color:var(--suave)}
+.grilla{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.grilla i{aspect-ratio:1;border-radius:4px;background:var(--fondo-3);transition:background .25s,transform .25s}
+.grilla i.vivido{background:#5A5750}
+.grilla i.celu{background:var(--acento);transform:scale(.92)}
+.grilla i.parcial{background:linear-gradient(90deg,var(--acento) var(--f),var(--fondo-3) var(--f))}
+.leyenda{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:12px;color:var(--suave)}
+.leyenda span::before{content:"";display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:var(--c)}
+
+.calculo{margin-top:26px;background:var(--fondo-2);border-radius:16px;padding:16px;font-size:13px;color:var(--suave)}
+.calculo b{color:var(--texto);font-weight:600}
+
+.compartir{margin-top:26px;display:grid;gap:10px}
+.tarjeta-prev{width:100%;max-width:300px;margin:6px auto 0;display:block;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+
+.cta-canal{margin:46px 0 30px;padding:24px;border-radius:24px;background:var(--fondo-2);text-align:center}
+.cta-canal h3{font-family:"Archivo Black";font-weight:400;font-size:24px;margin:0;line-height:1.1}
+.cta-canal p{margin:8px 0 16px;color:var(--suave);font-size:14px}
+footer{padding:0 0 40px;font-size:12px;color:var(--suave)}
+footer p{margin:6px 0}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--texto);color:var(--fondo);padding:12px 20px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;z-index:9}
+.toast.ver{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="marca" href="../" style="text-decoration:none;color:inherit">DATOS QUE <span>DUELEN</span></a>
+    <div class="idioma" role="group" aria-label="Idioma">
+      <button type="button" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <section class="titulo">
+    <h1 data-t="h1">¿Cuántos <em>años</em> de tu vida vas a pasar en el celular?</h1>
+    <p class="intro" data-t="intro">Pon tu edad y tus horas de pantalla al día. El cálculo se hace en tu teléfono: no guardamos nada.</p>
+  </section>
+
+  <form class="form" id="form">
+    <div class="campo">
+      <div class="campo-top"><label for="edad" data-t="edad">Tu edad</label><div class="valor"><span id="v-edad">25</span><small data-t="anios">años</small></div></div>
+      <input type="range" id="edad" min="10" max="90" step="1" value="25">
+    </div>
+    <div class="campo">
+      <div class="campo-top"><label for="horas" data-t="horas">Horas de celular al día</label><div class="valor"><span id="v-horas">4</span><small data-t="hdia">h/día</small></div></div>
+      <input type="range" id="horas" min="0.5" max="16" step="0.5" value="4">
+      <details class="ayuda">
+        <summary data-t="dondeVer">¿Dónde veo mis horas?</summary>
+        <p data-t="iphone"><b>iPhone:</b> Ajustes → Tiempo de uso → Ver toda la actividad.</p>
+        <p data-t="android"><b>Android:</b> Ajustes → Bienestar digital y controles parentales.</p>
+      </details>
+    </div>
+    <div class="campo">
+      <div class="campo-top"><label for="vida" data-t="esperanza">Esperanza de vida</label><div class="valor"><span id="v-vida">80</span><small data-t="anios">años</small></div></div>
+      <input type="range" id="vida" min="50" max="100" step="1" value="80">
+      <p class="ayuda" data-t="esperanzaAyuda">Un valor promedio aproximado. Cámbialo según tu país.</p>
+    </div>
+    <button class="btn btn-acento full" type="submit" data-t="calcular">Calcular el mío</button>
+  </form>
+
+  <section class="resultado" id="resultado" aria-live="polite">
+    <div class="res-label" data-t="vasAPasar">Desde hoy, vas a pasar</div>
+    <div class="res-num"><span id="r-anios">0,0</span><small data-t="aniosMay">años</small></div>
+    <div class="res-txt" data-t="mirando">mirando el celular.</div>
+
+    <div class="extra">
+      <div><b id="r-dias">0</b><span data-t="diasCompletos">días completos, sin parar</span></div>
+      <div><b id="r-pct">0%</b><span data-t="pctDespierto">del tiempo que pasarás despierto</span></div>
+    </div>
+
+    <div class="vida">
+      <h2 data-t="vidaTit">Tu vida en cuadritos</h2>
+      <p data-t="vidaTxt">Cada cuadrito es un año.</p>
+      <div class="grilla" id="grilla" aria-hidden="true"></div>
+      <div class="leyenda">
+        <span style="--c:#5A5750" data-t="lVivido">Ya vivido</span>
+        <span style="--c:var(--acento)" data-t="lCelu">En el celular</span>
+        <span style="--c:var(--fondo-3)" data-t="lResto">El resto</span>
+      </div>
+    </div>
+
+    <div class="calculo" id="calculo"></div>
+
+    <div class="compartir">
+      <img class="tarjeta-prev" id="prev" alt="">
+      <button class="btn btn-claro full" type="button" id="compartir" data-t="compartir">Compartir mi resultado</button>
+      <button class="btn btn-borde full" type="button" id="descargar" data-t="descargar">Descargar imagen</button>
+    </div>
+  </section>
+
+  <section class="cta-canal">
+    <h3 data-t="ctaTit">Más datos que duelen</h3>
+    <p data-t="ctaTxt">Datos reales, con fuente, que te van a hacer pensar.</p>
+    <a class="btn btn-acento" href="#" id="canal" data-t="ctaBtn">Ver el canal</a>
+  </section>
+
+  <footer>
+    <p data-t="fuente1">Cálculo: años que te quedan × horas al día ÷ 24. Supone 8 horas de sueño para el porcentaje del tiempo despierto.</p>
+    <p data-t="fuente2">Es una estimación: si cambias tus hábitos, cambia el resultado.</p>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<canvas id="lienzo" width="1080" height="1920" hidden></canvas>
+
+<script>
+const CANAL = "../#videos"; // ← poner aquí el link del canal (YouTube / TikTok / Instagram)
+const URL_WEB = "datosqueduelen.netlify.app/celular"; // ← dirección donde se publique esta página
+const T = {
+  es:{h1:'¿Cuántos <em>años</em> de tu vida vas a pasar en el celular?',intro:'Pon tu edad y tus horas de pantalla al día. El cálculo se hace en tu teléfono: no guardamos nada.',edad:'Tu edad',anios:'años',horas:'Horas de celular al día',hdia:'h/día',dondeVer:'¿Dónde veo mis horas?',iphone:'<b>iPhone:</b> Ajustes → Tiempo de uso → Ver toda la actividad.',android:'<b>Android:</b> Ajustes → Bienestar digital y controles parentales.',esperanza:'Esperanza de vida',esperanzaAyuda:'Un valor promedio aproximado. Cámbialo según tu país.',calcular:'Calcular el mío',vasAPasar:'Desde hoy, vas a pasar',aniosMay:'años',mirando:'mirando el celular.',diasCompletos:'días completos, sin parar',pctDespierto:'del tiempo que pasarás despierto',vidaTit:'Tu vida en cuadritos',vidaTxt:'Cada cuadrito es un año.',lVivido:'Ya vivido',lCelu:'En el celular',lResto:'El resto',compartir:'Compartir mi resultado',descargar:'Descargar imagen',ctaTit:'Más datos que duelen',ctaTxt:'Datos reales, con fuente, que te van a hacer pensar.',ctaBtn:'Ver el canal',fuente1:'Cálculo: años que te quedan × horas al día ÷ 24. Supone 8 horas de sueño para el porcentaje del tiempo despierto.',fuente2:'Es una estimación: si cambias tus hábitos, cambia el resultado.',
+      calc:(q,h,a)=>`Te quedan <b>${q} años</b>. Con <b>${h} h</b> al día, son <b>${a} años</b> de pantalla.`,card1:'Voy a pasar',card2:'AÑOS',card3:'de mi vida mirando el celular.',card4:'¿Y tú? Calcula el tuyo:',copiado:'Enlace copiado',descargado:'Imagen descargada',shareTxt:a=>`Voy a pasar ${a} años de mi vida mirando el celular. ¿Y tú?`},
+  en:{h1:'How many <em>years</em> of your life will you spend on your phone?',intro:'Enter your age and your daily screen time. Everything is calculated on your phone: we store nothing.',edad:'Your age',anios:'years',horas:'Phone hours per day',hdia:'h/day',dondeVer:'Where do I find my hours?',iphone:'<b>iPhone:</b> Settings → Screen Time → See All Activity.',android:'<b>Android:</b> Settings → Digital Wellbeing & parental controls.',esperanza:'Life expectancy',esperanzaAyuda:'A rough average. Change it for your country.',calcular:'Calculate mine',vasAPasar:'From today, you will spend',aniosMay:'years',mirando:'looking at your phone.',diasCompletos:'full days, non-stop',pctDespierto:'of your waking time',vidaTit:'Your life in squares',vidaTxt:'Each square is one year.',lVivido:'Already lived',lCelu:'On the phone',lResto:'The rest',compartir:'Share my result',descargar:'Download image',ctaTit:'More data that hurts',ctaTxt:'Real data, with sources, that will make you think.',ctaBtn:'Watch the channel',fuente1:'Calculation: years left × hours per day ÷ 24. Assumes 8 hours of sleep for the share of waking time.',fuente2:'It is an estimate: if your habits change, so does the result.',
+      calc:(q,h,a)=>`You have <b>${q} years</b> left. At <b>${h} h</b> a day, that's <b>${a} years</b> of screen time.`,card1:'I will spend',card2:'YEARS',card3:'of my life looking at my phone.',card4:'And you? Calculate yours:',copiado:'Link copied',descargado:'Image downloaded',shareTxt:a=>`I will spend ${a} years of my life looking at my phone. And you?`}
+};
+let L = (navigator.language||'es').toLowerCase().startsWith('es') ? 'es' : 'en';
+const $=s=>document.querySelector(s);
+const fmt=(n,d=1)=>L==='es'?n.toFixed(d).replace('.',','):n.toFixed(d);
+const fmtInt=n=>Math.round(n).toLocaleString(L==='es'?'es-CL':'en-US');
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('ver');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('ver'),2200)};
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function idioma(l){L=l;document.documentElement.lang=l;
+  document.querySelectorAll('[data-t]').forEach(el=>{const v=T[l][el.dataset.t];if(typeof v==='string')el.innerHTML=v});
+  document.querySelectorAll('.idioma button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===l));
+  if($('#resultado').classList.contains('ver'))calcular(false);}
+document.querySelectorAll('.idioma button').forEach(b=>b.onclick=()=>idioma(b.dataset.lang));
+
+// Sliders
+const sl=['edad','horas','vida'];
+const pinta=id=>{const el=$('#'+id),p=(el.value-el.min)/(el.max-el.min)*100;el.style.setProperty('--p',p+'%');$('#v-'+id).textContent=id==='horas'?fmt(+el.value,el.value%1?1:0):el.value};
+sl.forEach(id=>{$('#'+id).addEventListener('input',()=>{pinta(id);if(id==='edad'||id==='vida'){const e=$('#edad'),v=$('#vida');if(+e.value>=+v.value){v.value=Math.min(100,+e.value+1);pinta('vida')}}if($('#resultado').classList.contains('ver'))calcular(false)});pinta(id)});
+
+// Cuadritos
+function grilla(edad,vida,aniosCelu,animar){
+  const g=$('#grilla');g.innerHTML='';const total=Math.ceil(vida);const cuadros=[];
+  for(let i=0;i<total;i++){const c=document.createElement('i');if(i<edad)c.className='vivido';g.appendChild(c);cuadros.push(c)}
+  // los años de celular se reparten al final de la vida restante para que se vean juntos
+  const enteros=Math.floor(aniosCelu),frac=aniosCelu-enteros;const inicio=edad;
+  const marcar=k=>{if(k<enteros)cuadros[inicio+k].className='celu';else if(frac>0.05){const c=cuadros[inicio+enteros];if(c){c.className='parcial';c.style.setProperty('--f',Math.round(frac*100)+'%')}}};
+  if(!animar||reduce){for(let k=0;k<=enteros;k++)marcar(k);return}
+  let k=0;const paso=()=>{marcar(k);k++;if(k<=enteros)setTimeout(paso,Math.max(40,500/Math.max(1,enteros)))};setTimeout(paso,500);
+}
+
+function calcular(animar=true){
+  const edad=+$('#edad').value,h=+$('#horas').value,vida=+$('#vida').value;
+  const quedan=Math.max(0,vida-edad),anios=quedan*h/24,dias=anios*365.25,pct=Math.min(100,h/16*100);
+  $('#resultado').classList.add('ver');
+  const fin=anios,el=$('#r-anios');
+  if(animar&&!reduce){const t0=performance.now(),dur=1400;const f=t=>{const p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3);el.textContent=fmt(fin*e);$('#r-dias').textContent=fmtInt(dias*e);$('#r-pct').textContent=Math.round(pct*e)+'%';if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+  else{el.textContent=fmt(fin);$('#r-dias').textContent=fmtInt(dias);$('#r-pct').textContent=Math.round(pct)+'%'}
+  $('#calculo').innerHTML=T[L].calc(quedan,fmt(h,h%1?1:0),fmt(anios));
+  grilla(edad,vida,anios,animar);
+  tarjeta(anios);
+}
+$('#form').addEventListener('submit',e=>{e.preventDefault();calcular(true);setTimeout(()=>$('#resultado').scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'}),60)});
+
+// Tarjeta para compartir (1080x1920, formato historia)
+function tarjeta(anios){
+  const c=$('#lienzo'),x=c.getContext('2d'),t=T[L];
+  x.fillStyle='#141414';x.fillRect(0,0,1080,1920);
+  x.fillStyle='#FF4D2E';x.fillRect(0,0,1080,14);
+  x.fillStyle='#F2EFE9';x.font='38px "Archivo Black"';x.fillText('DATOS QUE',90,170);x.fillStyle='#FF4D2E';x.fillText('DUELEN',90+x.measureText('DATOS QUE ').width,170);
+  x.fillStyle='#A8A49C';x.font='500 46px "JetBrains Mono"';x.fillText(t.card1,90,520);
+  x.fillStyle='#FF4D2E';x.font='300px "Archivo Black"';x.fillText(fmt(anios),80,820);
+  x.fillStyle='#F2EFE9';x.font='96px "Archivo Black"';x.fillText(t.card2,90,1010);
+  x.font='54px "Archivo Black"';wrap(x,t.card3,90,1120,900,66);
+  // mini grilla
+  const edad=+$('#edad').value,vida=+$('#vida').value;let n=Math.ceil(vida),cols=10,s=58,g=10,ox=90,oy=1260;
+  const ent=Math.floor(anios);
+  for(let i=0;i<n;i++){const cx=ox+(i%cols)*(s+g),cy=oy+Math.floor(i/cols)*(s+g);if(cy>1640)break;
+    x.fillStyle=i<edad?'#5A5750':(i<edad+ent?'#FF4D2E':(i===edad+ent&&anios%1>0.05?'#FF4D2E':'#2A2A2A'));
+    x.beginPath();x.roundRect?x.roundRect(cx,cy,s,s,8):x.rect(cx,cy,s,s);x.fill()}
+  x.fillStyle='#A8A49C';x.font='500 40px "JetBrains Mono"';x.fillText(t.card4,90,1790);
+  x.fillStyle='#F2EFE9';x.font='700 44px "JetBrains Mono"';x.fillText(URL_WEB,90,1850);
+  $('#prev').src=c.toDataURL('image/png');
+}
+function wrap(x,txt,X,Y,max,lh){const w=txt.split(' ');let l='';for(const p of w){const t=l?l+' '+p:p;if(x.measureText(t).width>max&&l){x.fillText(l,X,Y);Y+=lh;l=p}else l=t}x.fillText(l,X,Y)}
+
+$('#descargar').onclick=()=>{const a=document.createElement('a');a.href=$('#lienzo').toDataURL('image/png');a.download='datos-que-duelen-celular.png';a.click();toast(T[L].descargado)};
+$('#compartir').onclick=async()=>{
+  const anios=$('#r-anios').textContent,txt=T[L].shareTxt(anios);
+  const blob=await new Promise(r=>$('#lienzo').toBlob(r,'image/png'));
+  const file=new File([blob],'datos-que-duelen.png',{type:'image/png'});
+  if(navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],text:txt+' '+location.href});return}catch(e){if(e.name==='AbortError')return}}
+  if(navigator.share){try{await navigator.share({text:txt,url:location.href});return}catch(e){if(e.name==='AbortError')return}}
+  try{await navigator.clipboard.writeText(txt+' '+location.href);toast(T[L].copiado)}catch{toast(txt)}
+};
+$('#canal').href=CANAL;
+document.fonts.ready.then(()=>idioma(L));
+</script>
+</body>
+</html>

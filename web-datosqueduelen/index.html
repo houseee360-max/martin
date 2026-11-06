@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datos que Duelen | Datos reales que incomodan</title>
+<meta name="description" content="Videos cortos y calculadoras con datos reales que incomodan sobre el celular, la salud, el planeta y el costo de vivir. Cada dato tiene su fuente.">
+<meta property="og:title" content="Datos que Duelen">
+<meta property="og:description" content="Datos reales que duelen. Calcula el tuyo.">
+<meta property="og:image" content="img/ep1.jpg">
+<meta name="theme-color" content="#141414">
+<style>
+@font-face{font-family:"Archivo Black";src:url(fonts/ArchivoBlack-Regular.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url(fonts/JetBrainsMono-Variable.woff2) format("woff2");font-weight:100 800;font-display:swap}
+:root{--fondo:#141414;--fondo-2:#1E1E1E;--fondo-3:#2A2A2A;--texto:#F2EFE9;--suave:#A8A49C;--acento:#FF4D2E;--linea:#333}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--fondo);color:var(--texto);font-family:"JetBrains Mono",ui-monospace,monospace;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--acento);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:"Archivo Black";font-weight:400;margin:0;line-height:1}
+h2{font-size:clamp(34px,8vw,56px)}
+.sub{margin-top:14px;color:var(--suave);max-width:52ch}
+section{padding:80px 0;border-top:1px solid var(--linea)}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .7s,transform .7s}
+.rv.on{opacity:1;transform:none}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px;border:0;border-radius:999px;cursor:pointer;font-family:"Archivo Black";font-size:17px;text-decoration:none;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-acento{background:var(--acento);color:#fff}
+.btn-claro{background:var(--texto);color:var(--fondo)}
+.btn-borde{background:transparent;color:var(--texto);box-shadow:inset 0 0 0 2px var(--linea)}
+
+/* Encabezado */
+.top{position:sticky;top:0;z-index:20;background:rgba(20,20,20,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+.marca{font-family:"Archivo Black";font-size:16px;letter-spacing:.02em;text-decoration:none}
+.marca span{color:var(--acento)}
+.top nav{display:none;gap:22px;font-size:14px}
+.top nav a{text-decoration:none;color:var(--suave)}
+.top nav a:hover{color:var(--texto)}
+.idioma{display:flex;background:var(--fondo-2);border-radius:999px;padding:3px}
+.idioma button{border:0;background:none;padding:6px 12px;border-radius:999px;font-size:13px;cursor:pointer;color:var(--suave)}
+.idioma button[aria-pressed="true"]{background:var(--texto);color:var(--fondo)}
+
+/* Portada */
+.hero{border-top:0;padding:56px 0 70px}
+.hero .lema{font-size:14px;color:var(--suave)}
+.hero h1{margin-top:14px;font-size:clamp(52px,14vw,112px);line-height:.92;letter-spacing:-.01em}
+.hero h1 span{color:var(--acento)}
+.hero .sub{font-size:18px}
+.hero .acciones{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.dato{margin-top:46px;background:var(--fondo-2);border-radius:24px;padding:24px;display:grid;gap:8px}
+.dato .n{font-family:"Archivo Black";font-size:clamp(64px,18vw,120px);line-height:.9;color:var(--acento);font-variant-numeric:tabular-nums}
+.dato .n small{font-size:.3em;color:var(--texto);margin-left:8px}
+.dato p{margin:0;color:var(--suave);max-width:46ch}
+.dato a{color:var(--texto);font-weight:600}
+
+/* Calculadoras */
+.calcs{display:grid;gap:14px;margin-top:30px}
+.calc{position:relative;display:flex;flex-direction:column;gap:10px;background:var(--fondo-2);border-radius:24px;padding:24px;text-decoration:none;transition:transform .2s,background .2s}
+a.calc:hover{transform:translateY(-3px);background:#232323}
+.calc .tag{align-self:flex-start;font-size:12px;padding:3px 10px;border-radius:999px;background:var(--acento);color:#fff}
+.calc .tag.pronto{background:var(--fondo-3);color:var(--suave)}
+.calc h3{font-size:26px;line-height:1.08}
+.calc p{margin:0;color:var(--suave);font-size:14px}
+.calc .ir{margin-top:6px;font-family:"Archivo Black";font-size:16px}
+.calc.off{opacity:.6}
+
+/* Videos */
+.videos{display:grid;gap:14px;margin-top:30px}
+.video{display:grid;gap:10px;text-decoration:none}
+.video .mini{position:relative;border-radius:20px;overflow:hidden;background:var(--fondo-2)}
+.video .mini img{width:100%;height:100%;object-fit:cover}
+.video .mini::after{content:"";position:absolute;inset:auto auto 14px 14px;width:46px;height:46px;border-radius:50%;background:var(--acento) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8 5v14l11-7z' fill='%23fff'/%3E%3C/svg%3E") center/22px no-repeat}
+.video.ancho .mini{aspect-ratio:16/9}
+.video.vertical .mini{aspect-ratio:9/16}
+.video b{font-family:"Archivo Black";font-weight:400;font-size:18px;line-height:1.15}
+.video span{font-size:13px;color:var(--suave)}
+.shorts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+
+/* Fuentes */
+.principios{display:grid;gap:12px;margin-top:30px}
+.pr{background:var(--fondo-2);border-radius:20px;padding:20px}
+.pr b{display:block;font-family:"Archivo Black";font-weight:400;font-size:19px}
+.pr p{margin:6px 0 0;color:var(--suave);font-size:14px}
+.lista-fuentes{margin-top:24px;font-size:14px;color:var(--suave)}
+.lista-fuentes li{margin:6px 0}
+.lista-fuentes b{color:var(--texto);font-weight:600}
+
+/* Sobre */
+.sobre p{max-width:60ch;color:var(--suave);font-size:17px}
+.sobre p + p{margin-top:12px}
+
+/* Formularios */
+.forms{display:grid;gap:16px;margin-top:30px}
+.form{background:var(--fondo-2);border-radius:24px;padding:22px}
+.form h3{font-size:22px}
+.form p.ayuda{margin:6px 0 16px;color:var(--suave);font-size:14px}
+.campo{margin-top:12px}
+.campo label{display:block;font-size:13px;color:var(--suave);margin:0 0 6px 4px}
+.campo input,.campo textarea{width:100%;min-height:52px;border:2px solid transparent;border-radius:14px;padding:12px 14px;background:var(--fondo-3);font-size:16px}
+.campo textarea{min-height:110px;resize:vertical}
+.campo input:focus,.campo textarea:focus{outline:none;border-color:var(--acento)}
+.form .btn{margin-top:16px;width:100%}
+.oculto{position:absolute;left:-9999px}
+.redes{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+
+footer{padding:36px 0 50px;border-top:1px solid var(--linea);font-size:13px;color:var(--suave)}
+footer p{margin:4px 0}
+
+@media (min-width:760px){
+  .top nav{display:flex}
+  .hero{padding:90px 0 90px}
+  .dato{grid-template-columns:auto 1fr;align-items:center;gap:30px;padding:30px}
+  .calcs{grid-template-columns:repeat(3,1fr)}
+  .videos{grid-template-columns:1.4fr 1fr;align-items:start}
+  .principios{grid-template-columns:repeat(3,1fr)}
+  .forms{grid-template-columns:1fr 1.3fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="marca" href="#inicio">DATOS QUE <span>DUELEN</span></a>
+    <nav aria-label="Secciones">
+      <a href="#calculadoras" data-t="nCalc">Calculadoras</a>
+      <a href="#videos" data-t="nVideos">Videos</a>
+      <a href="#fuentes" data-t="nFuentes">Fuentes</a>
+      <a href="#contacto" data-t="nContacto">Contacto</a>
+    </nav>
+    <div class="idioma" role="group" aria-label="Idioma">
+      <button type="button" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <div class="wrap">
+      <div class="lema" data-t="lema">Videos cortos y calculadoras</div>
+      <h1 data-t="h1">Datos reales que <span>duelen.</span></h1>
+      <p class="sub" data-t="heroSub">Datos que incomodan sobre el celular, la salud, el planeta y el costo de vivir. Cada dato tiene su fuente, y tú calculas el tuyo.</p>
+      <div class="acciones">
+        <a class="btn btn-acento" href="celular/" data-t="heroBtn1">Calcula el tuyo</a>
+        <a class="btn btn-borde" href="#videos" data-t="heroBtn2">Ver videos</a>
+      </div>
+      <div class="dato rv">
+        <div class="n"><span id="cuenta">0</span><small data-t="anios">años</small></div>
+        <p><span data-t="datoTxt">frente al celular, para una persona de 30 años que lo usa 6 horas al día y vive hasta los 80.</span> <a href="celular/" data-t="datoLink">¿Y tú?</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="calculadoras">
+    <div class="wrap">
+      <h2 class="rv" data-t="cTit">Calculadoras</h2>
+      <p class="sub rv" data-t="cSub">Pon tus datos y recibe tu resultado personal, listo para compartir. Todo se calcula en tu teléfono.</p>
+      <div class="calcs">
+        <a class="calc rv" href="celular/">
+          <span class="tag" data-t="disponible">Disponible</span>
+          <h3 data-t="c1">¿Cuántos años de tu vida vas a pasar en el celular?</h3>
+          <p data-t="c1d">Tu edad, tus horas de pantalla y tu vida en cuadritos.</p>
+          <span class="ir" data-t="calcular">Calcular →</span>
+        </a>
+        <div class="calc off rv">
+          <span class="tag pronto" data-t="pronto">Próximamente</span>
+          <h3 data-t="c2">¿Cuántas horas de sueño te debes?</h3>
+          <p data-t="c2d">Lo que duermes contra lo que tu cuerpo necesita.</p>
+        </div>
+        <div class="calc off rv">
+          <span class="tag pronto" data-t="pronto">Próximamente</span>
+          <h3 data-t="c3">¿Cuánta azúcar tomas en un año?</h3>
+          <p data-t="c3d">Las bebidas y snacks de tu semana, en kilos al año.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="videos">
+    <div class="wrap">
+      <h2 class="rv" data-t="vTit">Videos</h2>
+      <p class="sub rv" data-t="vSub">Episodios y cortos con un dato que duele, explicado con números simples.</p>
+      <div class="videos">
+        <a class="video ancho rv" href="#" data-link="ep1">
+          <div class="mini"><img src="img/ep1.jpg" alt="" loading="lazy"></div>
+          <b data-t="ep1">Episodio 1: 18 días de trabajo solo para el arriendo</b>
+          <span data-t="ep1d">Sueldo mínimo contra arriendo en Santiago y Lima. 6 minutos.</span>
+        </a>
+        <div class="shorts">
+          <a class="video vertical rv" href="#" data-link="s1"><div class="mini"><img src="img/Short01-18Dias.jpg" alt="" loading="lazy"></div><span data-t="s1">18 días al mes</span></a>
+          <a class="video vertical rv" href="#" data-link="s2"><div class="mini"><img src="img/Short02-Providencia.jpg" alt="" loading="lazy"></div><span data-t="s2">Providencia: 163%</span></a>
+          <a class="video vertical rv" href="#" data-link="s3"><div class="mini"><img src="img/Short05-Lima.jpg" alt="" loading="lazy"></div><span data-t="s3">Lima: 129%</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fuentes">
+    <div class="wrap">
+      <h2 class="rv" data-t="fTit">Cómo trabajamos los datos</h2>
+      <div class="principios">
+        <div class="pr rv"><b data-t="p1">Siempre con fuente</b><p data-t="p1d">Cada cifra muestra de dónde viene, en pantalla y en la descripción.</p></div>
+        <div class="pr rv"><b data-t="p2">Sin exagerar</b><p data-t="p2d">Mostramos el dato como es. Si es una estimación, lo decimos.</p></div>
+        <div class="pr rv"><b data-t="p3">Tus datos son tuyos</b><p data-t="p3d">Las calculadoras funcionan en tu teléfono. No guardamos lo que escribes.</p></div>
+      </div>
+      <ul class="lista-fuentes rv">
+        <li><b data-t="lf1t">Episodio 1:</b> <span data-t="lf1">Assetplan vía The Clinic, El Peruano, Urbania vía Infobae.</span></li>
+        <li><b data-t="lf2t">Calculadora del celular:</b> <span data-t="lf2">años que te quedan × horas al día ÷ 24. La esperanza de vida la eliges tú.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="sobre" class="sobre">
+    <div class="wrap">
+      <h2 class="rv" data-t="sTit">Sobre el canal</h2>
+      <p class="rv" style="margin-top:20px" data-t="s1p">Datos que Duelen nace de una idea simple: hay números que todos deberíamos conocer, pero casi nadie se detiene a mirarlos.</p>
+      <p class="rv" data-t="s2p">Los mostramos en videos cortos y en calculadoras donde tú pones tus propios datos. No para asustar, sino para que pienses, compares y compartas.</p>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="wrap">
+      <h2 class="rv" data-t="kTit">Contacto</h2>
+      <div class="forms">
+        <form class="form rv" name="suscripcion" method="POST" action="gracias.html" data-netlify="true" netlify-honeypot="bot">
+          <input type="hidden" name="form-name" value="suscripcion">
+          <p class="oculto"><label>No llenar: <input name="bot"></label></p>
+          <h3 data-t="fsTit">Avísame de nuevos datos</h3>
+          <p class="ayuda" data-t="fsTxt">Solo tu correo. Te escribimos cuando haya un video o una calculadora nueva.</p>
+          <div class="campo"><label for="s-correo" data-t="correo">Correo</label><input id="s-correo" name="correo" type="email" required placeholder="tu@correo.com"></div>
+          <button class="btn btn-acento" type="submit" data-t="fsBtn">Suscribirme</button>
+        </form>
+        <form class="form rv" name="contacto" method="POST" action="gracias.html" data-netlify="true" netlify-honeypot="bot">
+          <input type="hidden" name="form-name" value="contacto">
+          <p class="oculto"><label>No llenar: <input name="bot"></label></p>
+          <h3 data-t="fcTit">Escríbenos</h3>
+          <p class="ayuda" data-t="fcTxt">Para marcas, propuestas o un dato que quieras que investiguemos.</p>
+          <div class="campo"><label for="c-nombre" data-t="nombre">Nombre</label><input id="c-nombre" name="nombre" required></div>
+          <div class="campo"><label for="c-correo" data-t="correo">Correo</label><input id="c-correo" name="correo" type="email" required placeholder="tu@correo.com"></div>
+          <div class="campo"><label for="c-msg" data-t="mensaje">Mensaje</label><textarea id="c-msg" name="mensaje" required></textarea></div>
+          <button class="btn btn-claro" type="submit" data-t="fcBtn">Enviar mensaje</button>
+        </form>
+      </div>
+      <div class="redes rv">
+        <a class="btn btn-borde" href="#" data-link="youtube">YouTube</a>
+        <a class="btn btn-borde" href="#" data-link="tiktok">TikTok</a>
+        <a class="btn btn-borde" href="#" data-link="instagram">Instagram</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b style="color:var(--texto)">DATOS QUE <span style="color:var(--acento)">DUELEN</span></b></p>
+    <p data-t="pie">Datos reales, con fuente. Las calculadoras no guardan tus datos.</p>
+  </div>
+</footer>
+
+<script>
+// ← Poner aquí los links reales del canal cuando existan
+const LINKS = { youtube:"#", tiktok:"#", instagram:"#", ep1:"#", s1:"#", s2:"#", s3:"#" };
+document.querySelectorAll("[data-link]").forEach(a => { const u = LINKS[a.dataset.link]; if (u && u !== "#") { a.href = u; a.target = "_blank"; a.rel = "noopener"; } });
+
+const T = {
+ es:{nCalc:"Calculadoras",nVideos:"Videos",nFuentes:"Fuentes",nContacto:"Contacto",lema:"Videos cortos y calculadoras",h1:'Datos reales que <span>duelen.</span>',heroSub:"Datos que incomodan sobre el celular, la salud, el planeta y el costo de vivir. Cada dato tiene su fuente, y tú calculas el tuyo.",heroBtn1:"Calcula el tuyo",heroBtn2:"Ver videos",anios:"años",datoTxt:"frente al celular, para una persona de 30 años que lo usa 6 horas al día y vive hasta los 80.",datoLink:"¿Y tú?",cTit:"Calculadoras",cSub:"Pon tus datos y recibe tu resultado personal, listo para compartir. Todo se calcula en tu teléfono.",disponible:"Disponible",pronto:"Próximamente",c1:"¿Cuántos años de tu vida vas a pasar en el celular?",c1d:"Tu edad, tus horas de pantalla y tu vida en cuadritos.",calcular:"Calcular →",c2:"¿Cuántas horas de sueño te debes?",c2d:"Lo que duermes contra lo que tu cuerpo necesita.",c3:"¿Cuánta azúcar tomas en un año?",c3d:"Las bebidas y snacks de tu semana, en kilos al año.",vTit:"Videos",vSub:"Episodios y cortos con un dato que duele, explicado con números simples.",ep1:"Episodio 1: 18 días de trabajo solo para el arriendo",ep1d:"Sueldo mínimo contra arriendo en Santiago y Lima. 6 minutos.",s1:"18 días al mes",s2:"Providencia: 163%",s3:"Lima: 129%",fTit:"Cómo trabajamos los datos",p1:"Siempre con fuente",p1d:"Cada cifra muestra de dónde viene, en pantalla y en la descripción.",p2:"Sin exagerar",p2d:"Mostramos el dato como es. Si es una estimación, lo decimos.",p3:"Tus datos son tuyos",p3d:"Las calculadoras funcionan en tu teléfono. No guardamos lo que escribes.",lf1t:"Episodio 1:",lf1:"Assetplan vía The Clinic, El Peruano, Urbania vía Infobae.",lf2t:"Calculadora del celular:",lf2:"años que te quedan × horas al día ÷ 24. La esperanza de vida la eliges tú.",sTit:"Sobre el canal",s1p:"Datos que Duelen nace de una idea simple: hay números que todos deberíamos conocer, pero casi nadie se detiene a mirarlos.",s2p:"Los mostramos en videos cortos y en calculadoras donde tú pones tus propios datos. No para asustar, sino para que pienses, compares y compartas.",kTit:"Contacto",fsTit:"Avísame de nuevos datos",fsTxt:"Solo tu correo. Te escribimos cuando haya un video o una calculadora nueva.",correo:"Correo",fsBtn:"Suscribirme",fcTit:"Escríbenos",fcTxt:"Para marcas, propuestas o un dato que quieras que investiguemos.",nombre:"Nombre",mensaje:"Mensaje",fcBtn:"Enviar mensaje",pie:"Datos reales, con fuente. Las calculadoras no guardan tus datos."},
+ en:{nCalc:"Calculators",nVideos:"Videos",nFuentes:"Sources",nContacto:"Contact",lema:"Short videos and calculators",h1:'Real data that <span>hurts.</span>',heroSub:"Uncomfortable facts about your phone, health, the planet and the cost of living. Every number has a source, and you calculate yours.",heroBtn1:"Calculate yours",heroBtn2:"Watch videos",anios:"years",datoTxt:"on the phone, for a 30-year-old who uses it 6 hours a day and lives to 80.",datoLink:"And you?",cTit:"Calculators",cSub:"Enter your data and get your personal result, ready to share. Everything is calculated on your phone.",disponible:"Available",pronto:"Coming soon",c1:"How many years of your life will you spend on your phone?",c1d:"Your age, your screen time and your life in squares.",calcular:"Calculate →",c2:"How much sleep do you owe yourself?",c2d:"What you sleep versus what your body needs.",c3:"How much sugar do you have in a year?",c3d:"Your weekly drinks and snacks, in kilos per year.",vTit:"Videos",vSub:"Episodes and shorts with one painful fact, explained with simple numbers.",ep1:"Episode 1: 18 days of work just to pay rent",ep1d:"Minimum wage versus rent in Santiago and Lima (Spanish). 6 minutes.",s1:"18 days a month",s2:"Providencia: 163%",s3:"Lima: 129%",fTit:"How we work with data",p1:"Always sourced",p1d:"Every number shows where it comes from, on screen and in the description.",p2:"No exaggeration",p2d:"We show the data as it is. If it's an estimate, we say so.",p3:"Your data is yours",p3d:"Calculators run on your phone. We don't store what you type.",lf1t:"Episode 1:",lf1:"Assetplan via The Clinic, El Peruano, Urbania via Infobae.",lf2t:"Phone calculator:",lf2:"years left × hours per day ÷ 24. You choose the life expectancy.",sTit:"About the channel",s1p:"Datos que Duelen starts from a simple idea: there are numbers we should all know, but almost nobody stops to look at them.",s2p:"We show them in short videos and in calculators where you enter your own data. Not to scare you, but so you think, compare and share.",kTit:"Contact",fsTit:"Tell me about new data",fsTxt:"Just your email. We'll write when there's a new video or calculator.",correo:"Email",fsBtn:"Subscribe",fcTit:"Write to us",fcTxt:"For brands, proposals or a fact you want us to investigate.",nombre:"Name",mensaje:"Message",fcBtn:"Send message",pie:"Real data, with sources. Calculators don't store your data."}
+};
+let L = (navigator.language||"es").toLowerCase().startsWith("es") ? "es" : "en";
+const idioma = l => { L = l; document.documentElement.lang = l;
+  document.querySelectorAll("[data-t]").forEach(el => { const v = T[l][el.dataset.t]; if (v) el.innerHTML = v; });
+  document.querySelectorAll(".idioma button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === l));
+  pintaCuenta(fin); };
+document.querySelectorAll(".idioma button").forEach(b => b.onclick = () => idioma(b.dataset.lang));
+
+// Dato de portada: (80 − 30) × 6 ÷ 24 = 12,5 años
+const fin = (80 - 30) * 6 / 24, cuenta = document.getElementById("cuenta");
+const pintaCuenta = v => cuenta.textContent = L === "es" ? v.toFixed(1).replace(".", ",") : v.toFixed(1);
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add("on");
+  if (e.target.classList.contains("dato") && !reduce) { const t0 = performance.now(); const f = t => { const p = Math.min(1, (t - t0) / 1500), k = 1 - Math.pow(1 - p, 3); pintaCuenta(fin * k); if (p < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); }
+  io.unobserve(e.target); }), { threshold: .2 });
+document.querySelectorAll(".rv").forEach(el => io.observe(el));
+if (reduce) pintaCuenta(fin);
+idioma(L);
+</script>
+</body>
+</html>
