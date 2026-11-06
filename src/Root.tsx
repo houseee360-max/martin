@@ -7,6 +7,7 @@ import { CLIPS } from "./shorts/clips";
 import { layoutSegments, Short, SHORT_H, SHORT_W, ShortProps } from "./shorts/Short";
 import { FPS, HEIGHT, TOTAL_FRAMES, WIDTH } from "./theme";
 import { Propuesta, PROP_FPS, PROP_H, PROP_TOTAL, PROP_W } from "./propuesta/Propuesta";
+import { ReelCelular, RC_FPS, RC_H, RC_TOTAL, RC_W } from "./reel-celular/ReelCelular";
 
 const episodioMetadata: CalculateMetadataFunction<Episodio1Props> = async ({ props }) => ({
   props: { ...props, ...(await loadMedia(props.subtitles)) },
@@ -45,6 +46,14 @@ export const RemotionRoot: React.FC = () => (
       width={PROP_W}
       height={PROP_H}
       defaultProps={{ conVoz: false }}
+    />
+    <Composition
+      id="ReelCelular"
+      component={ReelCelular}
+      durationInFrames={RC_TOTAL}
+      fps={RC_FPS}
+      width={RC_W}
+      height={RC_H}
     />
     <Folder name="Shorts">
       {CLIPS.map((c) => (
