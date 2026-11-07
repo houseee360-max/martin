@@ -9,6 +9,7 @@ import { FPS, HEIGHT, TOTAL_FRAMES, WIDTH } from "./theme";
 import { Propuesta, PROP_FPS, PROP_H, PROP_TOTAL, PROP_W } from "./propuesta/Propuesta";
 import { ReelCelular, RC_FPS, RC_H, RC_TOTAL, RC_W } from "./reel-celular/ReelCelular";
 import { ReelLunes, RL_FPS, RL_H, RL_TOTAL, RL_W } from "./reel-lunes/ReelLunes";
+import { ReelTrabajo, RT_FPS, RT_H, RT_TOTAL, RT_W } from "./reel-trabajo/ReelTrabajo";
 
 const episodioMetadata: CalculateMetadataFunction<Episodio1Props> = async ({ props }) => ({
   props: { ...props, ...(await loadMedia(props.subtitles)) },
@@ -63,6 +64,14 @@ export const RemotionRoot: React.FC = () => (
       fps={RL_FPS}
       width={RL_W}
       height={RL_H}
+    />
+    <Composition
+      id="ReelTrabajo"
+      component={ReelTrabajo}
+      durationInFrames={RT_TOTAL}
+      fps={RT_FPS}
+      width={RT_W}
+      height={RT_H}
     />
     <Folder name="Shorts">
       {CLIPS.map((c) => (
