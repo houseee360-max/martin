@@ -1,11 +1,65 @@
 {
   "version": 1,
   "skills": {
+    "Dietitian": {
+      "source": "clawic/skills",
+      "sourceType": "github",
+      "skillPath": "skills/dietitian/SKILL.md",
+      "computedHash": "a9eb57c0c7e876316b1279f044e1052326e6a9183648abfea94f20562340a002"
+    },
+    "Fitness": {
+      "source": "clawic/skills",
+      "sourceType": "github",
+      "skillPath": "skills/fitness/SKILL.md",
+      "computedHash": "afbcf5a5aa42a99a57dcc38bdffa9811d9cca6f31e893551a0f15e337bd41bc8"
+    },
+    "Gym": {
+      "source": "clawic/skills",
+      "sourceType": "github",
+      "skillPath": "skills/gym/SKILL.md",
+      "computedHash": "568648d760861743f2242a7dc726689520d795c83816b302ad2d66d9f3b31469"
+    },
+    "Meal Planner": {
+      "source": "clawic/skills",
+      "sourceType": "github",
+      "skillPath": "skills/meal-planner/SKILL.md",
+      "computedHash": "14343003d85b81046d0f748b460c27c529bf9c02c3bf7e50e5349b2008284d1d"
+    },
+    "Nutrition": {
+      "source": "clawic/skills",
+      "sourceType": "github",
+      "skillPath": "skills/nutrition/SKILL.md",
+      "computedHash": "62d2166d15e75d4c56e539a1cb423aa4f76be639193c906a90d49c78ada85eec"
+    },
+    "Sleep": {
+      "source": "clawic/skills",
+      "sourceType": "github",
+      "skillPath": "skills/sleep/SKILL.md",
+      "computedHash": "cfaf97799b8f9d85446bb932fd89eb30e14430fe1f378cefb8824c7a7db1d117"
+    },
+    "Water Tracker": {
+      "source": "clawic/skills",
+      "sourceType": "github",
+      "skillPath": "skills/water/SKILL.md",
+      "computedHash": "f85f5e8060f06d22650733a713f4ecbe7131a92715b72554dbac27fd0ed1d3e8"
+    },
+    "Workouts": {
+      "source": "clawic/skills",
+      "sourceType": "github",
+      "skillPath": "skills/workouts/SKILL.md",
+      "computedHash": "7b48966f94f05dca4c91f551f7b994d1654846d0442508bffec149e1df2b5377"
+    },
     "ad-creative": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
       "skillPath": "skills/ad-creative/SKILL.md",
       "computedHash": "62469b7b8e594424cd313527c6b45e0749242a27955b1f80dcfc7f0c12d13d2d"
+    },
+    "assessment": {
+      "source": "borisghidaglia/science-based-lifter",
+      "sourceType": "github",
+      "skillPath": "skills/assessment/SKILL.md",
+      "computedHash": "ed974c3d2d13485572635ba94564cac78094f99fc2334405982bc969d1402156"
     },
     "brainstorming": {
       "source": "obra/superpowers",
@@ -73,6 +127,12 @@
       "skillPath": "skills/find-skills/SKILL.md",
       "computedHash": "913b9d37d0d54047dd65222bb8c67b2bf04e3cb87dcad1729068d7a8b2c8c396"
     },
+    "fitness-planning": {
+      "source": "cosmicstack-labs/mercury-agent-skills",
+      "sourceType": "github",
+      "skillPath": "categories/health-wellness/fitness-planning/SKILL.md",
+      "computedHash": "5bfcc59574e7370757eb2de4e607c3fdd38b1e7ef6a12b55958c1c0b563cd45c"
+    },
     "frontend-design": {
       "source": "anthropics/skills",
       "sourceType": "github",
@@ -90,6 +150,36 @@
       "sourceType": "github",
       "skillPath": "skills/grand-slam-offer/SKILL.md",
       "computedHash": "33c6325b1af8f39daf78b26848abe11acccd3395bbe3c816f6498ab355bc6a83"
+    },
+    "gym-training-expert": {
+      "source": "frankxai/claude-skills-library",
+      "sourceType": "github",
+      "skillPath": "free-skills/gym-training-expert/SKILL.md",
+      "computedHash": "3f2860e998faaec7932cf49ce8457d0706ec9c6f085eb7b793170afede40d692"
+    },
+    "habit-builder": {
+      "source": "JayRHa/agent-skills",
+      "sourceType": "github",
+      "skillPath": "habit-builder/SKILL.md",
+      "computedHash": "3b405696c5f095c1ec7f32c0ba7d9e9db66532219297a7e53baf1c7c34e9ef89"
+    },
+    "habit-formation": {
+      "source": "cosmicstack-labs/mercury-agent-skills",
+      "sourceType": "github",
+      "skillPath": "categories/health-wellness/habit-formation/SKILL.md",
+      "computedHash": "30a8feb91c137b20183e6775b21fa95b402ea750559a905e1b6f7251af1f9420"
+    },
+    "health-nutrition-expert": {
+      "source": "frankxai/claude-skills-library",
+      "sourceType": "github",
+      "skillPath": "free-skills/health-nutrition-expert/SKILL.md",
+      "computedHash": "d37df8a446937250b48ca9b2cbf594a7fb4fb2f3f17bb2e19a3efde1b728edd6"
+    },
+    "hypertrophy-training": {
+      "source": "disco-trooper/skills",
+      "sourceType": "github",
+      "skillPath": "hypertrophy-training/SKILL.md",
+      "computedHash": "2bfd2d68a926ff5b56e04dd46cd0341039b28913b5d3a4ff7edd4755c08dc005"
     },
     "landing-page-optimizer": {
       "source": "thatrebeccarae/claude-marketing",
@@ -127,17 +217,35 @@
       "skillPath": "skills/marketing-psychology/SKILL.md",
       "computedHash": "50d735eb0f5c36f379ed2200f21aeacc9b9ad85667b5d33ec6111857352a1340"
     },
+    "meal-plan-builder": {
+      "source": "JayRHa/agent-skills",
+      "sourceType": "github",
+      "skillPath": "meal-plan-builder/SKILL.md",
+      "computedHash": "e65e8a211c20ba5e07411b9a290ec03153a2b3d3d82a61a6ff81ec0fa49ef60c"
+    },
     "money-model": {
       "source": "zacker-tech/hormozi-skills",
       "sourceType": "github",
       "skillPath": "skills/money-model/SKILL.md",
       "computedHash": "774261bbbc1c277660d73b44d850598c38c5d16f159c2941a61260061d2539d1"
     },
+    "nutrition-planning": {
+      "source": "cosmicstack-labs/mercury-agent-skills",
+      "sourceType": "github",
+      "skillPath": "categories/health-wellness/nutrition-planning/SKILL.md",
+      "computedHash": "d019f8706b46d3f8935246b92302dabf2197d96d5f6d630846a00b5c551b93de"
+    },
     "offers": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
       "skillPath": "skills/offers/SKILL.md",
       "computedHash": "cf33eff3e0bc6a527d16f00919f8887be47e9f3dae78a0b382b8e6df8f8081cc"
+    },
+    "personal-trainer": {
+      "source": "npapatheodorou/personal-trainer-skill",
+      "sourceType": "github",
+      "skillPath": "personal-trainer/SKILL.md",
+      "computedHash": "239142198011e2baa149182ee8b9993622232672f14bdef1b92e82dd6313187b"
     },
     "pricing-strategy": {
       "source": "thatrebeccarae/claude-marketing",
@@ -151,6 +259,12 @@
       "skillPath": "skills/product-marketing/SKILL.md",
       "computedHash": "d051a45340cc15c633c008e5e8896dce61f5746830104f2624e7d20fdf5beb48"
     },
+    "program-creation": {
+      "source": "borisghidaglia/science-based-lifter",
+      "sourceType": "github",
+      "skillPath": "skills/program-creation/SKILL.md",
+      "computedHash": "12b8629ca9e017ba7b9583298d7909b9d0630a5ee18c1a12365b52a6adc87449"
+    },
     "prospecting": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
@@ -162,6 +276,30 @@
       "sourceType": "github",
       "skillPath": "skills/review-management/SKILL.md",
       "computedHash": "1851e01a712ac3876d6fb932ebe930a6735da199e17a50c2251fd2666f3cb1c7"
+    },
+    "rp-diet": {
+      "source": "borisghidaglia/science-based-lifter",
+      "sourceType": "github",
+      "skillPath": "skills/rp-diet/SKILL.md",
+      "computedHash": "ce9305e80c1ea5430eacb0a622069794ec5a6000d92ad42f1b1efb36e225dd17"
+    },
+    "rp-training": {
+      "source": "borisghidaglia/science-based-lifter",
+      "sourceType": "github",
+      "skillPath": "skills/rp-training/SKILL.md",
+      "computedHash": "f814a223e5a748a2134c525a72a6bad40315a547c7e1cbd29759114e5d2e75ab"
+    },
+    "sbs-training": {
+      "source": "borisghidaglia/science-based-lifter",
+      "sourceType": "github",
+      "skillPath": "skills/sbs-training/SKILL.md",
+      "computedHash": "a92ac5a5c97ec3b8c37f99f268a75ca8d8dd389ee6fc5a53f5e6efb648de5f00"
+    },
+    "schoenfeld-hypertrophy": {
+      "source": "borisghidaglia/science-based-lifter",
+      "sourceType": "github",
+      "skillPath": "skills/schoenfeld-hypertrophy/SKILL.md",
+      "computedHash": "800042ef2877ad9793808abeb956d7dbcf008c8a53a87087d359f666b5342eb1"
     },
     "seo-local": {
       "source": "AgriciDaniel/claude-seo",
@@ -181,6 +319,12 @@
       "skillPath": "skills/shopify/SKILL.md",
       "computedHash": "83e3b50123807813e388b207e915510467de91388d36cf15df2d06b69530056c"
     },
+    "sleep-optimization": {
+      "source": "cosmicstack-labs/mercury-agent-skills",
+      "sourceType": "github",
+      "skillPath": "categories/health-wellness/sleep-optimization/SKILL.md",
+      "computedHash": "f2eeea6303cacd609f8f0328f1afa1e40f20381678715ccd613fd32e66bdaecf"
+    },
     "sms": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
@@ -198,6 +342,12 @@
       "sourceType": "github",
       "skillPath": "skills/value-equation/SKILL.md",
       "computedHash": "9c18d829f248ca1256ed7086a12e3908ae87d41e6893e1f5f580e9a986789556"
+    },
+    "workout-planner": {
+      "source": "JayRHa/agent-skills",
+      "sourceType": "github",
+      "skillPath": "workout-planner/SKILL.md",
+      "computedHash": "3343897c5bab1240936c2f7a6872847ae5f05d75dc71148b29dda08c973e3f07"
     },
     "writing-plans": {
       "source": "obra/superpowers",
