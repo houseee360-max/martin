@@ -412,6 +412,8 @@ const CAM: Record<number, { pos: [number, number, number]; mira: [number, number
   7: { pos: [12, 3, 16], mira: [2.5, 0, -3], fov: 46 },
   8: { pos: [4, -2, 34], mira: [1, -19.6, 26], fov: 40 },
   9: { pos: [8, -7, 13], mira: [2, -11, -4], fov: 44 },
+  // 10 = encuadre para la portada (robot pedaleando, más abierto y más abajo)
+  10: { pos: [10, -3.5, 13], mira: [3.2, -7.4, -4], fov: 50 },
 };
 const Camara: React.FC<{ clip: number }> = ({ clip }) => {
   const { camera } = useThree();
@@ -449,10 +451,10 @@ const Escena: React.FC<{ clip: number }> = ({ clip }) => {
 
   const enchufado = clip === 1 ? lerp(f, [8, 72], [9, 0]) : 0;
   const abrir = clip === 1 ? 0 : clip === 2 ? lerp(f, [12, 96], [0, 1], Easing.inOut(Easing.quad)) : 1;
-  const pedaleando = clip === 5 || clip === 6 || clip === 7;
-  const giro = pedaleando ? s * (clip === 5 ? 4 + s * 3 : 14) : clip === 9 ? 14 * lerp(f, [0, 60], [1, 0], Easing.out(Easing.cubic)) : 0;
+  const pedaleando = clip === 5 || clip === 6 || clip === 7 || clip === 10;
+  const giro = pedaleando ? s * (clip === 5 || clip === 10 ? 4 + s * 3 : 14) : clip === 9 ? 14 * lerp(f, [0, 60], [1, 0], Easing.out(Easing.cubic)) : 0;
   const baliza = clip >= 3 && clip <= 4 ? 1 : 0;
-  const aguja = clip === 5 ? lerp(f, [10, 115], [0.05, 0.85]) : clip === 6 || clip === 7 ? 0.85 : clip === 9 ? lerp(f, [10, 70], [0.85, 0.08]) : 0.05;
+  const aguja = clip === 10 ? 0.8 : clip === 5 ? lerp(f, [10, 115], [0.05, 0.85]) : clip === 6 || clip === 7 ? 0.85 : clip === 9 ? lerp(f, [10, 70], [0.85, 0.08]) : 0.05;
   const rayosX = clip === 6 ? lerp(f, [10, 50], [0, 1]) : clip === 7 ? 1 : 0;
 
   // Robot según el clip (una acción por clip)
@@ -473,7 +475,7 @@ const Escena: React.FC<{ clip: number }> = ({ clip }) => {
       return <Robot anim={f > 78 ? "Idle" : "Running"} t={s} pos={[x, PISO_CUARTO, -3.2]} rotY={Math.PI / 2} />;
     }
     // sentado en el asiento, del lado de la cámara: no cruza la rueda ni los tubos
-    if (pedaleando) return <Robot anim="Running" t={s * (clip === 5 ? 1 + s * 0.25 : 2)} pos={[BICI_X + 0.5, PISO_CUARTO + 3.1, -2.9]} rotY={Math.PI / 2} escala={1.05} />;
+    if (pedaleando) return <Robot anim="Running" t={s * (clip === 5 || clip === 10 ? 1 + s * 0.25 : 2)} pos={[BICI_X + 0.5, PISO_CUARTO + 3.1, -2.9]} rotY={Math.PI / 2} escala={1.05} />;
     if (clip === 9) {
       // se desploma hacia atrás y baja hasta apoyarse en el piso
       const y = lerp(f, [14, 36], [PISO_CUARTO + 3.1, PISO_CUARTO + 0.05], Easing.in(Easing.quad));
