@@ -9,6 +9,7 @@ import { FPS, HEIGHT, TOTAL_FRAMES, WIDTH } from "./theme";
 import { Propuesta, PROP_FPS, PROP_H, PROP_TOTAL, PROP_W } from "./propuesta/Propuesta";
 import { ReelCelular, RC_FPS, RC_H, RC_TOTAL, RC_W } from "./reel-celular/ReelCelular";
 import { ReelLunes, RL_FPS, RL_H, RL_TOTAL, RL_W } from "./reel-lunes/ReelLunes";
+import { ReelCorazon, RCZ_FPS, RCZ_H, RCZ_TOTAL, RCZ_W } from "./reel-corazon/ReelCorazon";
 import { ReelTrabajo, RT_FPS, RT_H, RT_TOTAL, RT_W } from "./reel-trabajo/ReelTrabajo";
 
 const episodioMetadata: CalculateMetadataFunction<Episodio1Props> = async ({ props }) => ({
@@ -72,6 +73,14 @@ export const RemotionRoot: React.FC = () => (
       fps={RT_FPS}
       width={RT_W}
       height={RT_H}
+    />
+    <Composition
+      id="ReelCorazon"
+      component={ReelCorazon}
+      durationInFrames={RCZ_TOTAL}
+      fps={RCZ_FPS}
+      width={RCZ_W}
+      height={RCZ_H}
     />
     <Folder name="Shorts">
       {CLIPS.map((c) => (
