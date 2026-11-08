@@ -298,7 +298,7 @@ const Cuarto: React.FC<{ f: number; m: Mats; giro: number; baliza: number; aguja
             <Caja key={i} p={[0, 0, -0.2]} s={[3, 0.12, 0.08]} m={m.goma} r={[0, 0, (i * Math.PI) / 6]} />
           ))}
         </group>
-        <Cil p={[VOLANTE.x, VOLANTE.y, -5]} r={0.3} h={0.6} m={m.goma} rot={[Math.PI / 2, 0, 0]} />
+        <Cil p={[VOLANTE.x, VOLANTE.y, -4.4]} r={0.22} h={2.2} m={m.acero} rot={[Math.PI / 2, 0, 0]} />
         <Tubo c={useMemo(() => new THREE.CatmullRomCurve3([V(BICI_X - 2.4, PISO_CUARTO + 0.2, -5), V(BICI_X - 0.6, PISO_CUARTO + 1.9, -5), V(BICI_X + 0.6, PISO_CUARTO + 4.6, -5)]), [])} r={0.16} m={m.rojo} />
         <Tubo c={useMemo(() => new THREE.CatmullRomCurve3([V(BICI_X - 0.6, PISO_CUARTO + 1.9, -5), V(BICI_X + 1.6, PISO_CUARTO + 2.6, -5), V(BICI_X + 3, PISO_CUARTO + 5.2, -5)]), [])} r={0.16} m={m.rojo} />
         <Caja p={[BICI_X - 0.2, PISO_CUARTO + 0.15, -5]} s={[5, 0.3, 2.6]} m={m.goma} />
@@ -306,7 +306,10 @@ const Cuarto: React.FC<{ f: number; m: Mats; giro: number; baliza: number; aguja
         <Caja p={[BICI_X + 3, PISO_CUARTO + 5.3, -5]} s={[0.2, 0.2, 2.4]} m={m.goma} />
         {/* Pedales girando */}
         {[0, Math.PI].map((d, i) => (
-          <Caja key={i} p={[VOLANTE.x + Math.cos(giro + d) * 0.9, VOLANTE.y + Math.sin(giro + d) * 0.9, i ? -5.5 : -4.5]} s={[0.7, 0.14, 0.5]} m={m.goma} />
+          <group key={i}>
+            <Caja p={[VOLANTE.x + Math.cos(giro + d) * 0.45, VOLANTE.y + Math.sin(giro + d) * 0.45, i ? -5.5 : -3.6]} s={[0.9, 0.12, 0.12]} m={m.acero} r={[0, 0, giro + d]} />
+            <Caja p={[VOLANTE.x + Math.cos(giro + d) * 0.9, VOLANTE.y + Math.sin(giro + d) * 0.9, i ? -5.7 : -3.1]} s={[0.8, 0.16, 0.9]} m={m.goma} />
+          </group>
         ))}
       </group>
       {/* Correa al generador */}
@@ -408,7 +411,7 @@ const CAM: Record<number, { pos: [number, number, number]; mira: [number, number
   6: { pos: [13, -8, 6], mira: [8.4, -12, -5], fov: 40 },
   7: { pos: [12, 3, 16], mira: [2.5, 0, -3], fov: 46 },
   8: { pos: [4, -2, 34], mira: [1, -19.6, 26], fov: 40 },
-  9: { pos: [9, -7, 11], mira: [3.5, -10.2, -5], fov: 42 },
+  9: { pos: [8, -7, 13], mira: [2, -11, -4], fov: 44 },
 };
 const Camara: React.FC<{ clip: number }> = ({ clip }) => {
   const { camera } = useThree();
@@ -465,11 +468,18 @@ const Escena: React.FC<{ clip: number }> = ({ clip }) => {
       );
     }
     if (clip === 4) {
-      const x = lerp(f, [4, 84], [-6.5, BICI_X + 0.6], Easing.inOut(Easing.sin));
-      return <Robot anim={f > 80 ? "Idle" : "Running"} t={s} pos={[x, PISO_CUARTO, -5]} rotY={Math.PI / 2} />;
+      // corre por delante de la bici (z más cerca de cámara) y se detiene a su lado, sin tocarla
+      const x = lerp(f, [4, 80], [-6.5, -1.4], Easing.inOut(Easing.sin));
+      return <Robot anim={f > 78 ? "Idle" : "Running"} t={s} pos={[x, PISO_CUARTO, -3.2]} rotY={Math.PI / 2} />;
     }
-    if (pedaleando) return <Robot anim="Running" t={s * (clip === 5 ? 1 + s * 0.25 : 2)} pos={[BICI_X + 0.3, PISO_CUARTO + 2.3, -4.3]} rotY={Math.PI / 2} escala={0.8} />;
-    if (clip === 9) return <Robot anim="Death" t={Math.max(0, (f - 6) / fps)} una pos={[BICI_X + 0.3, PISO_CUARTO + 2.3, -4.3]} rotY={Math.PI / 2} escala={0.8} />;
+    // sentado en el asiento, del lado de la cámara: no cruza la rueda ni los tubos
+    if (pedaleando) return <Robot anim="Running" t={s * (clip === 5 ? 1 + s * 0.25 : 2)} pos={[BICI_X + 0.5, PISO_CUARTO + 3.1, -2.9]} rotY={Math.PI / 2} escala={1.05} />;
+    if (clip === 9) {
+      // se desploma hacia atrás y baja hasta apoyarse en el piso
+      const y = lerp(f, [14, 36], [PISO_CUARTO + 3.1, PISO_CUARTO + 0.05], Easing.in(Easing.quad));
+      const x = lerp(f, [14, 36], [BICI_X + 0.5, BICI_X + 0.1], Easing.out(Easing.quad));
+      return <Robot anim="Death" t={Math.max(0, (f - 6) / fps)} una pos={[x, y, -2.0]} rotY={Math.PI / 2} escala={1.05} />;
+    }
     return null;
   })();
 
