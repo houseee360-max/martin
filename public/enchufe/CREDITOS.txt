@@ -1,0 +1,1 @@
+robot.glb: "RobotExpressive" de Tomás Laulhé (Quaternius), CC0 1.0, vía ejemplos de three.js (modificaciones de Don McCurdy).

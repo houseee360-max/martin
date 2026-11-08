@@ -9,6 +9,8 @@ import { FPS, HEIGHT, TOTAL_FRAMES, WIDTH } from "./theme";
 import { Propuesta, PROP_FPS, PROP_H, PROP_TOTAL, PROP_W } from "./propuesta/Propuesta";
 import { ReelCelular, RC_FPS, RC_H, RC_TOTAL, RC_W } from "./reel-celular/ReelCelular";
 import { ReelLunes, RL_FPS, RL_H, RL_TOTAL, RL_W } from "./reel-lunes/ReelLunes";
+import { EnchufeRobot, ER_DUR, ER_FPS, ER_H, ER_W } from "./enchufe/EnchufeRobot";
+import { Enchufe3D, EN_DUR, EN_FPS, EN_H, EN_W } from "./enchufe/Enchufe3D";
 import { ReelCorazon, RCZ_FPS, RCZ_H, RCZ_TOTAL, RCZ_W } from "./reel-corazon/ReelCorazon";
 import { ReelTrabajo, RT_FPS, RT_H, RT_TOTAL, RT_W } from "./reel-trabajo/ReelTrabajo";
 
@@ -82,6 +84,16 @@ export const RemotionRoot: React.FC = () => (
       width={RCZ_W}
       height={RCZ_H}
     />
+    <Folder name="Enchufe">
+      {[1, 2, 3, 4, 5, 6, 7].map((c) => (
+        <Composition key={c} id={`Enchufe-${c}`} component={Enchufe3D} durationInFrames={EN_DUR} fps={EN_FPS} width={EN_W} height={EN_H} defaultProps={{ clip: c }} />
+      ))}
+    </Folder>
+    <Folder name="EnchufeRobot">
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((c) => (
+        <Composition key={c} id={`Robot-${c}`} component={EnchufeRobot} durationInFrames={ER_DUR[c]} fps={ER_FPS} width={ER_W} height={ER_H} defaultProps={{ clip: c }} />
+      ))}
+    </Folder>
     <Folder name="Shorts">
       {CLIPS.map((c) => (
         <Composition
