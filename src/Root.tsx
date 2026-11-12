@@ -9,6 +9,7 @@ import { FPS, HEIGHT, TOTAL_FRAMES, WIDTH } from "./theme";
 import { Propuesta, PROP_FPS, PROP_H, PROP_TOTAL, PROP_W } from "./propuesta/Propuesta";
 import { ReelCelular, RC_FPS, RC_H, RC_TOTAL, RC_W } from "./reel-celular/ReelCelular";
 import { ReelLunes, RL_FPS, RL_H, RL_TOTAL, RL_W } from "./reel-lunes/ReelLunes";
+import { RefriVideo, RF_DUR, RF_FPS, RF_H, RF_W } from "./refri/Refri";
 import { PortadaEnchufe } from "./enchufe/PortadaEnchufe";
 import { EnchufeRobot, ER_DUR, ER_FPS, ER_H, ER_W } from "./enchufe/EnchufeRobot";
 import { Enchufe3D, EN_DUR, EN_FPS, EN_H, EN_W } from "./enchufe/Enchufe3D";
@@ -96,6 +97,11 @@ export const RemotionRoot: React.FC = () => (
       ))}
       <Composition id="Portada-TikTok" component={PortadaEnchufe} durationInFrames={120} fps={ER_FPS} width={ER_W} height={ER_H} defaultProps={{ variante: "tiktok" as const }} />
       <Composition id="Portada-YouTube" component={PortadaEnchufe} durationInFrames={120} fps={ER_FPS} width={ER_W} height={ER_H} defaultProps={{ variante: "youtube" as const }} />
+    </Folder>
+    <Folder name="Refri">
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((c) => (
+        <Composition key={c} id={`Refri-${c}`} component={RefriVideo} durationInFrames={RF_DUR[c]} fps={RF_FPS} width={RF_W} height={RF_H} defaultProps={{ clip: c }} />
+      ))}
     </Folder>
     <Folder name="Shorts">
       {CLIPS.map((c) => (

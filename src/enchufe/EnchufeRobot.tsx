@@ -23,7 +23,7 @@ const lerp = (f: number, a: number[], b: number[], e = Easing.inOut(Easing.cubic
 const V = (x: number, y: number, z: number) => new THREE.Vector3(x, y, z);
 
 // ---------- Texturas generadas (sin imágenes externas) ----------
-const lienzo = (w: number, h: number, dibujar: (x: CanvasRenderingContext2D) => void) => {
+export const lienzo = (w: number, h: number, dibujar: (x: CanvasRenderingContext2D) => void) => {
   const c = document.createElement("canvas");
   c.width = w;
   c.height = h;
@@ -33,7 +33,7 @@ const lienzo = (w: number, h: number, dibujar: (x: CanvasRenderingContext2D) => 
   t.anisotropy = 8;
   return t;
 };
-const texMadera = () =>
+export const texMadera = () =>
   lienzo(512, 512, (x) => {
     const tonos = ["#8a5a35", "#7d5030", "#94633b", "#6f4628", "#87582f"];
     for (let i = 0; i < 8; i++) {
@@ -91,7 +91,7 @@ const texPantalla = () =>
     x.closePath();
     x.fill();
   });
-const texHalo = (() => {
+export const texHalo = (() => {
   let t: THREE.Texture | null = null;
   return () =>
     (t ??= lienzo(128, 128, (x) => {
@@ -104,7 +104,7 @@ const texHalo = (() => {
     }));
 })();
 
-const useMat = () =>
+export const useMat = () =>
   useMemo(() => {
     const madera = texMadera();
     madera.wrapS = madera.wrapT = THREE.RepeatWrapping;
@@ -131,19 +131,19 @@ const useMat = () =>
       vidrio: new THREE.MeshPhysicalMaterial({ color: "#0b0c10", roughness: 0.08, metalness: 0.2, clearcoat: 1 }),
     };
   }, []);
-type Mats = ReturnType<typeof useMat>;
+export type Mats = ReturnType<typeof useMat>;
 
-const Caja: React.FC<{ p: [number, number, number]; s: [number, number, number]; m: THREE.Material; r?: [number, number, number] }> = ({ p, s, m, r }) => (
+export const Caja: React.FC<{ p: [number, number, number]; s: [number, number, number]; m: THREE.Material; r?: [number, number, number] }> = ({ p, s, m, r }) => (
   <mesh position={p} rotation={r} material={m} castShadow receiveShadow>
     <boxGeometry args={s} />
   </mesh>
 );
-const Cil: React.FC<{ p: [number, number, number]; r: number; h: number; m: THREE.Material; rot?: [number, number, number]; seg?: number }> = ({ p, r, h, m, rot, seg = 40 }) => (
+export const Cil: React.FC<{ p: [number, number, number]; r: number; h: number; m: THREE.Material; rot?: [number, number, number]; seg?: number }> = ({ p, r, h, m, rot, seg = 40 }) => (
   <mesh position={p} rotation={rot} material={m} castShadow receiveShadow>
     <cylinderGeometry args={[r, r, h, seg]} />
   </mesh>
 );
-const Tubo: React.FC<{ c: THREE.Curve<THREE.Vector3>; r: number; m: THREE.Material }> = ({ c, r, m }) => {
+export const Tubo: React.FC<{ c: THREE.Curve<THREE.Vector3>; r: number; m: THREE.Material }> = ({ c, r, m }) => {
   const g = useMemo(() => new THREE.TubeGeometry(c, 140, r, 16, false), [c, r]);
   return <mesh geometry={g} material={m} castShadow receiveShadow />;
 };
@@ -387,7 +387,7 @@ const useRobot = () => {
   return { gltf, mixer };
 };
 
-const Robot: React.FC<{ anim: string; t: number; pos: [number, number, number]; rotY: number; una?: boolean; escala?: number }> = ({ anim, t, pos, rotY, una = false, escala = 0.62 }) => {
+export const Robot: React.FC<{ anim: string; t: number; pos: [number, number, number]; rotY: number; una?: boolean; escala?: number }> = ({ anim, t, pos, rotY, una = false, escala = 0.62 }) => {
   const { gltf, mixer } = useRobot();
   if (!gltf || !mixer) return null;
   const clip = gltf.animations.find((a) => a.name === anim)!;
