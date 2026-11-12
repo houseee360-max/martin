@@ -122,3 +122,27 @@ Repositorios públicos de skills para instalar más:
 5. **Remate:** un dato o chiste final, más una pregunta fácil de comentar ("tu edad", "tu % de batería").
 6. **Portada** con 3 líneas de texto grande y una palabra en amarillo.
 7. **Título corto y con curiosidad** + 3 a 5 hashtags relevantes.
+
+## 10. Añadido el 12-nov: más skills y librerías
+
+**Skills nuevas en `.claude/skills/`** (revisadas antes de instalar, licencia MIT salvo las oficiales de Remotion):
+
+| Skill | Para qué | Origen |
+|---|---|---|
+| `remotion-create`, `remotion-render`, `remotion-captions`, `remotion-multimedia`, `remotion-markup`, `remotion-maps`, `remotion-interactivity`, `remotion-saas`, `remotion-studio`, `remotion-docs`, `remotion-upgrade`, `remotion-license` | Pack oficial de Remotion (y `remotion-best-practices` actualizada) | https://github.com/remotion-dev/skills |
+| `remotion-motion-graphics` | Motion graphics profesionales: intros, logos, promos, Reels | https://github.com/haidrrrry/claude-remotion-skill |
+| `cartoon-3d-short` | Shorts de historia: personajes 2D tipo caricatura en un mundo 3D | https://github.com/mromidev/claude-animated-shorts |
+| `stick-figure` | Explicativos con monigotes, cámara en movimiento y transiciones rápidas | https://github.com/artemnovitckii/claude-animation-skills |
+| `breakdown` | Vista explosionada 3D de un objeto, pieza por pieza | (mismo repo) |
+| `graph` | Gráfico de línea que se dibuja con un número que sube | (mismo repo) |
+| `map-route` | Mapa 3D con ruta que se dibuja y pin que cae | (mismo repo) |
+| `minimalistic-graphics` | Animación minimalista en blanco y negro | (mismo repo) |
+| `3dviz-pro-max` | Escenas y explicativos 3D con Three.js (incluye kits de modelos) | https://github.com/viettranx/3dviz-pro-max |
+
+No se instalaron: `video-talkcraft` y `anything2explainer` (licencia no comercial) ni la skill que imita el estilo de un creador concreto.
+
+**Librerías npm nuevas** (ya en `package.json`):
+
+- Remotion: `@remotion/transitions` (transiciones entre escenas), `@remotion/motion-blur` (desenfoque de movimiento), `@remotion/noise`, `@remotion/paths` y `@remotion/shapes` (trazos y formas SVG), `@remotion/lottie` + `lottie-web`, `@remotion/animation-utils`, `@remotion/layout-utils` (ajustar texto), `@remotion/gif`.
+- Animación: `gsap`.
+- 3D: `@react-three/drei` (entornos, texto 3D, contornos), `@react-three/postprocessing` + `postprocessing` (bloom, profundidad de campo, viñeta).
