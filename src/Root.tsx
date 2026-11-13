@@ -9,6 +9,7 @@ import { FPS, HEIGHT, TOTAL_FRAMES, WIDTH } from "./theme";
 import { Propuesta, PROP_FPS, PROP_H, PROP_TOTAL, PROP_W } from "./propuesta/Propuesta";
 import { ReelCelular, RC_FPS, RC_H, RC_TOTAL, RC_W } from "./reel-celular/ReelCelular";
 import { ReelLunes, RL_FPS, RL_H, RL_TOTAL, RL_W } from "./reel-lunes/ReelLunes";
+import { CalcetinVideo, CA_DUR, CA_FPS, CA_H, CA_W } from "./calcetin/Calcetin";
 import { RefriVideo, RF_DUR, RF_FPS, RF_H, RF_W } from "./refri/Refri";
 import { PortadaEnchufe } from "./enchufe/PortadaEnchufe";
 import { EnchufeRobot, ER_DUR, ER_FPS, ER_H, ER_W } from "./enchufe/EnchufeRobot";
@@ -101,6 +102,11 @@ export const RemotionRoot: React.FC = () => (
     <Folder name="Refri">
       {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((c) => (
         <Composition key={c} id={`Refri-${c}`} component={RefriVideo} durationInFrames={RF_DUR[c]} fps={RF_FPS} width={RF_W} height={RF_H} defaultProps={{ clip: c }} />
+      ))}
+    </Folder>
+    <Folder name="Calcetin">
+      {[1, 2, 3, 4, 5, 6, 7, 8].map((c) => (
+        <Composition key={c} id={`Calcetin-${c}`} component={CalcetinVideo} durationInFrames={CA_DUR[c]} fps={CA_FPS} width={CA_W} height={CA_H} defaultProps={{ clip: c }} />
       ))}
     </Folder>
     <Folder name="Shorts">
