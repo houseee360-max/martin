@@ -1,0 +1,33 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:"Archivo Black";src:url(../../public/fonts/ArchivoBlack-Regular.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";src:url(../../public/fonts/JetBrainsMono-Variable.woff2) format("woff2");font-weight:100 800}
+html,body{margin:0;background:transparent}
+.logo{width:420px;height:620px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;border-radius:44px;box-sizing:border-box;padding:40px 30px}
+.oscuro{background:#141414}
+.claro{background:#F2EFE9}
+svg{display:block}
+.t{font-family:"Archivo Black";line-height:.92;text-align:center;letter-spacing:1px}
+.datos{font-size:72px}
+.que{font-family:"JetBrains Mono";font-weight:800;font-size:30px;letter-spacing:10px;margin:10px 0 8px}
+.duelen{font-size:72px;color:#FF4D2E}
+</style></head>
+<body>
+<div id="logo" class="logo VAR">
+  <!-- ícono: barras de datos con la última cayendo y rota en rojo -->
+  <svg width="170" height="150" viewBox="0 0 170 150">
+    <rect x="8"  y="62" width="30" height="80" rx="6" fill="FG"/>
+    <rect x="50" y="34" width="30" height="108" rx="6" fill="FG"/>
+    <rect x="92" y="8"  width="30" height="134" rx="6" fill="FG"/>
+    <g transform="rotate(14 150 142)">
+      <path d="M134 92 H164 V142 H134 Z" fill="#FF4D2E"/>
+      <path d="M134 74 l8 6 l7 -9 l8 8 l7 -6 V88 H134 Z" fill="#FF4D2E"/>
+    </g>
+    <rect x="0" y="144" width="170" height="6" rx="3" fill="FG" opacity=".35"/>
+  </svg>
+  <div class="t datos" style="margin-top:34px;color:FG">DATOS</div>
+  <div class="t que" style="color:FG">QUE</div>
+  <div class="t duelen">DUELEN</div>
+</div>
+</body></html>
