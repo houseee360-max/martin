@@ -1,0 +1,45 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:"Archivo Black";src:url(../../public/fonts/ArchivoBlack-Regular.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";src:url(../../public/fonts/JetBrainsMono-Variable.woff2) format("woff2");font-weight:100 800}
+html,body{margin:0;background:transparent}
+#logo{position:relative;width:1220px;height:260px;display:flex;align-items:center;gap:34px;padding:0 46px;box-sizing:border-box;border-radius:36px;overflow:hidden}
+.fondo{background:radial-gradient(120% 140% at 15% 50%,#0b1f16 0%,#04060a 60%);border:2px solid rgba(57,255,136,.35)}
+.fondo::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(63,216,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(63,216,255,.07) 1px,transparent 1px);background-size:26px 26px}
+.fondo::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 2px,transparent 2px 5px)}
+.icono,.txt{position:relative;z-index:1;flex-shrink:0}
+.linea1{white-space:nowrap;font-family:"Archivo Black";font-size:74px;line-height:.9;color:#eef3f7;letter-spacing:2px;text-shadow:3px 0 #ff2a3a,-3px 0 #3fd8ff,0 4px 18px rgba(0,0,0,.9)}
+.linea1 span{color:#ff2a3a;text-shadow:0 0 22px rgba(255,42,58,.7),3px 0 #3fd8ff}
+.linea2{white-space:nowrap;margin-top:16px;font-family:"JetBrains Mono";font-weight:800;font-size:22px;letter-spacing:9px;color:#39ff88;text-shadow:0 0 12px rgba(57,255,136,.8)}
+</style></head>
+<body>
+<div id="logo" class="VAR">
+  <svg class="icono" width="190" height="190" viewBox="-95 -95 190 190">
+    <defs>
+      <filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <linearGradient id="barr" x1="0" x2="1"><stop offset="0" stop-color="#39ff88" stop-opacity="0"/><stop offset="1" stop-color="#39ff88" stop-opacity=".45"/></linearGradient>
+    </defs>
+    <!-- radar -->
+    <circle r="88" fill="#020906" stroke="#39ff88" stroke-width="3" filter="url(#g)"/>
+    <circle r="58" fill="none" stroke="#39ff88" stroke-opacity=".35" stroke-width="2"/>
+    <circle r="29" fill="none" stroke="#39ff88" stroke-opacity=".35" stroke-width="2"/>
+    <path d="M0 0 L88 0 A88 88 0 0 0 67 -57 Z" fill="url(#barr)" transform="rotate(-40)"/>
+    <!-- barras de datos dentro del radar; la última cae y se rompe en rojo -->
+    <g filter="url(#g)">
+      <rect x="-50" y="5"  width="20" height="40" rx="4" fill="#eef3f7"/>
+      <rect x="-22" y="-17" width="20" height="62" rx="4" fill="#eef3f7"/>
+      <rect x="6"  y="-39" width="20" height="84" rx="4" fill="#eef3f7"/>
+      <g transform="rotate(16 44 45)">
+        <path d="M34 10 H54 V45 H34 Z" fill="#ff2a3a"/>
+        <path d="M34 0 l5 5 l5 -7 l5 6 l5 -4 V12 H34 Z" fill="#ff2a3a"/>
+      </g>
+    </g>
+    <line x1="-60" y1="47" x2="60" y2="47" stroke="#39ff88" stroke-width="3" stroke-opacity=".6"/>
+  </svg>
+  <div class="txt">
+    <div class="linea1">DATOS QUE <span>DUELEN</span></div>
+    <div class="linea2">▸ LO QUE NADIE TE CUENTA</div>
+  </div>
+</div>
+</body></html>
