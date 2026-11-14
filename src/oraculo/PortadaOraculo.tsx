@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Img, Sequence, staticFile } from "remotion";
-import { DISPLAY, MONO } from "../theme";
+import { DISPLAY } from "../theme";
 import { Oraculo } from "./Oraculo";
 
 /** Portada vertical: el ojo de ORÁCULO abierto + pregunta gancho + logo del canal */
@@ -20,9 +20,8 @@ export const PortadaOraculo: React.FC = () => {
         <div style={{ fontSize: 132, color: "#fff", textShadow: `${borde}, 6px 0 #ff2a3a, -6px 0 #3fd8ff` }}>¿Y SI NO FUE</div>
         <div style={{ fontSize: 168, color: "#ff2a3a", marginTop: 10, textShadow: `${borde}, 0 0 40px rgba(255,42,58,.8)` }}>UNA FALLA?</div>
       </div>
-      <div style={{ position: "absolute", bottom: 360, left: 0, right: 0, textAlign: "center" }}>
+      <div style={{ position: "absolute", bottom: 400, left: 0, right: 0, textAlign: "center" }}>
         <div style={{ display: "inline-block", padding: "14px 30px", background: "#ff2a3a", fontFamily: DISPLAY, fontSize: 64, color: "#fff", transform: "rotate(-2deg)" }}>4 HORAS SIN CIELO</div>
-        <div style={{ marginTop: 24, fontFamily: MONO, fontWeight: 700, fontSize: 30, letterSpacing: 6, color: "#39ff88" }}>▸ HISTORIA DE FICCIÓN</div>
       </div>
     </AbsoluteFill>
   );
