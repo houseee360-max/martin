@@ -9,6 +9,7 @@ import { FPS, HEIGHT, TOTAL_FRAMES, WIDTH } from "./theme";
 import { Propuesta, PROP_FPS, PROP_H, PROP_TOTAL, PROP_W } from "./propuesta/Propuesta";
 import { ReelCelular, RC_FPS, RC_H, RC_TOTAL, RC_W } from "./reel-celular/ReelCelular";
 import { ReelLunes, RL_FPS, RL_H, RL_TOTAL, RL_W } from "./reel-lunes/ReelLunes";
+import { Pantallas, PA_FPS, PA_H, PA_TOTAL, PA_W } from "./pantallas/Pantallas";
 import { PortadaOraculo } from "./oraculo/PortadaOraculo";
 import { Oraculo, OR_FPS, OR_H, OR_TOTAL, OR_W } from "./oraculo/Oraculo";
 import { CalcetinVideo, CA_DUR, CA_FPS, CA_H, CA_W } from "./calcetin/Calcetin";
@@ -111,6 +112,7 @@ export const RemotionRoot: React.FC = () => (
         <Composition key={c} id={`Calcetin-${c}`} component={CalcetinVideo} durationInFrames={CA_DUR[c]} fps={CA_FPS} width={CA_W} height={CA_H} defaultProps={{ clip: c }} />
       ))}
     </Folder>
+    <Composition id="Pantallas" component={Pantallas} durationInFrames={PA_TOTAL} fps={PA_FPS} width={PA_W} height={PA_H} />
     <Composition id="Portada-Oraculo" component={PortadaOraculo} durationInFrames={1} fps={OR_FPS} width={OR_W} height={OR_H} />
     <Composition id="Oraculo" component={Oraculo} durationInFrames={OR_TOTAL} fps={OR_FPS} width={OR_W} height={OR_H} />
     <Folder name="Shorts">
