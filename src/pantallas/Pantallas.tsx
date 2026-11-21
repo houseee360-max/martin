@@ -11,9 +11,10 @@ import { DISPLAY, MONO } from "../theme";
 export const PA_FPS = 30;
 export const PA_W = 1080;
 export const PA_H = 1920;
-export const PA_TOTAL = 900;
+export const PA_TOTAL = 1146; // 38,2 s: sincronizado con la voz
 
-const T = { ninos: 90, mejor: 210, ajuste: 330, ojo: 420, duele: 540, clave: 720, bucle: 840 };
+// Inicio de cada escena = inicio de su frase en la voz (cuadro = segundo × 30)
+const T = { ninos: 72, mejor: 240, ajuste: 379, ojo: 563, duele: 711, clave: 938, bucle: 1064 };
 const C = { bg: "#0b0e14", cian: "#3fd8ff", cianCore: "#d6f8ff", rojo: "#FF4D2E", amarillo: "#ffd23f", gris: "#8a94a3", blanco: "#F2EFE9" };
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 const lerp = (f: number, a: number[], b: number[], e = Easing.inOut(Easing.cubic)) => interpolate(f, a, b, { ...clamp, easing: e });
@@ -161,8 +162,8 @@ const Gancho: React.FC<{ f: number; local: number }> = ({ f, local }) => {
 const Ninos: React.FC<{ f: number }> = ({ f }) => {
   const lf = f - T.ninos;
   const aparecen = lerp(lf, [6, 46], [0, 260], Easing.out(Easing.quad));
-  const anios = Math.floor(lerp(lf, [50, 104], [0, 8], Easing.linear));
-  const crecen = lerp(lf, [50, 104], [1, 1.45]);
+  const anios = Math.floor(lerp(lf, [108, 150], [0, 8], Easing.linear));
+  const crecen = lerp(lf, [108, 150], [1, 1.45]);
   return (
     <AbsoluteFill>
       <Texto f={f} at={T.ninos} top={170}>
@@ -176,7 +177,7 @@ const Ninos: React.FC<{ f: number }> = ({ f }) => {
           return i < aparecen ? <Nino key={i} x={70 + col * 50} y={60 + fila * 46} h={crecen} color={i % 7 === 0 ? C.cian : C.blanco} op={0.9} /> : null;
         })}
       </svg>
-      <Texto f={f} at={T.ninos + 50} top={1330}>
+      <Texto f={f} at={T.ninos + 106} top={1330}>
         <div style={mono(C.gris, 34)}>DURANTE</div>
         <div style={{ ...grande(C.cian, 150), fontVariantNumeric: "tabular-nums" }}>{anios} AÑOS</div>
       </Texto>
@@ -186,8 +187,8 @@ const Ninos: React.FC<{ f: number }> = ({ f }) => {
 
 const Mejor: React.FC<{ f: number }> = ({ f }) => {
   const lf = f - T.mejor;
-  const b1 = lerp(lf, [30, 70], [0, 0.55]);
-  const b2 = lerp(lf, [40, 84], [0, 0.85], Easing.out(Easing.back(1.4)));
+  const b1 = lerp(lf, [20, 50], [0, 0.55]);
+  const b2 = lerp(lf, [28, 62], [0, 0.85], Easing.out(Easing.back(1.4)));
   return (
     <AbsoluteFill>
       <Texto f={f} at={T.mejor} top={190}>
@@ -195,7 +196,7 @@ const Mejor: React.FC<{ f: number }> = ({ f }) => {
         <div style={grande(C.cian, 112)}>MÁS PANTALLAS…</div>
       </Texto>
       <div style={{ position: "absolute", top: 470, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
-        <Cerebro f={f} encendido={lerp(lf, [44, 100], [0, 1.05])} rojo={0} s={1.15} />
+        <Cerebro f={f} encendido={lerp(lf, [24, 70], [0, 1.05])} rojo={0} s={1.15} />
       </div>
       {/* barras comparativas */}
       <div style={{ position: "absolute", left: 160, right: 160, top: 1110, height: 300, display: "flex", alignItems: "flex-end", justifyContent: "space-around" }}>
@@ -209,7 +210,7 @@ const Mejor: React.FC<{ f: number }> = ({ f }) => {
           </div>
         ))}
       </div>
-      <Texto f={f} at={T.mejor + 86} top={1520}>
+      <Texto f={f} at={T.mejor + 60} top={1520}>
         <div style={grande(C.amarillo, 72)}>…rindieron MEJOR</div>
         <div style={{ ...grande(C.blanco, 40), whiteSpace: "nowrap" }}>en pruebas mentales de adolescentes.</div>
       </Texto>
@@ -237,10 +238,10 @@ const Ajuste: React.FC<{ f: number }> = ({ f }) => {
         <div style={grande(C.amarillo, 112)}>casualidad</div>
       </Texto>
       <div style={{ position: "absolute", top: 700, left: 110, right: 80 }}>
-        {item(16, "Comparando cómo eran de niños")}
-        {item(36, "Y la educación de sus padres")}
+        {item(110, "Comparando cómo eran de niños")}
+        {item(134, "Y la educación de sus padres")}
       </div>
-      <Texto f={f} at={T.ajuste + 56} top={1260}>
+      <Texto f={f} at={T.ajuste + 52} top={1260}>
         <div style={grande(C.cian, 70)}>El resultado se mantuvo.</div>
       </Texto>
     </AbsoluteFill>
@@ -249,7 +250,7 @@ const Ajuste: React.FC<{ f: number }> = ({ f }) => {
 
 const Ojo: React.FC<{ f: number }> = ({ f }) => {
   const lf = f - T.ojo;
-  const sello = vb((lf - 52) / 12, 0.12, 0.18);
+  const sello = vb((lf - 100) / 12, 0.12, 0.18);
   const linea = (fase: number, color: string, dy: number) =>
     Array.from({ length: 61 }, (_, k) => {
       const x = 90 + k * 15;
@@ -267,7 +268,7 @@ const Ojo: React.FC<{ f: number }> = ({ f }) => {
         <text x={110} y={760} fontFamily={MONO} fontWeight={700} fontSize={30} fill={C.cian}>PANTALLA</text>
         <text x={110} y={1110} fontFamily={MONO} fontWeight={700} fontSize={30} fill={C.amarillo}>RESULTADOS</text>
       </svg>
-      {lf > 52 ? (
+      {lf > 100 ? (
         <div style={{ position: "absolute", top: 820, left: 0, right: 0, textAlign: "center" }}>
           <div style={{ display: "inline-block", padding: "12px 34px", border: `8px solid ${C.rojo}`, borderRadius: 16, background: "rgba(11,14,20,.9)", ...grande(C.rojo, 88), transform: `rotate(-7deg) scale(${1.6 - 0.6 * sello})`, opacity: Math.min(1, sello * 2) }}>
             ≠ CAUSA
@@ -297,7 +298,7 @@ const Duele: React.FC<{ f: number }> = ({ f }) => {
       <div style={{ position: "absolute", top: 640, left: 0, right: 0, display: "flex", justifyContent: "center", transform: `scale(${latido})` }}>
         <Cerebro f={f} encendido={1.1} rojo={rojo} s={1.15} />
       </div>
-      <Texto f={f} at={T.duele + 70} top={1270}>
+      <Texto f={f} at={T.duele + 80} top={1270}>
         <div style={grande(C.blanco, 62)}>Más pantallas,</div>
         <div style={grande(C.rojo, 80)}>más estrés</div>
         <div style={grande(C.blanco, 62)}>y más síntomas de depresión.</div>
@@ -348,7 +349,7 @@ export const Pantallas: React.FC = () => {
   const op = (a: number, b: number) => lerp(f, [a - 6, a + 4, b - 6, b], [0, 1, 1, 0]);
   const enBucle = f >= T.bucle;
   const fuenteOp = lerp(f, [T.ninos, T.ninos + 10, T.clave + 110, T.clave + 120], [0, 1, 1, 0]);
-  const flash = Math.max(0, ...[T.mejor + 86, T.ojo + 52, T.duele + 40].map((p) => 1 - Math.abs(f - p) / 8)) * 0.35;
+  const flash = Math.max(0, ...[T.mejor + 60, T.ojo + 100, T.duele + 40].map((p) => 1 - Math.abs(f - p) / 8)) * 0.35;
   return (
     <AbsoluteFill style={{ background: `radial-gradient(90% 60% at 50% 45%, #14202e 0%, ${C.bg} 70%)`, overflow: "hidden" }}>
       {/* partículas de fondo */}
