@@ -67,6 +67,7 @@ def normalizar(cfg: dict) -> dict:
     cfg.setdefault("notificaciones", {})
     cfg.setdefault("mesas_por_mozo", 4)
     cfg.setdefault("base_datos", "mesas.db")
+    cfg.setdefault("clave_panel", "")
 
     ids_camaras = {c["id"] for c in cfg["camaras"]}
     vistos = set()

@@ -7,6 +7,7 @@ from pathlib import Path
 
 import uvicorn
 
+from . import notificar
 from .servidor import Sistema, crear_app, ip_local
 
 RAIZ = Path(__file__).resolve().parent.parent
@@ -29,6 +30,9 @@ def main():
         a.config = str(RAIZ / "presentacion.json")
         if not Path(a.config).exists():
             shutil.copy(RAIZ / "config.presentacion.json", a.config)
+    if a.config and not Path(a.config).exists() and Path(a.config).name == "config.json":
+        # primera vez en el restaurante: configuración vacía, se completa desde /instalar
+        shutil.copy(RAIZ / "config.inicial.json", a.config)
     if not a.demo and not a.config:
         ap.error("indica --config config.json, --presentacion para una demo en vivo, o --demo para probar sin cámaras")
 
@@ -41,8 +45,12 @@ def main():
     print(f"  Desde el móvil (misma wifi):   {red}")
     print("  Para pararlo, cierra esta ventana.")
     print()
+    if not a.demo and not a.presentacion:
+        notificar.mensaje(sistema.cfg["notificaciones"],
+                          f"✅ Mesas IA está en marcha en {sistema.cfg['restaurante']}.\nPanel: {red}")
     if not a.sin_navegador:
-        threading.Timer(2.5, lambda: webbrowser.open(f"http://localhost:{a.puerto}/conectar")).start()
+        pagina = "instalar" if not a.demo and not sistema.cfg["camaras"] else "conectar"
+        threading.Timer(2.5, lambda: webbrowser.open(f"http://localhost:{a.puerto}/{pagina}")).start()
     uvicorn.run(crear_app(sistema, a.puerto), host=a.host, port=a.puerto, log_level="warning")
 
 

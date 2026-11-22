@@ -7,6 +7,8 @@ import threading
 import time
 
 os.environ.setdefault("OPENCV_LOG_LEVEL", "OFF")  # sin avisos técnicos de OpenCV en la ventana
+# RTSP por TCP: más estable en wifi y en grabadores que por UDP
+os.environ.setdefault("OPENCV_FFMPEG_CAPTURE_OPTIONS", "rtsp_transport;tcp")
 import cv2  # noqa: E402
 import numpy as np
 
@@ -68,6 +70,40 @@ def _punto(caja, modo):
     return ((x1 + x2) / 2, y2 if modo == "pie" else (y1 + y2) / 2)
 
 
+def _abrir(fuente):
+    if isinstance(fuente, int) and sys.platform == "win32":
+        return cv2.VideoCapture(fuente, cv2.CAP_DSHOW)  # abre la webcam más rápido en Windows
+    return cv2.VideoCapture(fuente)
+
+
+def foto_de_prueba(valor, espera_s: float = 15):
+    """Devuelve (jpeg, None) si la cámara responde, o (None, motivo)."""
+    fuente, _ = _fuente(valor)
+    resultado = {}
+
+    def intentar():
+        cap = _abrir(fuente)
+        try:
+            if not cap.isOpened():
+                resultado["error"] = "no responde: revisa la IP, el usuario y la contraseña"
+                return
+            for _ in range(5):  # las primeras imágenes a veces llegan vacías
+                ok, frame = cap.read()
+                if ok and frame is not None:
+                    resultado["jpeg"] = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 80])[1].tobytes()
+                    return
+            resultado["error"] = "se conecta pero no manda imagen"
+        finally:
+            cap.release()
+
+    hilo = threading.Thread(target=intentar, daemon=True)
+    hilo.start()
+    hilo.join(espera_s)
+    if "jpeg" in resultado:
+        return resultado["jpeg"], None
+    return None, resultado.get("error", "no contestó a tiempo: ¿está en la misma red y encendida?")
+
+
 def _fuente(valor):
     if isinstance(valor, int) or (isinstance(valor, str) and valor.isdigit()):
         return int(valor), False
@@ -96,10 +132,7 @@ class Camara(threading.Thread):
         ultimo_analisis = 0.0
         while not self._parar.is_set():
             if cap is None or not cap.isOpened():
-                if isinstance(fuente, int) and sys.platform == "win32":
-                    cap = cv2.VideoCapture(fuente, cv2.CAP_DSHOW)  # abre la webcam más rápido en Windows
-                else:
-                    cap = cv2.VideoCapture(fuente)
+                cap = _abrir(fuente)
                 if not cap.isOpened():
                     self.ok = False
                     self.error = (

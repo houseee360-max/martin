@@ -1,0 +1,10 @@
+{
+  "restaurante": "Mi restaurante",
+  "camaras": [],
+  "mesas": [],
+  "entrada": null,
+  "notificaciones": {"telegram_token": "", "telegram_chat_id": ""},
+  "clave_panel": "",
+  "mesas_por_mozo": 4,
+  "base_datos": "mesas.db"
+}

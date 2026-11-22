@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Instalar Mesas IA</title>
+<style>
+:root{--fondo:#0f1419;--panel:#171e26;--borde:#26313d;--texto:#e7edf3;--suave:#8b9aab;--acento:#38bdf8;--ok:#22c55e;--mal:#ef4444}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--texto);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{display:flex;gap:12px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--borde);background:var(--panel);flex-wrap:wrap}
+header h1{margin:0;font-size:18px}
+header a{color:var(--acento)}
+main{max-width:860px;margin:0 auto;padding:20px 16px 60px}
+section{background:var(--panel);border:1px solid var(--borde);border-radius:14px;padding:18px;margin-bottom:16px}
+h2{margin:0 0 4px;font-size:18px;display:flex;gap:10px;align-items:center}
+h2 .n{background:var(--acento);color:#04121c;width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:none}
+h2 .hecho{background:var(--ok)}
+p.ayuda{color:var(--suave);margin:4px 0 12px;font-size:14px}
+label{display:block;font-size:13px;color:var(--suave);margin:8px 0 3px}
+input,select{width:100%;font:inherit;color:var(--texto);background:#0b1016;border:1px solid var(--borde);border-radius:8px;padding:8px 10px}
+.fila{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+button,a.btn{font:inherit;color:var(--texto);background:transparent;border:1px solid var(--borde);border-radius:8px;padding:8px 14px;cursor:pointer;text-decoration:none;display:inline-block}
+button.prim,a.prim{background:var(--acento);border-color:var(--acento);color:#04121c;font-weight:650}
+.botones{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.cam{border:1px solid var(--borde);border-radius:12px;padding:14px;margin-bottom:12px;background:#121920}
+.cam img{max-width:100%;max-height:340px;border-radius:8px;margin-top:10px;display:block}
+.estado{font-size:14px}
+.estado.ok{color:var(--ok)} .estado.mal{color:#fca5a5}
+.oculto{display:none!important}
+code{background:#0b1016;padding:2px 6px;border-radius:6px;font-size:13px;word-break:break-all}
+#guardado{color:var(--ok);font-weight:600}
+.chat{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--borde);border-radius:8px;padding:6px 10px;margin-top:6px}
+ol{margin:6px 0;padding-left:20px;color:var(--suave);font-size:14px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Instalar Mesas IA</h1>
+  <a href="/">Ir al panel →</a>
+</header>
+<main>
+  <p id="aviso-demo" class="oculto" style="color:#fca5a5">Estás en modo demo o presentación: aquí no se guardan ajustes. Arranca con «Iniciar-Restaurante».</p>
+
+  <section>
+    <h2><span class="n">1</span>Nombre del restaurante</h2>
+    <input id="restaurante" placeholder="Ej. Parrilla Don José">
+  </section>
+
+  <section>
+    <h2><span class="n">2</span>Cámaras</h2>
+    <p class="ayuda">Necesitas la <b>IP</b> de cada cámara (o del grabador) y su <b>usuario y contraseña</b>. Suelen estar en la app de las
+      cámaras o en una pegatina del grabador. Pulsa «Probar» hasta que salga la imagen.</p>
+    <div id="camaras"></div>
+    <div class="botones"><button id="agregar">+ Agregar cámara</button></div>
+  </section>
+
+  <section>
+    <h2><span class="n" id="n3">3</span>Dibujar las mesas</h2>
+    <p class="ayuda">Primero guarda las cámaras (botón de abajo). Después dibuja en la imagen dónde está cada mesa, con sus sillas.</p>
+    <p id="mesas-estado" class="estado"></p>
+    <div class="botones"><a class="btn" href="/calibrar">Abrir el dibujo de mesas →</a></div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span>Avisos al móvil del jefe (Telegram)</h2>
+    <ol>
+      <li>En Telegram, busca <b>@BotFather</b>, escríbele <code>/newbot</code> y sigue los pasos (te pide un nombre).</li>
+      <li>Te da un <b>token</b> (algo como <code>123456:ABC-xyz…</code>). Pégalo aquí abajo.</li>
+      <li>El jefe abre el bot que creaste y le escribe «hola» (o crea un grupo con los encargados y agrega el bot).</li>
+      <li>Pulsa «Buscar chat» y elige al jefe o al grupo.</li>
+    </ol>
+    <label>Token del bot</label>
+    <input id="token" placeholder="Pega aquí el token" autocomplete="off">
+    <div class="botones"><button id="buscar">Buscar chat</button><span id="chats-estado" class="estado"></span></div>
+    <div id="chats"></div>
+    <label>Chat elegido</label>
+    <input id="chat" placeholder="Se rellena al elegir un chat">
+    <div class="botones"><button id="probar-tg">Enviar mensaje de prueba</button><span id="tg-estado" class="estado"></span></div>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span>Contraseña del panel</h2>
+    <p class="ayuda">Para que nadie más en el wifi pueda ver el panel. El navegador la pide una vez y la recuerda
+      (el usuario puede ser cualquiera, por ejemplo «jefe»). Déjala vacía para no usar contraseña.</p>
+    <input id="clave" type="text" placeholder="Nueva contraseña (vacío = sin cambios)" autocomplete="off">
+    <p id="clave-estado" class="ayuda"></p>
+    <label>Mesas que atiende cada mozo (para el reporte)</label>
+    <input id="por-mozo" type="number" min="1" style="max-width:120px">
+  </section>
+
+  <div class="botones" style="position:sticky;bottom:12px;background:var(--fondo);padding:10px;border-radius:12px;border:1px solid var(--borde)">
+    <button class="prim" id="guardar">Guardar todo</button>
+    <span id="guardado"></span>
+  </div>
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+const MARCAS = {
+  hikvision: {n: "Hikvision / Ezviz / Hilook", u: "admin", url: (u,p,ip,c) => `rtsp://${u}:${p}@${ip}:554/Streaming/Channels/${c}02`},
+  dahua:     {n: "Dahua / Imou", u: "admin", url: (u,p,ip,c) => `rtsp://${u}:${p}@${ip}:554/cam/realmonitor?channel=${c}&subtype=1`},
+  reolink:   {n: "Reolink", u: "admin", url: (u,p,ip,c) => `rtsp://${u}:${p}@${ip}:554/h264Preview_${String(c).padStart(2,"0")}_sub`},
+  tapo:      {n: "TP-Link Tapo", u: "", url: (u,p,ip,c) => `rtsp://${u}:${p}@${ip}:554/stream2`},
+  movil:     {n: "Móvil con IP Webcam (Android)", u: "", url: (u,p,ip,c) => `http://${ip}:8080/video`},
+  webcam:    {n: "Webcam USB de este ordenador", u: "", url: (u,p,ip,c) => String(Number(c) - 1)},
+  otra:      {n: "Otra (escribir la dirección completa)", u: "", url: null},
+};
+let camaras = [], ajustes;
+
+function filaCamara(c, i){
+  const opciones = Object.entries(MARCAS).map(([k, m]) => `<option value="${k}" ${c.marca === k ? "selected" : ""}>${m.n}</option>`).join("");
+  return `<div class="cam" data-i="${i}">
+    <div class="fila">
+      <div><label>Nombre</label><input data-k="nombre" value="${c.nombre || ""}" placeholder="Salón, Terraza…"></div>
+      <div><label>Marca</label><select data-k="marca">${opciones}</select></div>
+    </div>
+    ${c.guardada && !c.editar ? `
+      <p class="ayuda">Dirección guardada: <code>${c.fuente_oculta}</code> <button data-acc="editar">Cambiar</button></p>` : `
+      <div class="fila ${c.marca === "otra" ? "oculto" : ""}">
+        <div class="${c.marca === "webcam" ? "oculto" : ""}"><label>IP</label><input data-k="ip" value="${c.ip || ""}" placeholder="192.168.1.64"></div>
+        <div class="${["webcam","movil"].includes(c.marca) ? "oculto" : ""}"><label>Usuario</label><input data-k="usuario" value="${c.usuario ?? MARCAS[c.marca].u}"></div>
+        <div class="${["webcam","movil"].includes(c.marca) ? "oculto" : ""}"><label>Contraseña</label><input data-k="clave" type="password" value="${c.clave || ""}"></div>
+        <div class="${["tapo","movil"].includes(c.marca) ? "oculto" : ""}"><label>${c.marca === "webcam" ? "Número de webcam" : "Canal (en grabadores)"}</label><input data-k="canal" type="number" min="1" value="${c.canal || 1}"></div>
+      </div>
+      <div class="${c.marca === "otra" ? "" : "oculto"}"><label>Dirección completa (rtsp://… o http://…)</label><input data-k="url" value="${c.url || ""}"></div>`}
+    <div class="botones">
+      <button data-acc="probar">Probar</button>
+      <button data-acc="quitar">Quitar</button>
+      <span class="estado ${c.ok === true ? "ok" : c.ok === false ? "mal" : ""}">${c.msg || ""}</span>
+    </div>
+    ${c.imagen ? `<img src="${c.imagen}" alt="Imagen de prueba de la cámara">` : ""}
+  </div>`;
+}
+
+function fuenteDe(c){
+  if (c.guardada && !c.editar) return null;
+  if (c.marca === "otra") return (c.url || "").trim();
+  const m = MARCAS[c.marca];
+  return m.url(encodeURIComponent(c.usuario ?? m.u), encodeURIComponent(c.clave || ""), (c.ip || "").trim(), c.canal || 1);
+}
+
+function pintar(){
+  $("#camaras").innerHTML = camaras.length ? camaras.map(filaCamara).join("") : '<p class="ayuda">Todavía no hay cámaras.</p>';
+  document.querySelectorAll(".cam").forEach(div => {
+    const c = camaras[+div.dataset.i];
+    div.querySelectorAll("[data-k]").forEach(inp => inp.oninput = inp.onchange = () => {
+      c[inp.dataset.k] = inp.value;
+      if (inp.dataset.k === "marca") { c.usuario = MARCAS[c.marca].u; pintar(); }
+    });
+    div.querySelectorAll("[data-acc]").forEach(b => b.onclick = async () => {
+      if (b.dataset.acc === "quitar") { camaras.splice(+div.dataset.i, 1); pintar(); }
+      if (b.dataset.acc === "editar") { c.editar = true; pintar(); }
+      if (b.dataset.acc === "probar") {
+        c.ok = null; c.msg = "Probando… (hasta 15 segundos)"; c.imagen = null; pintar();
+        const cuerpo = c.guardada && !c.editar ? {id: c.id} : {fuente: fuenteDe(c)};
+        const r = await (await fetch("/api/camaras/probar", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(cuerpo)})).json();
+        c.ok = !!r.ok; c.msg = r.ok ? "✓ Funciona" : "✗ " + (r.error || r.detail); c.imagen = r.imagen; pintar();
+      }
+    });
+  });
+}
+
+async function cargar(){
+  ajustes = await (await fetch("/api/ajustes")).json();
+  $("#aviso-demo").classList.toggle("oculto", ajustes.editable);
+  $("#restaurante").value = ajustes.restaurante;
+  camaras = ajustes.camaras.map(c => ({id: c.id, nombre: c.nombre, marca: "otra", guardada: true, fuente_oculta: c.fuente}));
+  $("#token").placeholder = ajustes.telegram_token ? "(ya guardado — pega otro solo para cambiarlo)" : "Pega aquí el token";
+  $("#chat").value = ajustes.telegram_chat_id;
+  $("#clave-estado").textContent = ajustes.clave ? "Ya hay una contraseña puesta." : "Ahora mismo no hay contraseña.";
+  $("#por-mozo").value = ajustes.mesas_por_mozo;
+  $("#mesas-estado").textContent = ajustes.mesas ? `${ajustes.mesas_con_zona} de ${ajustes.mesas} mesas tienen su zona dibujada.` : "Todavía no hay mesas dibujadas.";
+  $("#n3").classList.toggle("hecho", ajustes.mesas > 0 && ajustes.mesas_con_zona === ajustes.mesas);
+  pintar();
+}
+
+$("#agregar").onclick = () => {
+  let n = 1; while (camaras.some(c => c.id === "cam" + n)) n++;
+  camaras.push({id: "cam" + n, nombre: "Cámara " + n, marca: "hikvision", usuario: "admin", canal: 1});
+  pintar();
+};
+
+$("#buscar").onclick = async () => {
+  $("#chats-estado").textContent = "Buscando…";
+  const r = await (await fetch("/api/telegram/chats", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({token: $("#token").value})})).json();
+  if (!r.ok) { $("#chats-estado").textContent = r.error || r.detail; return; }
+  $("#chats-estado").textContent = r.chats.length ? "Elige uno:" : "Nadie le escribió todavía al bot. Escríbele «hola» y vuelve a buscar.";
+  $("#chats").innerHTML = r.chats.map(c => `<div class="chat"><span>${c.nombre} <small style="color:var(--suave)">(${c.tipo})</small></span><button data-id="${c.id}">Elegir</button></div>`).join("");
+  document.querySelectorAll("#chats button").forEach(b => b.onclick = () => { $("#chat").value = b.dataset.id; $("#chats-estado").textContent = "Elegido. Guarda y prueba."; });
+};
+
+async function guardar(){
+  for (const c of camaras) {
+    const f = fuenteDe(c);
+    if (f !== null && (!f || f.includes("@:") || f.includes("//:"))) { alert(`Revisa los datos de la cámara «${c.nombre}» (falta la IP o la dirección).`); return false; }
+  }
+  const cuerpo = {
+    restaurante: $("#restaurante").value,
+    camaras: camaras.map(c => ({id: c.id, nombre: c.nombre, fuente: fuenteDe(c)})),
+    telegram_chat_id: $("#chat").value,
+    mesas_por_mozo: +$("#por-mozo").value || 4,
+  };
+  if ($("#token").value.trim()) cuerpo.telegram_token = $("#token").value.trim();
+  if ($("#clave").value) cuerpo.clave = $("#clave").value;
+  const r = await fetch("/api/ajustes", {method: "PUT", headers: {"Content-Type": "application/json"}, body: JSON.stringify(cuerpo)});
+  const j = await r.json();
+  if (!r.ok) { $("#guardado").textContent = "Error: " + (j.detail || r.status); return false; }
+  $("#guardado").textContent = "✓ Guardado y funcionando";
+  $("#token").value = ""; $("#clave").value = "";
+  await cargar();
+  return true;
+}
+$("#guardar").onclick = guardar;
+$("#probar-tg").onclick = async () => {
+  if (!(await guardar())) return;
+  $("#tg-estado").textContent = "Enviando…";
+  const r = await (await fetch("/api/notificaciones/prueba", {method: "POST"})).json();
+  $("#tg-estado").textContent = r.resultado === "Enviado" ? "✓ Mensaje enviado: mira el móvil" : r.resultado;
+};
+
+cargar();
+</script>
+</body>
+</html>
