@@ -1,0 +1,31 @@
+{
+  "restaurante": "Demostración en vivo",
+  "camaras": [
+    {"id": "demo", "nombre": "Cámara de la demostración", "fuente": "0", "fps_analisis": 4}
+  ],
+  "mesas": [
+    {"id": "M1", "nombre": "Mesa 01", "camara": "demo", "capacidad": 4,
+     "poligono": [[0.03, 0.3], [0.49, 0.3], [0.49, 0.98], [0.03, 0.98]], "plano": [0.3, 0.5]},
+    {"id": "M2", "nombre": "Mesa 02", "camara": "demo", "capacidad": 4,
+     "poligono": [[0.51, 0.3], [0.97, 0.3], [0.97, 0.98], [0.51, 0.98]], "plano": [0.7, 0.5]}
+  ],
+  "entrada": null,
+  "tiempos": {
+    "confirmar_ocupada_s": 4,
+    "confirmar_vacia_s": 6,
+    "alerta_sin_atencion_s": 20,
+    "alerta_reatencion_s": 0,
+    "alerta_limpieza_s": 15,
+    "visita_min_s": 2,
+    "limpieza_min_s": 3,
+    "fila_min_personas": 1,
+    "fila_confirmar_s": 3,
+    "duracion_media_defecto_s": 600,
+    "limpieza_estimada_s": 60
+  },
+  "deteccion": {"modelo": "yolo11n.pt", "confianza": 0.4, "punto": "centro", "detectar_objetos": true},
+  "personal": {"modo": "ninguno", "hsv_min": [0, 0, 0], "hsv_max": [180, 255, 60], "fraccion_min": 0.35},
+  "notificaciones": {"telegram_token": "", "telegram_chat_id": ""},
+  "mesas_por_mozo": 4,
+  "base_datos": "presentacion.db"
+}

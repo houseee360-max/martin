@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mesas IA en vivo</title>
+<style>
+:root{--fondo:#0b0f14;--panel:#141b23;--borde:#243040;--texto:#eef3f8;--suave:#8b9aab;
+  --libre:#22c55e;--ocupada:#ef4444;--atendida:#c2410c;--limpiar:#f59e0b;--acento:#38bdf8}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--fondo);color:var(--texto);font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:16px;padding:10px 18px;border-bottom:1px solid var(--borde);flex-wrap:wrap}
+header h1{margin:0;font-size:18px}
+.vivo{display:inline-flex;align-items:center;gap:6px;background:#3a1114;color:#fecaca;font-weight:700;font-size:12px;padding:4px 10px;border-radius:999px;letter-spacing:.08em}
+.vivo i{width:8px;height:8px;border-radius:50%;background:#ef4444;animation:parpadeo 1.2s infinite}
+@keyframes parpadeo{50%{opacity:.2}}
+#hora{font-variant-numeric:tabular-nums;color:var(--suave)}
+.acciones{margin-left:auto;display:flex;gap:8px}
+button{font:inherit;color:var(--texto);background:transparent;border:1px solid var(--borde);border-radius:8px;padding:6px 12px;cursor:pointer}
+main{flex:1;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(300px,1fr);gap:16px;padding:16px;min-height:0}
+@media (max-width:900px){main{grid-template-columns:1fr}}
+.video{position:relative;background:#000;border-radius:14px;overflow:hidden;display:flex;align-items:center;justify-content:center;min-height:240px}
+.video img{max-width:100%;max-height:100%;display:block}
+.video .etq{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.6);padding:4px 10px;border-radius:8px;font-size:12px;color:#cbd5e1}
+#sinvideo{color:var(--suave);padding:30px;text-align:center}
+#toast{position:absolute;left:50%;bottom:18px;transform:translate(-50%,30px);opacity:0;transition:.35s;min-width:70%;
+  background:#1d0f12;border:2px solid var(--ocupada);border-radius:12px;padding:12px 16px;display:flex;gap:12px;align-items:center;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+#toast.ver{opacity:1;transform:translate(-50%,0)}
+#toast.FALTA_LIMPIAR{border-color:var(--limpiar);background:#1f180a}
+#toast.FILA{border-color:var(--acento);background:#0b1a24}
+#toast .ico{font-size:28px}
+#toast b{display:block;font-size:17px}
+aside{display:flex;flex-direction:column;gap:12px;min-height:0;overflow:auto}
+.mesa{border-radius:14px;padding:14px 16px;color:#fff;transition:background .4s}
+.mesa.LIBRE{background:var(--libre)} .mesa.OCUPADA{background:var(--ocupada)}
+.mesa.ATENDIDA{background:var(--atendida)} .mesa.POR_LIMPIAR{background:var(--limpiar);color:#1a1205}
+.mesa.alerta{animation:latido 1s infinite}
+@keyframes latido{50%{box-shadow:0 0 0 6px rgba(255,255,255,.6)}}
+.mesa .fila1{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.mesa .n{font-weight:800;font-size:18px}
+.mesa .e{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.mesa .t{font-size:44px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.05;margin-top:4px}
+.mesa .p{font-size:13px;opacity:.92}
+.caja{background:var(--panel);border:1px solid var(--borde);border-radius:14px;padding:12px 14px}
+.caja h2{margin:0 0 8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--suave)}
+.al{border-left:4px solid var(--ocupada);padding:6px 10px;margin-bottom:6px;background:#1d1114;border-radius:6px}
+.al.FALTA_LIMPIAR{border-color:var(--limpiar);background:#1f180a} .al.FILA{border-color:var(--acento);background:#0b1a24}
+.al small{color:var(--suave)}
+.pasos{font-size:13px;color:var(--suave);margin:0;padding-left:18px}
+.pasos li{margin:3px 0}
+.pasos li.hecho{color:var(--libre);text-decoration:line-through}
+</style>
+</head>
+<body>
+<header>
+  <h1 id="nombre">Mesas IA</h1>
+  <span class="vivo"><i></i>EN VIVO</span>
+  <span id="hora"></span>
+  <div class="acciones">
+    <button id="reiniciar" title="Deja todas las mesas libres para repetir la demostración">↺ Reiniciar</button>
+    <button id="pantalla">⛶ Pantalla completa</button>
+  </div>
+</header>
+<main>
+  <section class="video">
+    <img id="video" alt="Cámara en vivo con las detecciones">
+    <span class="etq">Cámara real · lo que ve la IA</span>
+    <div id="sinvideo" style="display:none">Esperando la cámara…</div>
+    <div id="toast"><span class="ico">⚠️</span><div><b id="toast-t"></b><span id="toast-d"></span></div></div>
+  </section>
+  <aside>
+    <div id="mesas"></div>
+    <div class="caja"><h2>Alertas</h2><div id="alertas"><small style="color:var(--suave)">Sin alertas.</small></div></div>
+    <div class="caja">
+      <h2>Guion de la demostración</h2>
+      <ol class="pasos" id="pasos">
+        <li data-p="ocupa">Siéntate en la mesa: se pone roja y arranca el cronómetro.</li>
+        <li data-p="alerta">Espera sin que nadie se acerque: salta «sin atención».</li>
+        <li data-p="atiende">Que alguien se acerque como mozo: pasa a «atendida».</li>
+        <li data-p="limpiar">Levántate y vete: queda «falta limpiar».</li>
+        <li data-p="limpia">Que alguien pase por la mesa vacía: vuelve a verde.</li>
+      </ol>
+    </div>
+  </aside>
+</main>
+<script>
+const $ = s => document.querySelector(s);
+const ESTADOS = {LIBRE:"Libre", OCUPADA:"Esperando mozo", ATENDIDA:"Atendida", POR_LIMPIAR:"Falta limpiar"};
+const mmss = s => { s = Math.max(0, Math.floor(s)); return String(Math.floor(s/60)).padStart(2,"0") + ":" + String(s%60).padStart(2,"0"); };
+let vistos = new Set(), primera = true, camara = null, toastT = null;
+const pasos = new Set(), previo = {};
+
+function pitido(){ try { const c = new AudioContext(), o = c.createOscillator(), g = c.createGain();
+  o.frequency.value = 880; o.connect(g); g.connect(c.destination);
+  g.gain.setValueAtTime(.25, c.currentTime); g.gain.exponentialRampToValueAtTime(.001, c.currentTime + .6);
+  o.start(); o.stop(c.currentTime + .6); } catch(e) {} }
+
+function toast(a){
+  const t = $("#toast"); t.className = "ver " + a.tipo;
+  $("#toast-t").textContent = a.mensaje; $("#toast-d").textContent = a.detalle;
+  clearTimeout(toastT); toastT = setTimeout(() => t.className = a.tipo, 6000);
+}
+
+function marcarPaso(p){ pasos.add(p); document.querySelectorAll("#pasos li").forEach(li => li.classList.toggle("hecho", pasos.has(li.dataset.p))); }
+
+async function actualizar(){
+  let e; try { e = await (await fetch("/api/estado")).json(); } catch(err) { return; }
+  $("#nombre").textContent = e.restaurante;
+  $("#hora").textContent = new Date(e.ahora*1000).toLocaleTimeString("es");
+  if (!camara && e.camaras.length){ camara = e.camaras[0].id; $("#video").src = `/api/camaras/${encodeURIComponent(camara)}/video`; }
+  const c = e.camaras[0];
+  $("#sinvideo").style.display = c && c.ok ? "none" : "block";
+  $("#sinvideo").textContent = !c ? "No hay cámara configurada." : (c.error ? "Cámara: " + c.error : "Esperando la cámara…");
+
+  $("#mesas").innerHTML = e.mesas.map(m => {
+    let t = "—", sub = m.personas ? "👤 " + m.personas + (m.personas === 1 ? " persona" : " personas") : "Nadie en la mesa";
+    if (m.estado === "OCUPADA") { t = mmss(m.segundos_sesion); sub = "Esperando al mozo hace " + mmss(m.espera_atencion); }
+    if (m.estado === "ATENDIDA") { t = mmss(m.segundos_sesion); sub = "Atendida en " + mmss(m.espera_atencion) + " · " + sub; }
+    if (m.estado === "POR_LIMPIAR") { t = mmss(m.segundos_estado); sub = "Sin limpiar desde que se fueron"; }
+    // avance del guion
+    const ant = previo[m.id];
+    if (m.estado === "OCUPADA") marcarPaso("ocupa");
+    if (m.estado === "ATENDIDA") { marcarPaso("ocupa"); marcarPaso("atiende"); }
+    if (m.estado === "POR_LIMPIAR") marcarPaso("limpiar");
+    if (ant === "POR_LIMPIAR" && m.estado === "LIBRE") marcarPaso("limpia");
+    previo[m.id] = m.estado;
+    return `<div class="mesa ${m.estado} ${m.alerta ? "alerta" : ""}">
+      <div class="fila1"><span class="n">${m.nombre}</span><span class="e">${ESTADOS[m.estado]}</span></div>
+      <div class="t">${t}</div><div class="p">${sub}</div></div>`;
+  }).join("");
+
+  $("#alertas").innerHTML = e.alertas.length ? e.alertas.map(a =>
+    `<div class="al ${a.tipo}"><b>${a.mensaje}</b><br><small>${a.detalle}</small></div>`).join("")
+    : '<small style="color:var(--suave)">Sin alertas.</small>';
+  e.alertas.forEach(a => {
+    if (a.tipo === "SIN_ATENCION") marcarPaso("alerta");
+    if (!vistos.has(a.id)) { vistos.add(a.id); if (!primera) { toast(a); pitido(); } }
+  });
+  primera = false;
+}
+
+$("#reiniciar").onclick = async () => {
+  await fetch("/api/reiniciar", {method: "POST"});
+  pasos.clear(); marcarPaso("__"); vistos.clear(); primera = true; actualizar();
+};
+$("#pantalla").onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+actualizar(); setInterval(actualizar, 500);
+</script>
+</body>
+</html>

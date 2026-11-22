@@ -104,6 +104,54 @@ Todos los tiempos están en `config.json` → `tiempos` (en segundos):
 En Linux puedes crear un servicio de systemd; en Windows, una tarea programada «al iniciar sesión» que ejecute
 `python -m mesas --config C:\ruta\config.json`. Los datos se guardan en `mesas.db` (SQLite).
 
+## Demostración en persona (para mostrar que es real)
+
+La idea: una mesa y dos sillas, una cámara apuntándolas y la pantalla del portátil (o una TV) a la vista.
+La persona se sienta y **ve cómo su propia mesa se pone roja, corre el cronómetro y salta la alerta**, con su imagen
+recuadrada en vivo al lado. No hay nada grabado: si se mueve, el sistema reacciona.
+
+```bash
+python -m mesas --presentacion                 # webcam del portátil
+python -m mesas --presentacion --fuente 1      # una webcam USB
+python -m mesas --presentacion --fuente http://192.168.1.50:8080/video   # el móvil como cámara
+```
+
+Abre http://localhost:8000/presentacion y pulsa **Pantalla completa**.
+
+En este modo los tiempos son cortos para que todo pase en un minuto: la mesa se ocupa a los 4 s,
+la alerta «sin atención» salta a los **20 s** y la de «falta limpiar» a los 15 s. Se cambian en `presentacion.json`
+(se crea solo la primera vez, copiando `config.presentacion.json`).
+
+### Montaje
+
+- **Cámara alta y en diagonal**, como en un restaurante: lo ideal es el móvil sujeto a una estantería, un trípode o
+  una lámpara, mirando la mesa desde 2 m de altura. La webcam del portátil también sirve si la pones lejos y mirando
+  la mesa (no a la cara de la persona).
+- **El móvil como cámara**: en Android instala *IP Webcam* → «Iniciar servidor» → usa la dirección que muestra +
+  `/video` (ej. `http://192.168.1.50:8080/video`). En iPhone, *DroidCam* o *Iriun* lo convierten en webcam del
+  ordenador (entonces es `--fuente 1`). Móvil y portátil en la misma wifi.
+- Por defecto la imagen se divide en dos mesas (mitad izquierda = Mesa 01, mitad derecha = Mesa 02). Para ajustarlas a
+  tu mesa de verdad, ve a http://localhost:8000/calibrar y dibuja cada zona alrededor de la mesa y sus sillas.
+  Si quieres enseñar la **fila**, dibuja también una zona de entrada (en este modo basta 1 persona para avisar).
+- **Prepara todo antes de llegar**: ejecútalo una vez con internet para que descargue el modelo (`yolo11n.pt`).
+  Después funciona sin conexión.
+
+### Guion (≈ 1 minuto, aparece también en la pantalla y se va tachando solo)
+
+1. **Se sienta** la persona → la mesa pasa a roja «Esperando mozo» y arranca el cronómetro.
+2. **Nadie se acerca 20 s** → pitido y cartel «ALERTA · Mesa 01 · Lleva 20 segundos sin atención».
+   Aquí explicas: «en el restaurante esto es a los 5 minutos, y te llega al móvil del encargado».
+3. **Tú te acercas como mozo** unos segundos → pasa a «Atendida» y la alerta se cierra.
+4. **Se levanta y se va** → queda naranja «Falta limpiar» (y a los 15 s, alerta).
+5. **Pasas por la mesa vacía** como si limpiaras → vuelve a verde.
+
+Para repetirla, botón **↺ Reiniciar**. Remata enseñando la pestaña *Reporte* del panel (http://localhost:8000):
+«con una semana de datos te dice las horas pico y cuántos mozos poner».
+
+**Consejos**: buena luz (la detección empeora a contraluz); que no pase gente por detrás dentro de la zona;
+si la persona se queda muy quieta y medio tapada, haz la zona un poco más grande. Si quieres que se vea que es su
+restaurante, haz la demo **con una de sus cámaras**: pide la dirección RTSP y pásala con `--fuente`.
+
 ## Cómo funciona
 
 ```

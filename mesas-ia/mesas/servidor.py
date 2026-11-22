@@ -32,10 +32,13 @@ CONFIG_DEMO = {
 
 
 class Sistema:
-    def __init__(self, ruta_cfg: str | None, demo: bool, velocidad: float):
+    def __init__(self, ruta_cfg: str | None, demo: bool, velocidad: float, fuente: str | None = None):
         self.ruta_cfg = ruta_cfg
         self.demo = demo
         self.cfg = cfgmod.cargar(ruta_cfg) if ruta_cfg else cfgmod.normalizar(CONFIG_DEMO)
+        if fuente is not None and self.cfg["camaras"]:
+            # solo en memoria: no se escribe en el archivo de configuración
+            self.cfg["camaras"][0]["fuente"] = fuente
         self.almacen = Almacen(self.cfg["base_datos"])
         self.motor = Motor(self.cfg, self.almacen, notificar.crear(self.cfg["notificaciones"]))
         self.motor.ahora = time.time()
@@ -100,6 +103,15 @@ def crear_app(sistema: Sistema) -> FastAPI:
     @app.get("/calibrar")
     def calibrar():
         return FileResponse(WEB / "calibrar.html")
+
+    @app.get("/presentacion")
+    def presentacion():
+        return FileResponse(WEB / "presentacion.html")
+
+    @app.post("/api/reiniciar")
+    def reiniciar():
+        sistema.motor.reiniciar()
+        return {"ok": True}
 
     @app.get("/api/estado")
     def estado():

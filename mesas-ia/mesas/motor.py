@@ -339,6 +339,18 @@ class Motor:
                     return True
             return False
 
+    def reiniciar(self) -> None:
+        """Deja todas las mesas libres y borra las alertas (para repetir una demostración)."""
+        with self.lock:
+            for a in self.alertas:
+                if a.fin is None:
+                    a.fin = self.ahora
+            self.alertas = []
+            self.fila_alerta = None
+            self.fila_hist.clear()
+            for m in list(self.mesas.values()):
+                self.mesas[m.id] = Mesa(id=m.id, nombre=m.nombre, capacidad=m.capacidad, desde=self.ahora)
+
     def resumen(self) -> dict:
         with self.lock:
             t = self.ahora

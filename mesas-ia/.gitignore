@@ -3,3 +3,4 @@ config.json
 *.pt
 __pycache__/
 .pytest_cache/
+presentacion.json
