@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conectar el móvil</title>
+<style>
+:root{--fondo:#0f1419;--panel:#171e26;--borde:#26313d;--texto:#e7edf3;--suave:#8b9aab;--acento:#38bdf8;--libre:#22c55e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--texto);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:980px;margin:0 auto;padding:28px 16px}
+h1{margin:0 0 4px;font-size:26px}
+p.sub{color:var(--suave);margin:0 0 24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.caja{background:var(--panel);border:1px solid var(--borde);border-radius:14px;padding:18px;text-align:center}
+.caja h2{margin:0 0 4px;font-size:18px}
+.caja p{color:var(--suave);margin:0 0 12px;font-size:14px}
+.qr{background:#fff;border-radius:12px;padding:10px;width:220px;height:220px;margin:0 auto 10px}
+.qr img{width:100%;height:100%;display:block}
+code{display:block;background:#0b1016;border:1px solid var(--borde);border-radius:8px;padding:8px;font-size:14px;word-break:break-all;margin-bottom:10px}
+a.btn{display:inline-block;background:var(--acento);color:#04121c;text-decoration:none;font-weight:650;padding:8px 14px;border-radius:8px}
+.ayuda{margin-top:24px;background:var(--panel);border:1px solid var(--borde);border-radius:14px;padding:16px 20px;color:var(--suave);font-size:14px}
+.ayuda b{color:var(--texto)}
+.ayuda li{margin:4px 0}
+</style>
+</head>
+<body>
+<main>
+  <h1>✅ Mesas IA está funcionando</h1>
+  <p class="sub">Escanea un código con la cámara del móvil. El móvil tiene que estar en <b>la misma wifi</b> que este ordenador.</p>
+  <div class="grid" id="grid"></div>
+  <div class="ayuda">
+    <b>¿El móvil no abre la página?</b>
+    <ul>
+      <li>Comprueba que el móvil está en la misma wifi (no con datos móviles).</li>
+      <li>En Windows, la primera vez sale un aviso del <b>Firewall</b>: marca «Redes privadas» y pulsa <b>Permitir acceso</b>.
+        Si lo cerraste, busca «Permitir una aplicación a través del Firewall» y activa Python.</li>
+      <li>Algunas wifi de invitados o de hoteles no dejan que los aparatos se vean entre sí. En casa o en el wifi principal del local sí funciona.</li>
+    </ul>
+    <b>Para que quede como una app:</b> ábrela en el móvil → menú del navegador → «Añadir a pantalla de inicio».
+  </div>
+</main>
+<script>
+(async () => {
+  const c = await (await fetch("/api/conexion")).json();
+  const items = [
+    ["Pantalla en vivo", "Cámara + mesas + alertas. Ideal para la demostración.", "/presentacion"],
+    ["Panel del jefe", "Plano del local, alertas y reporte semanal.", "/"],
+    ["Ajustar zonas", "Dibuja dónde está cada mesa (mejor desde el ordenador).", "/calibrar"],
+  ];
+  document.getElementById("grid").innerHTML = items.map(([t, d, ruta]) => {
+    const url = c.base + ruta;
+    return `<div class="caja"><h2>${t}</h2><p>${d}</p>
+      <div class="qr"><img src="/api/qr.svg?texto=${encodeURIComponent(url)}" alt="Código QR de ${t}"></div>
+      <code>${url}</code><a class="btn" href="${ruta}">Abrir aquí</a></div>`;
+  }).join("");
+})();
+</script>
+</body>
+</html>

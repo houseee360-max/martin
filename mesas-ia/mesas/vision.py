@@ -2,10 +2,12 @@
 from __future__ import annotations
 
 import os
+import sys
 import threading
 import time
 
-import cv2
+os.environ.setdefault("OPENCV_LOG_LEVEL", "OFF")  # sin avisos técnicos de OpenCV en la ventana
+import cv2  # noqa: E402
 import numpy as np
 
 from .motor import ATENDIDA, LIBRE, OCUPADA, POR_LIMPIAR, Muestra
@@ -94,9 +96,16 @@ class Camara(threading.Thread):
         ultimo_analisis = 0.0
         while not self._parar.is_set():
             if cap is None or not cap.isOpened():
-                cap = cv2.VideoCapture(fuente)
+                if isinstance(fuente, int) and sys.platform == "win32":
+                    cap = cv2.VideoCapture(fuente, cv2.CAP_DSHOW)  # abre la webcam más rápido en Windows
+                else:
+                    cap = cv2.VideoCapture(fuente)
                 if not cap.isOpened():
-                    self.ok, self.error = False, "no se pudo abrir la fuente"
+                    self.ok = False
+                    self.error = (
+                        "no encuentro la webcam (¿está conectada, o la está usando otra app como Zoom o Teams?)"
+                        if isinstance(fuente, int) else "no se pudo conectar con la cámara (revisa la dirección)"
+                    )
                     time.sleep(5)
                     continue
                 fps_video = cap.get(cv2.CAP_PROP_FPS) or 25

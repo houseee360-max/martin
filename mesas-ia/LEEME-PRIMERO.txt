@@ -1,0 +1,24 @@
+MESAS IA · PRUEBA EN TU WIFI
+============================
+
+1. Descomprime esta carpeta donde quieras (por ejemplo, en el Escritorio).
+
+2. Doble clic en:
+     - Windows:  Iniciar-Windows.bat
+     - Mac:      Iniciar-Mac.command   (si dice que no se puede abrir: clic derecho > Abrir > Abrir)
+
+   La primera vez instala lo necesario (5-10 minutos, necesita internet).
+   Si no tienes Python, se abre la página para descargarlo: instálalo MARCANDO
+   "Add python.exe to PATH" y vuelve a hacer doble clic.
+
+3. Se abre el navegador con códigos QR. Escanea "Pantalla en vivo" con el móvil
+   (el móvil en la MISMA wifi que el ordenador).
+   - Windows: si sale un aviso del Firewall, pulsa "Permitir acceso".
+   - Mac: si pide permiso para usar la cámara, acéptalo.
+
+4. Ponte delante de la webcam: la Mesa 01 es la mitad izquierda de la imagen
+   y la Mesa 02 la mitad derecha. Siéntate y mira cómo cambia en el móvil.
+   A los 20 segundos sin que nadie "te atienda" salta la alerta.
+
+Para pararlo: cierra la ventana negra.
+Si algo falla: haz una foto a la ventana negra y envíamela.

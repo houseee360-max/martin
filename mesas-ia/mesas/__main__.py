@@ -1,11 +1,13 @@
 """Punto de entrada:  python -m mesas --config config.json   |   python -m mesas --demo"""
 import argparse
 import shutil
+import threading
+import webbrowser
 from pathlib import Path
 
 import uvicorn
 
-from .servidor import Sistema, crear_app
+from .servidor import Sistema, crear_app, ip_local
 
 RAIZ = Path(__file__).resolve().parent.parent
 
@@ -18,6 +20,7 @@ def main():
                     help="demostración en vivo con la webcam o el móvil: tiempos cortos y pantalla de presentación")
     ap.add_argument("--fuente", help="cámara a usar: 0 = webcam, 1 = otra cámara USB, o la URL del móvil/cámara IP")
     ap.add_argument("--velocidad", type=float, default=10, help="en demo: cuántas veces más rápido corre el tiempo")
+    ap.add_argument("--sin-navegador", action="store_true", help="no abrir el navegador al arrancar")
     ap.add_argument("--host", default="0.0.0.0")
     ap.add_argument("--puerto", type=int, default=8000)
     a = ap.parse_args()
@@ -31,12 +34,16 @@ def main():
 
     sistema = Sistema(a.config, a.demo, a.velocidad if a.demo else 1, a.fuente)
     sistema.iniciar()
-    url = f"http://localhost:{a.puerto}"
-    if a.presentacion:
-        print(f"Pantalla de presentación: {url}/presentacion   ·   Ajustar zonas: {url}/calibrar")
-    else:
-        print(f"Panel: {url}   ·   Calibrar zonas: {url}/calibrar")
-    uvicorn.run(crear_app(sistema), host=a.host, port=a.puerto, log_level="warning")
+    red = f"http://{ip_local()}:{a.puerto}"
+    print()
+    print("  Mesas IA funcionando.")
+    print(f"  En este ordenador:   http://localhost:{a.puerto}/conectar")
+    print(f"  Desde el móvil (misma wifi):   {red}")
+    print("  Para pararlo, cierra esta ventana.")
+    print()
+    if not a.sin_navegador:
+        threading.Timer(2.5, lambda: webbrowser.open(f"http://localhost:{a.puerto}/conectar")).start()
+    uvicorn.run(crear_app(sistema, a.puerto), host=a.host, port=a.puerto, log_level="warning")
 
 
 if __name__ == "__main__":

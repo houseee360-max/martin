@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import asyncio
 import copy
+import io
+import socket
 import threading
 import time
 from pathlib import Path
@@ -31,6 +33,18 @@ CONFIG_DEMO = {
 }
 
 
+def ip_local() -> str:
+    """IP de este equipo en la wifi/red local (no envía nada por la red)."""
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    try:
+        s.connect(("10.255.255.255", 1))
+        return s.getsockname()[0]
+    except OSError:
+        return "127.0.0.1"
+    finally:
+        s.close()
+
+
 class Sistema:
     def __init__(self, ruta_cfg: str | None, demo: bool, velocidad: float, fuente: str | None = None):
         self.ruta_cfg = ruta_cfg
@@ -42,6 +56,8 @@ class Sistema:
         self.almacen = Almacen(self.cfg["base_datos"])
         self.motor = Motor(self.cfg, self.almacen, notificar.crear(self.cfg["notificaciones"]))
         self.motor.ahora = time.time()
+        for mesa in self.motor.mesas.values():
+            mesa.desde = self.motor.ahora
         self.camaras = {}
         self.detector = None
         self.simulador = None
@@ -93,8 +109,25 @@ class Sistema:
         return r
 
 
-def crear_app(sistema: Sistema) -> FastAPI:
+def crear_app(sistema: Sistema, puerto: int = 8000) -> FastAPI:
     app = FastAPI(title="Mesas IA")
+
+    @app.get("/conectar")
+    def conectar():
+        return FileResponse(WEB / "conectar.html")
+
+    @app.get("/api/conexion")
+    def conexion():
+        return {"base": f"http://{ip_local()}:{puerto}", "presentacion": sistema.ruta_cfg is not None and not sistema.demo}
+
+    @app.get("/api/qr.svg")
+    def qr(texto: str):
+        import qrcode
+        import qrcode.image.svg
+
+        b = io.BytesIO()
+        qrcode.make(texto, image_factory=qrcode.image.svg.SvgPathImage, border=2).save(b)
+        return Response(b.getvalue(), media_type="image/svg+xml")
 
     @app.get("/")
     def panel():
