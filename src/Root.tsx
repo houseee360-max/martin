@@ -9,6 +9,7 @@ import { FPS, HEIGHT, TOTAL_FRAMES, WIDTH } from "./theme";
 import { Propuesta, PROP_FPS, PROP_H, PROP_TOTAL, PROP_W } from "./propuesta/Propuesta";
 import { ReelCelular, RC_FPS, RC_H, RC_TOTAL, RC_W } from "./reel-celular/ReelCelular";
 import { ReelLunes, RL_FPS, RL_H, RL_TOTAL, RL_W } from "./reel-lunes/ReelLunes";
+import { DominoInfinito, DI_FPS, DI_H, DI_TOTAL, DI_W } from "./infinito/DominoInfinito";
 import { Domino, DO_FPS, DO_H, DO_TOTAL, DO_W } from "./domino/Domino";
 import { Pantallas, PA_FPS, PA_H, PA_TOTAL, PA_W } from "./pantallas/Pantallas";
 import { PortadaOraculo } from "./oraculo/PortadaOraculo";
@@ -113,6 +114,7 @@ export const RemotionRoot: React.FC = () => (
         <Composition key={c} id={`Calcetin-${c}`} component={CalcetinVideo} durationInFrames={CA_DUR[c]} fps={CA_FPS} width={CA_W} height={CA_H} defaultProps={{ clip: c }} />
       ))}
     </Folder>
+    <Composition id="DominoInfinito" component={DominoInfinito} durationInFrames={DI_TOTAL} fps={DI_FPS} width={DI_W} height={DI_H} />
     <Composition id="Domino" component={Domino} durationInFrames={DO_TOTAL} fps={DO_FPS} width={DO_W} height={DO_H} />
     <Composition id="Pantallas" component={Pantallas} durationInFrames={PA_TOTAL} fps={PA_FPS} width={PA_W} height={PA_H} />
     <Composition id="Portada-Oraculo" component={PortadaOraculo} durationInFrames={1} fps={OR_FPS} width={OR_W} height={OR_H} />
