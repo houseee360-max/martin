@@ -1,5 +1,13 @@
-MESAS IA · PRUEBA EN TU WIFI
-============================
+MESAS IA
+========
+
+Hay dos formas de arrancarlo:
+  - Iniciar-Windows.bat / Iniciar-Mac.command : PRUEBA o DEMOSTRACION con la webcam (lo de abajo).
+  - Iniciar-Restaurante.bat : INSTALACION DE VERDAD en el restaurante.
+    Sigue GUIA-INSTALACION.md paso a paso.
+
+PRUEBA EN TU WIFI
+-----------------
 
 1. Descomprime esta carpeta donde quieras (por ejemplo, en el Escritorio).
 
