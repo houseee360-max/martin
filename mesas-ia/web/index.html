@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mesas IA</title>
+<style>
+:root{
+  --fondo:#0f1419;--panel:#171e26;--borde:#26313d;--texto:#e7edf3;--suave:#8b9aab;
+  --libre:#22c55e;--ocupada:#ef4444;--atendida:#c2410c;--limpiar:#f59e0b;--acento:#38bdf8;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--texto);font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--borde);background:var(--panel)}
+header h1{font-size:17px;margin:0;font-weight:650}
+.kpi{display:flex;gap:18px;flex-wrap:wrap;color:var(--suave)}
+.kpi b{color:var(--texto);font-size:16px}
+nav{margin-left:auto;display:flex;gap:6px}
+nav button,.btn{background:transparent;border:1px solid var(--borde);color:var(--texto);padding:6px 12px;border-radius:8px;cursor:pointer;font:inherit}
+nav button.activo{background:var(--acento);border-color:var(--acento);color:#04121c;font-weight:600}
+a.btn{text-decoration:none}
+main{display:grid;grid-template-columns:1fr 340px;gap:16px;padding:16px;max-width:1400px;margin:0 auto}
+@media (max-width:900px){main{grid-template-columns:1fr}}
+.caja{background:var(--panel);border:1px solid var(--borde);border-radius:12px;padding:14px}
+.caja h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--suave);margin:0 0 10px}
+#plano{position:relative;width:100%;aspect-ratio:4/3;background:linear-gradient(#e9dcc8,#dccbb0);border-radius:10px;overflow:hidden}
+.mesa{position:absolute;transform:translate(-50%,-50%);width:min(30%,190px);border-radius:10px;padding:8px 10px;color:#fff;
+  border:2px solid rgba(0,0,0,.15);box-shadow:0 4px 14px rgba(0,0,0,.25);transition:background .4s}
+.mesa .n{font-weight:700;font-size:13px}
+.mesa .e{font-size:11px;opacity:.95;text-transform:uppercase;letter-spacing:.04em}
+.mesa .t{font-variant-numeric:tabular-nums;font-size:22px;font-weight:700;line-height:1.1;margin-top:2px}
+.mesa .p{font-size:11px;opacity:.9}
+.mesa.LIBRE{background:var(--libre)} .mesa.OCUPADA{background:var(--ocupada)}
+.mesa.ATENDIDA{background:var(--atendida)} .mesa.POR_LIMPIAR{background:var(--limpiar);color:#1a1205}
+.mesa.alerta{animation:latido 1s infinite}
+.mesa.sinsenal{filter:grayscale(1);opacity:.6}
+@media (max-width:700px){
+  #plano{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px;aspect-ratio:auto}
+  .mesa{position:static;transform:none;width:auto}
+}
+@keyframes latido{50%{box-shadow:0 0 0 6px rgba(255,255,255,.65)}}
+.leyenda{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;color:var(--suave);font-size:12px}
+.leyenda i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.alerta-item{border-left:4px solid var(--ocupada);background:#1f1416;padding:9px 10px;border-radius:8px;margin-bottom:8px;display:flex;gap:8px}
+.alerta-item.FALTA_LIMPIAR{border-color:var(--limpiar);background:#1f1a10}
+.alerta-item.FILA{border-color:var(--acento);background:#0f1b24}
+.alerta-item.REATENCION{border-color:#a78bfa;background:#18142a}
+.alerta-item.vista{opacity:.5}
+.alerta-item .txt{flex:1}
+.alerta-item b{display:block;font-size:13px}
+.alerta-item small{color:var(--suave)}
+.vacio{color:var(--suave);font-size:13px}
+#fila{font-size:13px;color:var(--suave);margin-top:12px;border-top:1px solid var(--borde);padding-top:10px}
+#fila b{color:var(--texto)}
+.oculto{display:none!important}
+.camaras{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px}
+.camaras img{width:100%;border-radius:8px;background:#000;display:block}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:6px 8px;border-bottom:1px solid var(--borde);text-align:left}
+th{color:var(--suave);font-weight:500}
+.tarjetas{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
+.tarjeta{background:#11171e;border:1px solid var(--borde);border-radius:10px;padding:10px}
+.tarjeta small{color:var(--suave)} .tarjeta b{display:block;font-size:22px}
+.mapa{overflow-x:auto}
+.mapa td{text-align:center;padding:4px 2px;min-width:30px;font-size:11px;border:1px solid #0f1419}
+.ancho{grid-column:1/-1}
+#aviso-demo{background:#1c2a1d;color:#bbf7d0;padding:6px 16px;font-size:12px}
+</style>
+</head>
+<body>
+<div id="aviso-demo" class="oculto">Modo demostración: restaurante simulado, el tiempo corre más rápido.</div>
+<header>
+  <h1 id="nombre">Mesas IA</h1>
+  <div class="kpi">
+    <span>Hora <b id="hora">--:--</b></span>
+    <span>Ocupadas <b id="ocupadas">0/0</b></span>
+    <span>Fila <b id="filan">0</b></span>
+    <span>Alertas <b id="nalertas">0</b></span>
+  </div>
+  <nav>
+    <button data-vista="vivo" class="activo">En vivo</button>
+    <button data-vista="camaras">Cámaras</button>
+    <button data-vista="reporte">Reporte</button>
+    <a class="btn" href="/calibrar">Calibrar</a>
+  </nav>
+</header>
+
+<main id="vivo">
+  <section class="caja">
+    <h2>Plano del local</h2>
+    <div id="plano"></div>
+    <div class="leyenda">
+      <span><i style="background:var(--libre)"></i>Libre</span>
+      <span><i style="background:var(--ocupada)"></i>Ocupada, esperando mozo</span>
+      <span><i style="background:var(--atendida)"></i>Ocupada, atendida</span>
+      <span><i style="background:var(--limpiar)"></i>Por limpiar</span>
+    </div>
+  </section>
+  <aside class="caja">
+    <h2>Alertas</h2>
+    <div id="alertas"><p class="vacio">Sin alertas.</p></div>
+    <div id="fila"></div>
+    <p style="margin-top:14px"><label><input type="checkbox" id="sonido" checked> Sonido al llegar una alerta</label></p>
+  </aside>
+</main>
+
+<main id="camaras" class="oculto">
+  <section class="caja ancho"><h2>Cámaras</h2><div class="camaras" id="lista-camaras"></div></section>
+</main>
+
+<main id="reporte" class="oculto">
+  <section class="caja ancho" id="rep"><p class="vacio">Cargando…</p></section>
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+const ESTADOS = {LIBRE:"Libre", OCUPADA:"Esperando mozo", ATENDIDA:"Atendida", POR_LIMPIAR:"Falta limpiar"};
+let vistos = new Set(), primera = true, camarasPintadas = false;
+
+const mmss = s => { s = Math.max(0, Math.floor(s)); const h = Math.floor(s/3600), m = Math.floor(s%3600/60), x = s%60;
+  return (h ? h + ":" + String(m).padStart(2,"0") : String(m).padStart(2,"0")) + ":" + String(x).padStart(2,"0"); };
+
+function pitido(){
+  if (!$("#sonido").checked) return;
+  try { const c = new AudioContext(), o = c.createOscillator(), g = c.createGain();
+    o.frequency.value = 880; o.connect(g); g.connect(c.destination);
+    g.gain.setValueAtTime(.2, c.currentTime); g.gain.exponentialRampToValueAtTime(.001, c.currentTime + .5);
+    o.start(); o.stop(c.currentTime + .5); } catch(e) {}
+}
+
+function posicion(m, i, total){
+  if (m && m.length === 2) return m;
+  const cols = Math.ceil(Math.sqrt(total)), filas = Math.ceil(total/cols);
+  return [(i%cols + .5)/cols, (Math.floor(i/cols) + .5)/filas];
+}
+
+function pintarPlano(e){
+  const plano = $("#plano");
+  e.mesas.forEach((m, i) => {
+    let el = document.getElementById("mesa-" + m.id);
+    if (!el){ el = document.createElement("div"); el.id = "mesa-" + m.id; plano.appendChild(el); }
+    const [x, y] = posicion(e.plano[m.id], i, e.mesas.length);
+    el.style.left = (x*100) + "%"; el.style.top = (y*100) + "%";
+    el.className = "mesa " + m.estado + (m.alerta ? " alerta" : "") + (!e.demo && !m.senal ? " sinsenal" : "");
+    let t = "", sub = "";
+    if (m.estado === "OCUPADA"){ t = mmss(m.segundos_sesion); sub = "esperando " + mmss(m.espera_atencion); }
+    else if (m.estado === "ATENDIDA"){ t = mmss(m.segundos_sesion); sub = m.visitas + (m.visitas === 1 ? " visita" : " visitas") + " · atendida en " + mmss(m.espera_atencion); }
+    else if (m.estado === "POR_LIMPIAR"){ t = mmss(m.segundos_estado); sub = "desde que se fueron"; }
+    else { t = "—"; sub = "capacidad " + m.capacidad; }
+    el.innerHTML = `<div class="n">${m.nombre}</div><div class="e">${ESTADOS[m.estado]}</div>
+      <div class="t">${t}</div><div class="p">${sub}${m.personas ? " · 👤" + m.personas : ""}</div>`;
+  });
+}
+
+function pintarAlertas(e){
+  const caja = $("#alertas");
+  if (!e.alertas.length) caja.innerHTML = '<p class="vacio">Sin alertas.</p>';
+  else caja.innerHTML = e.alertas.map(a => `
+    <div class="alerta-item ${a.tipo} ${a.vista ? "vista" : ""}">
+      <div class="txt"><b>${a.mensaje}</b><small>${a.detalle} · hace ${mmss(e.ahora - a.inicio)}</small></div>
+      ${a.vista ? "" : `<button class="btn" onclick="marcar(${a.id})">Visto</button>`}
+    </div>`).join("");
+  let nueva = false;
+  e.alertas.forEach(a => { if (!vistos.has(a.id)) { vistos.add(a.id); nueva = true; } });
+  if (nueva && !primera) pitido();
+  primera = false;
+  const p = e.fila.prediccion;
+  $("#fila").innerHTML = `Personas en la entrada: <b>${e.fila.personas}</b><br>${p.texto}`;
+}
+
+function pintarCamaras(e){
+  if (camarasPintadas) { e.camaras.forEach(c => { const s = document.getElementById("est-" + c.id); if (s) s.textContent = c.ok ? "En línea" : "Sin señal: " + c.error; }); return; }
+  camarasPintadas = true;
+  $("#lista-camaras").innerHTML = e.camaras.length ? e.camaras.map(c => `
+    <div><img src="/api/camaras/${encodeURIComponent(c.id)}/video" alt="Cámara ${c.nombre}">
+    <small><b>${c.nombre}</b> · <span id="est-${c.id}">${c.ok ? "En línea" : "Sin señal"}</span></small></div>`).join("")
+    : '<p class="vacio">No hay cámaras configuradas (en modo demo no se usan cámaras).</p>';
+}
+
+async function marcar(id){ await fetch(`/api/alertas/${id}/vista`, {method:"POST"}); actualizar(); }
+
+async function actualizar(){
+  try {
+    const e = await (await fetch("/api/estado")).json();
+    $("#nombre").textContent = e.restaurante;
+    $("#aviso-demo").classList.toggle("oculto", !e.demo);
+    $("#hora").textContent = new Date(e.ahora*1000).toLocaleTimeString("es", {hour:"2-digit", minute:"2-digit"});
+    $("#ocupadas").textContent = e.ocupadas + "/" + e.total;
+    $("#filan").textContent = e.fila.personas;
+    $("#nalertas").textContent = e.alertas.filter(a => !a.vista).length;
+    pintarPlano(e); pintarAlertas(e); pintarCamaras(e);
+  } catch(err) { $("#nombre").textContent = "Sin conexión con el servidor…"; }
+}
+
+async function cargarReporte(){
+  const r = await (await fetch("/api/reporte?dias=7")).json();
+  const f = (v, suf="") => v == null ? "—" : v + suf;
+  const max = Math.max(1, ...r.celdas.map(c => c.ocupadas_media));
+  const horas = [...new Set(r.celdas.filter(c => c.ocupadas_max > 0).map(c => c.hora))].sort((a,b) => a-b);
+  const dias = ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"];
+  const celda = (d, h) => r.celdas.find(c => c.dia === d && c.hora === h);
+  const mapa = horas.length ? `<table><tr><th></th>${horas.map(h => `<th>${h}h</th>`).join("")}</tr>
+    ${dias.map((dn, d) => `<tr><th>${dn}</th>${horas.map(h => { const c = celda(d, h);
+      if (!c) return "<td></td>";
+      const a = c.ocupadas_media / max;
+      return `<td title="${c.ocupadas_media} mesas ocupadas de media · ${c.mozos_recomendados} mozos" style="background:rgba(239,68,68,${.08 + a*.85})">${c.mozos_recomendados}</td>`;
+    }).join("")}</tr>`).join("")}</table>` : '<p class="vacio">Todavía no hay datos.</p>';
+  const al = r.alertas;
+  $("#rep").innerHTML = `
+    <h2>Últimos 7 días</h2>
+    <div class="tarjetas">
+      <div class="tarjeta"><small>Grupos atendidos</small><b>${r.grupos_atendidos}</b></div>
+      <div class="tarjeta"><small>Espera media al mozo</small><b>${f(r.espera_media_min, " min")}</b></div>
+      <div class="tarjeta"><small>Esperas de más de 5 min</small><b>${r.espera_mayor_5min}</b></div>
+      <div class="tarjeta"><small>Duración media en mesa</small><b>${f(r.duracion_media_min, " min")}</b></div>
+      <div class="tarjeta"><small>Tiempo medio de limpieza</small><b>${f(r.limpieza_media_min, " min")}</b></div>
+      <div class="tarjeta"><small>Alertas</small><b>${(al.SIN_ATENCION||0) + (al.FALTA_LIMPIAR||0) + (al.FILA||0) + (al.REATENCION||0)}</b></div>
+    </div>
+    <h2>Mozos recomendados por día y hora</h2>
+    <p class="vacio">Número = mozos para cubrir el pico de esa hora (1 cada ${r.mesas_por_mozo} mesas). Más rojo = más mesas ocupadas.</p>
+    <div class="mapa">${mapa}</div>
+    <h2 style="margin-top:18px">Horas pico</h2>
+    <table><tr><th>Día</th><th>Hora</th><th>Mesas ocupadas (media)</th><th>Máximo</th><th>Mozos</th></tr>
+    ${r.horas_pico.map(c => `<tr><td>${c.dia_nombre}</td><td>${c.hora}:00</td><td>${c.ocupadas_media}</td><td>${c.ocupadas_max}</td><td>${c.mozos_recomendados}</td></tr>`).join("")}</table>
+    <h2 style="margin-top:18px">Por mesa</h2>
+    <table><tr><th>Mesa</th><th>Grupos</th><th>Duración media</th><th>Espera media al mozo</th></tr>
+    ${r.mesas.map(m => `<tr><td>${m.nombre}</td><td>${m.clientes}</td><td>${m.duracion_media_min} min</td><td>${f(m.espera_media_min, " min")}</td></tr>`).join("")}</table>`;
+}
+
+document.querySelectorAll("nav button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("nav button").forEach(x => x.classList.toggle("activo", x === b));
+  ["vivo","camaras","reporte"].forEach(v => $("#" + v).classList.toggle("oculto", v !== b.dataset.vista));
+  if (b.dataset.vista === "reporte") cargarReporte();
+});
+
+actualizar(); setInterval(actualizar, 1000);
+</script>
+</body>
+</html>

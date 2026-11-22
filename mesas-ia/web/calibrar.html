@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calibrar zonas</title>
+<style>
+:root{--fondo:#0f1419;--panel:#171e26;--borde:#26313d;--texto:#e7edf3;--suave:#8b9aab;--acento:#38bdf8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--texto);font:14px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{display:flex;gap:12px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--borde);background:var(--panel);flex-wrap:wrap}
+header h1{font-size:17px;margin:0}
+main{display:grid;grid-template-columns:1fr 360px;gap:16px;padding:16px;max-width:1400px;margin:0 auto}
+@media (max-width:900px){main{grid-template-columns:1fr}}
+.caja{background:var(--panel);border:1px solid var(--borde);border-radius:12px;padding:14px}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--suave);margin:0 0 10px}
+button,select,input{font:inherit;color:var(--texto);background:#11171e;border:1px solid var(--borde);border-radius:8px;padding:6px 10px}
+button{cursor:pointer} button.prim{background:var(--acento);color:#04121c;border-color:var(--acento);font-weight:600}
+a{color:var(--acento)}
+#lienzo{width:100%;display:block;border-radius:8px;background:#000;cursor:crosshair}
+.mesa-fila{display:grid;grid-template-columns:1fr 56px auto;gap:6px;align-items:center;padding:6px;border-radius:8px;margin-bottom:4px}
+.mesa-fila.sel{background:#1f2b38;outline:1px solid var(--acento)}
+.mesa-fila input{width:100%}
+small{color:var(--suave)}
+#plano{position:relative;aspect-ratio:4/3;background:#dccbb0;border-radius:8px;margin-top:8px}
+.punto{position:absolute;transform:translate(-50%,-50%);background:#ef4444;color:#fff;font-size:11px;padding:3px 6px;border-radius:6px;cursor:grab;user-select:none;white-space:nowrap}
+.fila-botones{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+#msg{margin-left:auto;color:var(--suave)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Calibrar zonas</h1>
+  <a href="/">← Volver al panel</a>
+  <span id="msg"></span>
+  <button class="prim" id="guardar">Guardar</button>
+</header>
+<main>
+  <section class="caja">
+    <div class="fila-botones">
+      <label>Cámara <select id="camara"></select></label>
+      <button id="refrescar">Nueva foto</button>
+    </div>
+    <canvas id="lienzo" width="1280" height="720"></canvas>
+    <p><small>Elige una mesa a la derecha, pulsa «Dibujar zona» y haz clic alrededor de la mesa <b>incluyendo las sillas</b>.
+      Doble clic o «Terminar» para cerrar el polígono. La zona de entrada sirve para contar la fila.</small></p>
+  </section>
+  <aside class="caja">
+    <h2>Mesas</h2>
+    <div id="mesas"></div>
+    <div class="fila-botones">
+      <button id="nueva">+ Mesa</button>
+      <button id="dibujar">Dibujar zona</button>
+      <button id="terminar">Terminar</button>
+      <button id="borrar">Borrar zona</button>
+      <button id="quitar">Quitar mesa</button>
+    </div>
+    <div class="fila-botones"><button id="entrada">Dibujar zona de entrada</button></div>
+    <h2 style="margin-top:16px">Plano del panel</h2>
+    <small>Arrastra cada mesa a su lugar en el plano que verás en el panel.</small>
+    <div id="plano"></div>
+  </aside>
+</main>
+<script>
+const $ = s => document.querySelector(s);
+const cv = $("#lienzo"), ctx = cv.getContext("2d");
+let cfg, sel = null, modo = null, puntos = [], foto = new Image();
+
+const msg = t => $("#msg").textContent = t;
+const mesaSel = () => cfg.mesas.find(m => m.id === sel);
+const camara = () => $("#camara").value;
+
+async function cargar(){
+  cfg = await (await fetch("/api/config")).json();
+  if (!cfg.camaras.length){ msg("No hay cámaras configuradas: agrega una en config.json y reinicia."); }
+  $("#camara").innerHTML = cfg.camaras.map(c => `<option value="${c.id}">${c.nombre}</option>`).join("");
+  sel = cfg.mesas[0]?.id ?? null;
+  listar(); plano(); cargarFoto();
+}
+
+function cargarFoto(){
+  if (!camara()) return dibujar();
+  foto = new Image();
+  foto.onload = () => { cv.width = foto.naturalWidth; cv.height = foto.naturalHeight; dibujar(); };
+  foto.onerror = () => { msg("La cámara todavía no envía imagen; prueba «Nueva foto» en unos segundos."); dibujar(); };
+  foto.src = `/api/camaras/${encodeURIComponent(camara())}/foto?x=${Date.now()}`;
+}
+
+function listar(){
+  $("#mesas").innerHTML = cfg.mesas.map(m => `
+    <div class="mesa-fila ${m.id === sel ? "sel" : ""}" data-id="${m.id}">
+      <input value="${m.nombre}" data-campo="nombre" title="Nombre">
+      <input type="number" min="1" value="${m.capacidad}" data-campo="capacidad" title="Capacidad">
+      <small>${m.poligono.length >= 3 ? "✓ zona" : "sin zona"} · ${m.camara ?? "-"}</small>
+    </div>`).join("") || "<small>No hay mesas. Pulsa «+ Mesa».</small>";
+  document.querySelectorAll(".mesa-fila").forEach(f => {
+    f.onclick = e => { if (e.target.tagName !== "INPUT") { sel = f.dataset.id; listar(); dibujar(); } };
+    f.querySelectorAll("input").forEach(i => i.onchange = () => {
+      const m = cfg.mesas.find(x => x.id === f.dataset.id);
+      m[i.dataset.campo] = i.dataset.campo === "capacidad" ? +i.value : i.value; plano();
+    });
+  });
+}
+
+function dibujar(){
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  if (foto.complete && foto.naturalWidth) ctx.drawImage(foto, 0, 0, cv.width, cv.height);
+  else { ctx.fillStyle = "#222"; ctx.fillRect(0, 0, cv.width, cv.height); }
+  const W = cv.width, H = cv.height, grosor = Math.max(2, W/400);
+  const poli = (pts, color, texto) => {
+    if (!pts.length) return;
+    ctx.beginPath(); pts.forEach(([x, y], i) => i ? ctx.lineTo(x*W, y*H) : ctx.moveTo(x*W, y*H));
+    if (pts.length > 2) ctx.closePath();
+    ctx.fillStyle = color + "40"; ctx.fill(); ctx.strokeStyle = color; ctx.lineWidth = grosor; ctx.stroke();
+    pts.forEach(([x, y]) => { ctx.beginPath(); ctx.arc(x*W, y*H, grosor*2, 0, 7); ctx.fillStyle = color; ctx.fill(); });
+    ctx.font = `bold ${Math.max(14, W/60)}px system-ui`; ctx.fillStyle = "#fff";
+    ctx.fillText(texto, pts[0][0]*W + 6, pts[0][1]*H - 6);
+  };
+  cfg.mesas.filter(m => m.camara === camara()).forEach(m =>
+    poli(modo === "mesa" && m.id === sel ? puntos : m.poligono, m.id === sel ? "#38bdf8" : "#22c55e", m.nombre));
+  const ent = cfg.entrada;
+  if (modo === "entrada") poli(puntos, "#f59e0b", "Entrada");
+  else if (ent && ent.camara === camara()) poli(ent.poligono, "#f59e0b", "Entrada");
+}
+
+cv.onclick = e => {
+  if (!modo) return;
+  const r = cv.getBoundingClientRect();
+  puntos.push([+((e.clientX - r.left)/r.width).toFixed(4), +((e.clientY - r.top)/r.height).toFixed(4)]);
+  dibujar();
+};
+cv.ondblclick = () => terminar();
+
+function terminar(){
+  if (!modo) return;
+  if (puntos.length >= 3){
+    if (modo === "mesa"){ const m = mesaSel(); m.poligono = puntos; m.camara = camara(); }
+    else cfg.entrada = {camara: camara(), poligono: puntos};
+    msg("Zona lista. Recuerda «Guardar».");
+  } else msg("Hacen falta al menos 3 puntos.");
+  modo = null; puntos = []; listar(); dibujar();
+}
+
+$("#dibujar").onclick = () => { if (!sel) return msg("Primero elige o crea una mesa."); if (!camara()) return msg("No hay cámara."); modo = "mesa"; puntos = []; msg("Haz clic alrededor de " + mesaSel().nombre); dibujar(); };
+$("#entrada").onclick = () => { if (!camara()) return msg("No hay cámara."); modo = "entrada"; puntos = []; msg("Haz clic alrededor de la zona donde espera la gente"); dibujar(); };
+$("#terminar").onclick = terminar;
+$("#borrar").onclick = () => { const m = mesaSel(); if (m) { m.poligono = []; listar(); dibujar(); } };
+$("#quitar").onclick = () => { if (!sel || !confirm("¿Quitar " + mesaSel().nombre + "?")) return; cfg.mesas = cfg.mesas.filter(m => m.id !== sel); sel = cfg.mesas[0]?.id ?? null; listar(); plano(); dibujar(); };
+$("#nueva").onclick = () => {
+  let n = cfg.mesas.length + 1; while (cfg.mesas.some(m => m.id === "M" + n)) n++;
+  cfg.mesas.push({id: "M" + n, nombre: "Mesa " + String(n).padStart(2, "0"), capacidad: 4, camara: camara() || null, poligono: [], plano: null});
+  sel = "M" + n; listar(); plano();
+};
+$("#camara").onchange = cargarFoto;
+$("#refrescar").onclick = cargarFoto;
+
+function plano(){
+  const p = $("#plano"); p.innerHTML = "";
+  cfg.mesas.forEach((m, i) => {
+    m.plano = m.plano && m.plano.length === 2 ? m.plano : [.2 + (i%3)*.3, .2 + Math.floor(i/3)*.3];
+    const d = document.createElement("div"); d.className = "punto"; d.textContent = m.nombre;
+    d.style.left = m.plano[0]*100 + "%"; d.style.top = m.plano[1]*100 + "%";
+    d.onpointerdown = e => {
+      d.setPointerCapture(e.pointerId);
+      d.onpointermove = ev => { const r = p.getBoundingClientRect();
+        const x = Math.min(.95, Math.max(.05, (ev.clientX - r.left)/r.width)), y = Math.min(.95, Math.max(.05, (ev.clientY - r.top)/r.height));
+        m.plano = [+x.toFixed(3), +y.toFixed(3)]; d.style.left = x*100 + "%"; d.style.top = y*100 + "%"; };
+      d.onpointerup = () => { d.onpointermove = null; };
+    };
+    p.appendChild(d);
+  });
+}
+
+$("#guardar").onclick = async () => {
+  const r = await fetch("/api/config/zonas", {method: "PUT", headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({mesas: cfg.mesas, entrada: cfg.entrada})});
+  const j = await r.json();
+  msg(r.ok ? "Guardado ✓ (ya se está usando)" : "Error: " + (j.detail || r.status));
+};
+
+cargar();
+</script>
+</body>
+</html>
